@@ -188,6 +188,18 @@
       background: var(--bg-card-hover);
     }
 
+    .icon-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+      color: var(--text-muted);
+      background: transparent;
+    }
+
+    .icon-btn:disabled:hover {
+      color: var(--text-muted);
+      background: transparent;
+    }
+
     /* Theme toggle animation */
     .theme-toggle {
       position: relative;
@@ -1171,6 +1183,21 @@
       background: var(--bg-card-hover);
     }
 
+    .pub-card-project {
+      position: relative;
+    }
+
+    .pub-card-project:hover {
+      border-color: var(--accent-teal);
+    }
+
+    .pub-project-hint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
     .pub-icon {
       width: 48px;
       height: 48px;
@@ -1522,17 +1549,112 @@
     }
 
     .summer-school-image {
-      width: min(100%, 500px);
+      width: 100%;
+      max-width: 500px;
       height: auto;
       border-radius: 10px;
       border: none;
-      margin: 8px 0 14px;
+      margin: 0;
       background: #ffffff;
       display: block;
     }
 
+    .summer-school-layout {
+      display: grid;
+      grid-template-columns: minmax(240px, 500px) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .summer-school-copy p {
+      margin-bottom: 12px;
+    }
+
     .community-card-full {
       grid-column: 1 / -1;
+    }
+
+    .competition-card {
+      border-color: rgba(20, 184, 166, 0.35);
+    }
+
+    .competition-card:hover {
+      border-color: var(--accent-teal);
+    }
+
+    .competition-intro {
+      margin-bottom: 10px;
+    }
+
+    .competition-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(240px, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .competition-list-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .competition-criteria-panel {
+      min-width: 0;
+    }
+
+    .competition-criteria {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .competition-criteria li {
+      position: relative;
+      padding-left: 14px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .competition-criteria li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent-teal);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .competition-prize {
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-teal);
+      border-radius: 10px;
+      background: var(--bg-card);
+      padding: 14px 14px 14px 12px;
+    }
+
+    .competition-prize-label {
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent-teal);
+      margin-bottom: 6px;
+    }
+
+    .competition-prize-text {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
     }
 
     /* ==================== */
@@ -1790,6 +1912,15 @@
         flex: 1;
         min-width: 120px;
       }
+
+      .summer-school-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .competition-layout {
+        grid-template-columns: 1fr;
+      }
+
     }
 
     /* Mobile Menu - PyPSA Style Full-Screen Modal */
@@ -1908,6 +2039,15 @@
       background: var(--bg-card-hover);
     }
 
+    .mobile-theme-toggle:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+    }
+
+    .mobile-theme-toggle:disabled:hover {
+      background: transparent;
+    }
+
     /* Mobile Theme Toggle Animation */
     .mobile-theme-toggle svg {
       transition: transform 0.3s ease, opacity 0.3s ease;
@@ -2016,7 +2156,7 @@
               <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           </button>
-          <button class="icon-btn theme-toggle" aria-label="Toggle theme" id="themeToggle">
+          <button class="icon-btn theme-toggle" aria-label="Toggle theme" id="themeToggle" disabled title="Theme toggle temporarily disabled">
             <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5"/>
               <line x1="12" y1="1" x2="12" y2="3"/>
@@ -2073,7 +2213,7 @@
 
     <!-- Bottom left: Theme toggle -->
     <div class="mobile-nav-footer">
-      <button class="icon-btn mobile-theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
+      <button class="icon-btn mobile-theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme" disabled title="Theme toggle temporarily disabled">
         <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/>
@@ -2547,9 +2687,38 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             Summer School on Energy Planning of 100% Renewable Energy Systems
           </h3>
-          <img src="assets/summer-school.jpg" alt="Summer School on Energy Planning of 100% Renewable Energy Systems" class="summer-school-image">
-          <p>Summer school on energy planning of 100% renewable energy systems is centered on energy and climate planning and modelling of smart energy systems and exchange of experiences with experts in the field. A special focus will be on the improvements of existing energy planning tool and models, with improved data management, policy, and scenario assessment, as well as systematic dynamic modelling of relevant environmental, economic, social, and technological variables. Finding a new and improved representation of smart energy systems is a key issue in calculating policy scenarios and their emissions.</p>
-          <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="margin-top: 8px;">Summer School →</a>
+          <div class="summer-school-layout">
+            <img src="assets/summer-school.jpg" alt="Summer School on Energy Planning of 100% Renewable Energy Systems" class="summer-school-image">
+            <div class="summer-school-copy">
+              <p>Summer school on energy planning of 100% renewable energy systems is centered on energy and climate planning and modelling of smart energy systems and exchange of experiences with experts in the field. A special focus will be on the improvements of existing energy planning tool and models, with improved data management, policy, and scenario assessment, as well as systematic dynamic modelling of relevant environmental, economic, social, and technological variables. Finding a new and improved representation of smart energy systems is a key issue in calculating policy scenarios and their emissions.</p>
+              <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Summer School →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- H2RES Competition -->
+        <div class="community-card community-card-full competition-card">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v3a5 5 0 0 1-10 0V4z"/><path d="M17 5h2a2 2 0 0 1 0 4h-2"/><path d="M7 5H5a2 2 0 0 0 0 4h2"/></svg>
+            H2RES Competition
+          </h3>
+          <p class="competition-intro">Modellers that submit the model of their national energy system that is:</p>
+          <div class="competition-layout">
+            <div class="competition-criteria-panel">
+              <p class="competition-list-title">Eligibility Criteria</p>
+              <ul class="competition-criteria">
+                <li>100 % RES in total energy supply</li>
+                <li>Cheaper than the scenario based on fossil fuels</li>
+                <li>No more than 30 % of final energy supplied by biomass</li>
+                <li>Respects the limitations on installation of VRES capacities</li>
+                <li>Possesses no more than 48 hours worth of electricity storage in a form of battery stationary storage</li>
+              </ul>
+            </div>
+            <div class="competition-prize">
+              <p class="competition-prize-label">Prize</p>
+              <p class="competition-prize-text">Fee waiver for the next SDEWES conference.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Mailing List -->
@@ -2852,21 +3021,27 @@
   </footer>
 
   <script>
-    // Theme Toggle Functionality
+    // Theme Toggle Functionality (temporarily disabled)
+    const THEME_TOGGLE_ENABLED = false;
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
 
-    // Check for saved theme preference or default to 'light'
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
+    // Keep a fixed light theme while toggle is disabled.
+    html.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+    if (themeToggle) {
+      themeToggle.disabled = !THEME_TOGGLE_ENABLED;
+    }
 
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    if (THEME_TOGGLE_ENABLED && themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    }
 
     // Accordion functionality
     document.querySelectorAll('.accordion-header').forEach(header => {
@@ -3200,11 +3375,8 @@
         return 'report';
       }
 
-      if (
-        normalizedType === 'misc' ||
-        normalizedType === 'unpublished' ||
-        /project|horizon|grant|work package|wp\d+/.test(context)
-      ) {
+      const normalizedHowPublished = normalizeBibValue(fields.howpublished || '').toLowerCase();
+      if (normalizedType === 'misc' && normalizedHowPublished === 'research project') {
         return 'project';
       }
 
@@ -3273,6 +3445,10 @@
       return `details-${String(citationKey || 'entry').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
     }
 
+    function projectPageUrl(entry) {
+      return `projects/project.html?id=${encodeURIComponent(entry.citationKey || '')}`;
+    }
+
     function buildPublicationDetails(entry) {
       const abstractText = entry.fields.abstract ? normalizeBibValue(entry.fields.abstract) : '';
       const keywordsText = entry.fields.keywords ? normalizeBibValue(entry.fields.keywords) : '';
@@ -3303,6 +3479,22 @@
       const authors = formatAuthors(entry.fields.author);
       const meta = `${source}, ${year}${authors ? ` • ${authors}` : ''}`;
       const detailsId = detailsIdFromKey(entry.citationKey);
+
+      if (entry.category === 'project') {
+        const projectUrl = projectPageUrl(entry);
+        return `
+          <div class="pub-card pub-card-project" data-project-url="${escapeHtml(projectUrl)}" role="link" tabindex="0">
+            <div class="pub-icon">${publicationIcon(entry.category)}</div>
+            <div class="pub-content">
+              <span class="pub-type">Research Project</span>
+              <h4 class="pub-title">${escapeHtml(title)}</h4>
+              <p class="pub-meta">${escapeHtml(meta)}</p>
+              <div class="pub-links">${buildPublicationLinks(entry)}</div>
+              <p class="pub-project-hint">Open project page for full details</p>
+            </div>
+          </div>
+        `;
+      }
 
       return `
         <div class="pub-card" data-key="${escapeHtml(entry.citationKey)}" data-details-id="${escapeHtml(detailsId)}" role="button" tabindex="0" aria-expanded="false" aria-controls="${escapeHtml(detailsId)}">
@@ -3391,7 +3583,35 @@
     }
 
     function bindPublicationCardToggleActions() {
-      const cards = Array.from(document.querySelectorAll('.pub-card'));
+      const projectCards = Array.from(document.querySelectorAll('.pub-card[data-project-url]'));
+      projectCards.forEach(card => {
+        const openProject = () => {
+          const targetUrl = card.getAttribute('data-project-url');
+          if (targetUrl) {
+            window.location.href = targetUrl;
+          }
+        };
+
+        card.addEventListener('click', event => {
+          if (event.target.closest('.pub-link')) {
+            return;
+          }
+          openProject();
+        });
+
+        card.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') {
+            return;
+          }
+          if (event.target.closest('.pub-link')) {
+            return;
+          }
+          event.preventDefault();
+          openProject();
+        });
+      });
+
+      const cards = Array.from(document.querySelectorAll('.pub-card[data-details-id]'));
 
       function setExpanded(card, expanded) {
         const detailsId = card.getAttribute('data-details-id');
@@ -3667,13 +3887,19 @@
       document.body.style.overflow = '';
     });
 
+    if (mobileThemeToggle) {
+      mobileThemeToggle.disabled = !THEME_TOGGLE_ENABLED;
+    }
+
     // Mobile theme toggle
-    mobileThemeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+    if (THEME_TOGGLE_ENABLED && mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    }
 
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.mobile-nav-links a').forEach(link => {
