@@ -274,7 +274,6 @@
 
     <section class="pub-section">
       <h2 class="pub-title">Selected Bibliography</h2>
-      <p class="pub-subtitle" id="pubSubtitle">Loading publications from H2RES.bib...</p>
       <div id="pubRoot">
         <div class="pub-status">Loading records...</div>
       </div>
@@ -730,7 +729,6 @@
 
     function renderPublications(entries, person) {
       const root = document.getElementById("pubRoot");
-      const subtitle = document.getElementById("pubSubtitle");
       const matched = entries
         .filter(entry => matchesPerson(entry, person))
         .sort((a, b) => {
@@ -739,8 +737,6 @@
           }
           return a.citationKey.localeCompare(b.citationKey);
         });
-
-      subtitle.textContent = `${matched.length} publication${matched.length === 1 ? "" : "s"} found in H2RES.bib`;
 
       if (matched.length === 0) {
         root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
@@ -779,7 +775,6 @@
         document.getElementById("memberRole").textContent = "";
         document.getElementById("memberOrg").textContent = "";
         document.getElementById("memberBio").textContent = "Use the Team page and open a valid member profile.";
-        document.getElementById("pubSubtitle").textContent = "";
         document.getElementById("pubRoot").innerHTML = '<div class="empty-box">No profile loaded.</div>';
         return;
       }
@@ -795,7 +790,6 @@
         const entries = parseBibTeX(text);
         renderPublications(entries, person);
       } catch (error) {
-        document.getElementById("pubSubtitle").textContent = "";
         document.getElementById("pubRoot").innerHTML = '<div class="pub-status">Could not load H2RES.bib for this profile.</div>';
       }
     }
