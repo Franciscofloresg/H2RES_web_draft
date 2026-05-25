@@ -286,6 +286,11 @@
       background: #ffffff;
     }
 
+    .funding-logo-anid {
+      width: 74%;
+      margin: 0 auto;
+    }
+
     .funding-kicker {
       font-size: 12px;
       letter-spacing: 0.03em;
@@ -320,6 +325,10 @@
 
       .funding-logo {
         max-width: 260px;
+      }
+
+      .funding-logo-anid {
+        max-width: 180px;
       }
     }
   </style>
@@ -589,13 +598,15 @@
       return authors.join(', ');
     }
 
-    function extractFundingInfo(noteText) {
+    function extractFundingInfo(noteText, institutionText = '') {
       const normalized = normalizeBibValue(noteText || '');
-      if (!normalized) {
+      const normalizedInstitution = normalizeBibValue(institutionText || '');
+      const searchable = `${normalized} ${normalizedInstitution}`.trim();
+      if (!searchable) {
         return null;
       }
 
-      if (/croatian science foundation/i.test(normalized)) {
+      if (/croatian science foundation/i.test(searchable)) {
         const projectNoMatch = normalized.match(/project no\.\s*([A-Za-z0-9-]+)/i);
         return {
           agency: 'Croatian Science Foundation',
@@ -606,13 +617,28 @@
         };
       }
 
-      if (/interreg danube region/i.test(normalized)) {
+      if (/interreg danube region/i.test(searchable)) {
         return {
           agency: 'Interreg Danube Region',
           projectNo: '',
           logo: '../assets/funders/storemore.png',
           logoAlt: 'Interreg Danube Region - Co-funded by the European Union - StoreMore',
           text: 'Funded by the Interreg Danube Region.'
+        };
+      }
+
+      const isAnidChile = /agencia nacional de investigaci/i.test(searchable)
+        && /desarrollo\s*\(chile\)/i.test(searchable);
+      if (isAnidChile) {
+        const codeMatch = normalized.match(/(?:cod|code)\s*:\s*([^.,;]+)/i);
+        const fundingCode = codeMatch ? codeMatch[1].trim() : '';
+        return {
+          agency: 'Agencia Nacional de Investigaci\u00f3n y Desarrollo (Chile)',
+          projectNo: fundingCode,
+          logo: '../assets/funders/anid.png',
+          logoClass: 'funding-logo-anid',
+          logoAlt: 'Agencia Nacional de Investigaci\u00f3n y Desarrollo (Chile)',
+          text: `Funded by the Agencia Nacional de Investigaci\u00f3n y Desarrollo (Chile)${fundingCode ? `, code: ${fundingCode}` : ''}.`
         };
       }
 
@@ -647,7 +673,7 @@
       const authors = normalizeBibValue(formatAuthors(entry.fields.author || '')) || 'Not specified';
       const institution = normalizeBibValue(entry.fields.institution || entry.fields.organization || entry.fields.publisher || 'Not specified');
       const note = normalizeBibValue(entry.fields.note || '');
-      const fundingInfo = extractFundingInfo(note);
+      const fundingInfo = extractFundingInfo(note, institution);
       const abstractText = normalizeBibValue(entry.fields.abstract || '');
       const keywords = normalizeBibValue(entry.fields.keywords || '')
         .split(/[;,]/)
@@ -684,7 +710,7 @@
         ${fundingInfo ? `
           <div class="section-block funding-block">
             <div class="funding-card">
-              <img src="${escapeHtml(fundingInfo.logo || '')}" alt="${escapeHtml(fundingInfo.logoAlt || 'Funding logo')}" class="funding-logo">
+              <img src="${escapeHtml(fundingInfo.logo || '')}" alt="${escapeHtml(fundingInfo.logoAlt || 'Funding logo')}" class="funding-logo${fundingInfo.logoClass ? ` ${escapeHtml(fundingInfo.logoClass)}` : ''}">
               <div>
                 <p class="funding-kicker">Funding Support</p>
                 <p class="funding-text">${escapeHtml(fundingInfo.text || '')}</p>
