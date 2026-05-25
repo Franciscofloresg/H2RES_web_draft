@@ -824,12 +824,21 @@
     }
 
     .institution-logo {
+      display: inline-flex;
+      align-items: center;
       padding: 12px 20px;
       background: var(--bg-card-hover);
       border-radius: 8px;
       font-size: 13px;
       color: var(--text-secondary);
       border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+
+    .institution-logo:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-teal);
+      transform: translateY(-1px);
     }
 
     /* ==================== */
@@ -1125,10 +1134,16 @@
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .pub-card:hover {
       border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .pub-card.expanded {
+      border-color: var(--accent-teal);
       background: var(--bg-card-hover);
     }
 
@@ -1187,20 +1202,11 @@
       gap: 4px;
     }
 
-    button.pub-link {
-      background: transparent;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      font: inherit;
-      line-height: inherit;
-    }
-
     .pub-link:hover {
       text-decoration: underline;
     }
 
-    .pub-abstract {
+    .pub-details {
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid var(--border-color);
@@ -1209,8 +1215,17 @@
       line-height: 1.55;
     }
 
-    .pub-abstract[hidden] {
+    .pub-details[hidden] {
       display: none;
+    }
+
+    .pub-details-row + .pub-details-row {
+      margin-top: 8px;
+    }
+
+    .pub-details-label {
+      font-weight: 600;
+      color: var(--text-primary);
     }
 
     .pub-status {
@@ -1232,7 +1247,7 @@
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
@@ -1283,6 +1298,18 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      padding: 8px;
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+
+    a.team-member {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.team-member:hover {
+      background: var(--bg-card-hover);
     }
 
     .team-avatar {
@@ -1296,6 +1323,13 @@
       font-size: 16px;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .team-info h4 {
@@ -1313,6 +1347,16 @@
       color: var(--accent-teal);
       font-size: 11px;
       margin-left: 8px;
+    }
+
+    .team-category-wide {
+      grid-column: 1 / -1;
+    }
+
+    .team-member-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
     }
 
     /* ==================== */
@@ -2072,9 +2116,7 @@
           </div>
           <h3>Overview</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris.
+            H2RES is an open-source modeling framework that provides a transparent model to explore energy transition pathways by integrating power systems, storage, hydrogen technologies, and demand flexibility within an integrated optimisation structure.
           </p>
         </div>
 
@@ -2085,9 +2127,7 @@
           </div>
           <h3>Development History</h3>
           <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt.
+            H2RES has evolved through two decades of peer-reviewed research, progressing from early island-based renewable energy studies to a comprehensive modeling framework addressing sector coupling, flexibility, and long-term decarbonisation pathways across diverse energy systems.
           </p>
         </div>
 
@@ -2098,13 +2138,12 @@
           </div>
           <h3>Institutions &#038; Collaborations</h3>
           <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            H2RES is supported by universities and research partners working together to collaborate and share knowledge in open energy system modeling.
           </p>
           <div class="institutions-logos">
-            <div class="institution-logo">Institution A</div>
-            <div class="institution-logo">Institution B</div>
-            <div class="institution-logo">+ Partners</div>
+            <a class="institution-logo" href="https://www.unizg.hr/homepage/" target="_blank" rel="noopener noreferrer">UNIZAG</a>
+            <a class="institution-logo" href="https://www.pucv.cl/" target="_blank" rel="noopener noreferrer">PUCV</a>
+            <a class="institution-logo" href="https://feit.ukim.edu.mk/en/" target="_blank" rel="noopener noreferrer">FEEIT</a>
           </div>
         </div>
 
@@ -2115,193 +2154,21 @@
           </div>
           <h3>Governance &#038; Licensing</h3>
           <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-            deserunt mollit anim id est laborum sed ut perspiciatis.
+            H2RES follows an open governance approach and is distributed under an open-source license, supporting transparent development and responsible use of the model.
           </p>
         </div>
 
-        <!-- Contact -->
-        <div class="about-card about-card-full">
-          <div class="about-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h3>Contact</h3>
-          <p>
-            For general inquiries: <a href="mailto:info@info.info" style="color: var(--accent-teal);">info@info.info</a><br>
-            Lorem Ipsum University, Department of Lorem, City, Country
-          </p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 3. GET STARTED ========== -->
-  <section id="get-started" class="section getstarted-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Get Started</div>
-        <h2 class="section-title">Lorem Ipsum Dolor</h2>
-      </div>
-      <div class="section-divider"></div>
-
-      <div class="accordion-list">
-        <!-- Installation -->
-        <div class="accordion open">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Installation
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li>Lorem ipsum dolor sit amet consectetur adipiscing elit</li>
-                <li>Sed do eiusmod tempor incididunt ut labore</li>
-                <li>Ut enim ad minim veniam quis nostrud exercitation</li>
-              </ul>
-              <div class="code-block">
-                <span class="prompt">$</span> <span class="command">pip install h2res</span><br>
-                <span class="prompt">$</span> <span class="command">h2res &#8211;version</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Download -->
-        <div class="accordion">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li>Lorem ipsum dolor sit amet (DOI: 10.5281/xxxxx)</li>
-                <li>Consectetur adipiscing elit sed do eiusmod</li>
-                <li>Tempor incididunt ut labore et dolore magna</li>
-              </ul>
-              <div style="margin-top: 16px;">
-                <a href="#" class="btn btn-primary btn-sm">Download v2.0.0</a>
-                <a href="#" class="btn btn-outline btn-sm" style="margin-left: 8px;">All Releases</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GitHub Repository -->
-        <div class="accordion">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub Repository
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li><strong>/core</strong> – Lorem ipsum dolor sit amet</li>
-                <li><strong>/io</strong> – Consectetur adipiscing elit</li>
-                <li><strong>/data</strong> – Sed do eiusmod tempor</li>
-                <li><strong>/examples</strong> – Ut enim ad minim veniam</li>
-              </ul>
-              <div style="margin-top: 16px;">
-                <a href="#" class="btn btn-secondary btn-sm">View on GitHub →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 4. DOCUMENTATION ========== -->
-  <section id="documentation" class="section docs-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Documentation</div>
-        <h2 class="section-title">Lorem Ipsum</h2>
-      </div>
-      <div class="section-divider"></div>
-
-      <div class="docs-grid">
-        <div class="docs-card">
-          <div class="docs-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <h3>Dolor Sit Amet</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
-          <a href="#" class="docs-link">Read documentation →</a>
-        </div>
-
-        <div class="docs-card">
-          <div class="docs-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-          </div>
-          <h3>Consectetur Elit</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
-          <a href="#" class="docs-link">View parameters →</a>
-        </div>
-
-        <div class="docs-card">
-          <div class="docs-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </div>
-          <h3>Tempor Incididunt</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
-          <a href="#" class="docs-link">Configuration guide →</a>
-        </div>
-      </div>
-
-      <!-- Tutorials -->
-      <div class="tutorials-list">
-        <h3 style="font-size: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Tutorials
-        </h3>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">01</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>Consectetur adipiscing elit sed do eiusmod</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">02</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>Quis nostrud exercitation ullamco laboris</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">03</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>In reprehenderit in voluptate velit esse</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 5. PUBLICATIONS ========== -->
+  <!-- ========== 3. PUBLICATIONS ========== -->
   <section id="publications" class="section publications-section">
     <div class="container">
       <div class="section-header">
         <div class="section-badge">Publications</div>
-        <h2 class="section-title">Lorem Ipsum</h2>
-        <p class="section-subtitle">Peer-reviewed publications, conference contributions, technical reports, project deliverables, and curated datasets developed with H2RES.</p>
+        <h2 class="section-title">Research Outputs</h2>
+        <p class="section-subtitle">Peer-reviewed articles, in-proceedings papers, technical reports, theses, project deliverables, and curated databases developed with H2RES.</p>
       </div>
       <div class="section-divider"></div>
 
@@ -2339,51 +2206,34 @@
             <h3 class="team-category-title">Core Developers</h3>
           </div>
           <div class="team-members">
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            <a class="team-member" href="team/member.html?id=felipe-feijoo">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=60" alt="Felipe Feijoo"></div>
               <div class="team-info">
                 <h4>Prof. Felipe Feijoo</h4>
-                <p>Pontificia Universidad Católica de Valparaíso <a href="#">ORCID</a></p>
+                <p>Pontificia Universidad Catolica de Valparaiso</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=vladimir-gjorgievski">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=14" alt="Vladimir Gjorgievski"></div>
               <div class="team-info">
                 <h4>Dr. Vladimir Z. Gjorgievski</h4>
-                <p>Ss. Cyril and Methodius University in Skopje <a href="#">ORCID</a></p>
+                <p>Ss. Cyril and Methodius University in Skopje</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=luka-herc">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=13" alt="Luka Herc"></div>
               <div class="team-info">
                 <h4>Dr(c). Luka Herc</h4>
-                <p>University of Zagreb <a href="#">ORCID</a></p>
+                <p>University of Zagreb</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=antun-pfeifer">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=18" alt="Antun Pfeifer"></div>
               <div class="team-info">
-                <h4>Prof. Neven Duic</h4>
-                <p>University of Zagreb <a href="#">ORCID</a></p>
+                <h4>Prof. Antun Pfeifer</h4>
+                <p>University of Zagreb</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <div class="team-info">
-                <h4>Antun Pfeifer</h4>
-                <p>University of Zagreb <a href="#">ORCID</a></p>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -2396,72 +2246,75 @@
             <h3 class="team-category-title">Contributors &#038; Alumni</h3>
           </div>
           <div class="team-members">
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            <a class="team-member" href="team/member.html?id=doris-beljan">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=47" alt="Doris Beljan"></div>
               <div class="team-info">
-                <h4>Elit Adipiscing</h4>
-                <p>PhD Researcher (2019-2023)</p>
+                <h4>Doris Beljan</h4>
+                <p>Alumni Contributor</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=francisco-flores-gajardo">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=11" alt="Francisco Flores Gajardo"></div>
               <div class="team-info">
-                <h4>Tempor Incididunt</h4>
+                <h4>Francisco Flores Gajardo</h4>
+                <p>Research Contributor</p>
+              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=francesca-pugliese">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=49" alt="Francesca Pugliese"></div>
+              <div class="team-info">
+                <h4>Francesca Pugliese</h4>
                 <p>MSc Contributor</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=moazzam-ali-khan">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Moazzam Ali Khan"></div>
               <div class="team-info">
-                <h4>+ 12 contributors</h4>
-                <p><a href="#">View all on GitHub</a></p>
+                <h4>Moazzam Ali Khan</h4>
+                <p>MSc Contributor</p>
               </div>
-            </div>
+            </a>
           </div>
+          <p class="team-member-note">Each profile includes bio, research topics, and publications linked from H2RES BibTeX.</p>
         </div>
 
-        <!-- Collaborators -->
-        <div class="team-category">
+        <!-- Scientific Advisory Board -->
+        <div class="team-category team-category-wide">
           <div class="team-category-header">
             <div class="team-category-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
-            <h3 class="team-category-title">Collaborators</h3>
+            <h3 class="team-category-title">Scientific Advisory Board</h3>
           </div>
           <div class="team-members">
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
-              </div>
+            <a class="team-member" href="team/member.html?id=neven-duic">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=62" alt="Neven Duic"></div>
               <div class="team-info">
-                <h4>Institution Alpha</h4>
-                <p>Lorem collaboration</p>
+                <h4>Prof. Neven Duic</h4>
+                <p>University of Zagreb</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=henrik-lund">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=65" alt="Henrik Lund"></div>
               <div class="team-info">
-                <h4>Institution Beta</h4>
-                <p>Ipsum Model</p>
+                <h4>Prof. Henrik Lund</h4>
+                <p>Aalborg University</p>
               </div>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
-              </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=maria-graca-carvalho">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=45" alt="Maria da Graca Carvalho"></div>
               <div class="team-info">
-                <h4>Open Community</h4>
-                <p>Open modelling</p>
+                <h4>Prof. Maria da Graca Carvalho</h4>
+                <p>University of Lisbon</p>
               </div>
-            </div>
+            </a>
+            <a class="team-member" href="team/member.html?id=goran-krajacic">
+              <div class="team-avatar"><img src="https://i.pravatar.cc/120?img=19" alt="Goran Krajacic"></div>
+              <div class="team-info">
+                <h4>Prof. Goran Krajacic</h4>
+                <p>University of Zagreb</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -2576,6 +2429,166 @@
 
       <div style="text-align: center; margin-top: 40px;">
         <a href="#" class="btn btn-secondary">View All News →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 9. GET STARTED ========== -->
+  <section id="get-started" class="section getstarted-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Get Started</div>
+        <h2 class="section-title">Lorem Ipsum Dolor</h2>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="accordion-list">
+        <!-- Installation -->
+        <div class="accordion open">
+          <div class="accordion-header">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Installation
+            </h3>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <ul>
+                <li>Lorem ipsum dolor sit amet consectetur adipiscing elit</li>
+                <li>Sed do eiusmod tempor incididunt ut labore</li>
+                <li>Ut enim ad minim veniam quis nostrud exercitation</li>
+              </ul>
+              <div class="code-block">
+                <span class="prompt">$</span> <span class="command">pip install h2res</span><br>
+                <span class="prompt">$</span> <span class="command">h2res &#8211;version</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <div class="accordion">
+          <div class="accordion-header">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </h3>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <ul>
+                <li>Lorem ipsum dolor sit amet (DOI: 10.5281/xxxxx)</li>
+                <li>Consectetur adipiscing elit sed do eiusmod</li>
+                <li>Tempor incididunt ut labore et dolore magna</li>
+              </ul>
+              <div style="margin-top: 16px;">
+                <a href="#" class="btn btn-primary btn-sm">Download v2.0.0</a>
+                <a href="#" class="btn btn-outline btn-sm" style="margin-left: 8px;">All Releases</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub Repository -->
+        <div class="accordion">
+          <div class="accordion-header">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub Repository
+            </h3>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <ul>
+                <li><strong>/core</strong> – Lorem ipsum dolor sit amet</li>
+                <li><strong>/io</strong> – Consectetur adipiscing elit</li>
+                <li><strong>/data</strong> – Sed do eiusmod tempor</li>
+                <li><strong>/examples</strong> – Ut enim ad minim veniam</li>
+              </ul>
+              <div style="margin-top: 16px;">
+                <a href="#" class="btn btn-secondary btn-sm">View on GitHub →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 10. DOCUMENTATION ========== -->
+  <section id="documentation" class="section docs-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Documentation</div>
+        <h2 class="section-title">Lorem Ipsum</h2>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="docs-grid">
+        <div class="docs-card">
+          <div class="docs-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Dolor Sit Amet</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
+          <a href="#" class="docs-link">Read documentation →</a>
+        </div>
+
+        <div class="docs-card">
+          <div class="docs-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          </div>
+          <h3>Consectetur Elit</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
+          <a href="#" class="docs-link">View parameters →</a>
+        </div>
+
+        <div class="docs-card">
+          <div class="docs-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>Tempor Incididunt</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
+          <a href="#" class="docs-link">Configuration guide →</a>
+        </div>
+      </div>
+
+      <!-- Tutorials -->
+      <div class="tutorials-list">
+        <h3 style="font-size: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Tutorials
+        </h3>
+
+        <div class="tutorial-item">
+          <div class="tutorial-num">01</div>
+          <div class="tutorial-content">
+            <h4>Lorem ipsum dolor sit amet</h4>
+            <p>Consectetur adipiscing elit sed do eiusmod</p>
+          </div>
+          <a href="#" class="btn btn-outline btn-sm">Start →</a>
+        </div>
+
+        <div class="tutorial-item">
+          <div class="tutorial-num">02</div>
+          <div class="tutorial-content">
+            <h4>Lorem ipsum dolor sit amet</h4>
+            <p>Quis nostrud exercitation ullamco laboris</p>
+          </div>
+          <a href="#" class="btn btn-outline btn-sm">Start →</a>
+        </div>
+
+        <div class="tutorial-item">
+          <div class="tutorial-num">03</div>
+          <div class="tutorial-content">
+            <h4>Lorem ipsum dolor sit amet</h4>
+            <p>In reprehenderit in voluptate velit esse</p>
+          </div>
+          <a href="#" class="btn btn-outline btn-sm">Start →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -2932,6 +2945,16 @@
         fields.howpublished
       ].join(' ').toLowerCase();
 
+      // Strict category rules requested:
+      // - Articles tab: only @article
+      // - Conference tab: only @inproceedings
+      if (normalizedType === 'article') {
+        return 'articles';
+      }
+      if (normalizedType === 'inproceedings') {
+        return 'conference';
+      }
+
       if (normalizedType === 'mastersthesis' || normalizedType === 'phdthesis' || normalizedType === 'thesis') {
         return 'thesis';
       }
@@ -2946,10 +2969,8 @@
       }
 
       if (
-        normalizedType === 'inproceedings' ||
         normalizedType === 'conference' ||
-        normalizedType === 'proceedings' ||
-        /conference|proceedings|symposium|workshop/.test(context)
+        normalizedType === 'proceedings'
       ) {
         return 'conference';
       }
@@ -2958,6 +2979,9 @@
         normalizedType === 'techreport' ||
         normalizedType === 'report' ||
         normalizedType === 'manual' ||
+        normalizedType === 'inbook' ||
+        normalizedType === 'incollection' ||
+        normalizedType === 'book' ||
         /deliverable/.test(context)
       ) {
         return 'report';
@@ -2971,7 +2995,7 @@
         return 'project';
       }
 
-      return 'articles';
+      return 'report';
     }
 
     function typeLabel(entryType) {
@@ -3027,12 +3051,36 @@
       if (pdfUrl) {
         links.push(`<a class="pub-link" href="${escapeHtml(pdfUrl)}" target="_blank" rel="noopener noreferrer">PDF ↗</a>`);
       }
-      if (entry.fields.abstract) {
-        links.push(`<button type="button" class="pub-link abstract-toggle" data-key="${escapeHtml(entry.citationKey)}">Abstract</button>`);
-      }
       links.push(`<a class="pub-link bibtex-copy" href="#" data-key="${escapeHtml(entry.citationKey)}">BibTeX</a>`);
 
       return links.join('');
+    }
+
+    function detailsIdFromKey(citationKey) {
+      return `details-${String(citationKey || 'entry').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    }
+
+    function buildPublicationDetails(entry) {
+      const abstractText = entry.fields.abstract ? normalizeBibValue(entry.fields.abstract) : '';
+      const keywordsText = entry.fields.keywords ? normalizeBibValue(entry.fields.keywords) : '';
+      const keywords = keywordsText
+        .split(/[;,]/)
+        .map(item => item.trim())
+        .filter(Boolean);
+
+      const detailParts = [];
+      if (abstractText) {
+        detailParts.push(`<p class="pub-details-row"><span class="pub-details-label">Abstract:</span> ${escapeHtml(abstractText)}</p>`);
+      }
+      if (keywords.length > 0) {
+        detailParts.push(`<p class="pub-details-row"><span class="pub-details-label">Keywords:</span> ${escapeHtml(keywords.join(', '))}</p>`);
+      }
+      if (detailParts.length === 0) {
+        detailParts.push('<p class="pub-details-row">No abstract or keywords available in this BibTeX entry.</p>');
+      }
+
+      const detailsId = detailsIdFromKey(entry.citationKey);
+      return `<div class="pub-details" id="${escapeHtml(detailsId)}" hidden>${detailParts.join('')}</div>`;
     }
 
     function buildPublicationCard(entry) {
@@ -3041,17 +3089,17 @@
       const year = entry.fields.year || 'n.d.';
       const authors = formatAuthors(entry.fields.author);
       const meta = `${source}, ${year}${authors ? ` • ${authors}` : ''}`;
-      const abstractText = entry.fields.abstract ? normalizeBibValue(entry.fields.abstract) : '';
+      const detailsId = detailsIdFromKey(entry.citationKey);
 
       return `
-        <div class="pub-card" data-key="${escapeHtml(entry.citationKey)}">
+        <div class="pub-card" data-key="${escapeHtml(entry.citationKey)}" data-details-id="${escapeHtml(detailsId)}" role="button" tabindex="0" aria-expanded="false" aria-controls="${escapeHtml(detailsId)}">
           <div class="pub-icon">${publicationIcon(entry.category)}</div>
           <div class="pub-content">
             <span class="pub-type">${escapeHtml(typeLabel(entry.entryType))}</span>
             <h4 class="pub-title">${escapeHtml(title)}</h4>
             <p class="pub-meta">${escapeHtml(meta)}</p>
             <div class="pub-links">${buildPublicationLinks(entry)}</div>
-            ${abstractText ? `<p class="pub-abstract" id="abstract-${escapeHtml(entry.citationKey)}" hidden>${escapeHtml(abstractText)}</p>` : ''}
+            ${buildPublicationDetails(entry)}
           </div>
         </div>
       `;
@@ -3101,22 +3149,52 @@
       });
     }
 
-    function bindAbstractToggleActions() {
-      document.querySelectorAll('.abstract-toggle').forEach(button => {
-        button.addEventListener('click', () => {
-          const key = button.getAttribute('data-key');
-          const abstractElement = document.getElementById(`abstract-${key}`);
-          if (!abstractElement) {
+    function bindPublicationCardToggleActions() {
+      const cards = Array.from(document.querySelectorAll('.pub-card'));
+
+      function setExpanded(card, expanded) {
+        const detailsId = card.getAttribute('data-details-id');
+        const details = detailsId ? document.getElementById(detailsId) : null;
+        if (!details) {
+          return;
+        }
+        if (expanded) {
+          card.classList.add('expanded');
+          card.setAttribute('aria-expanded', 'true');
+          details.removeAttribute('hidden');
+        } else {
+          card.classList.remove('expanded');
+          card.setAttribute('aria-expanded', 'false');
+          details.setAttribute('hidden', '');
+        }
+      }
+
+      function collapseOthers(activeCard) {
+        cards.forEach(card => {
+          if (card !== activeCard) {
+            setExpanded(card, false);
+          }
+        });
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', event => {
+          if (event.target.closest('.pub-link')) {
             return;
           }
-          const isHidden = abstractElement.hasAttribute('hidden');
-          if (isHidden) {
-            abstractElement.removeAttribute('hidden');
-            button.textContent = 'Hide abstract';
-          } else {
-            abstractElement.setAttribute('hidden', '');
-            button.textContent = 'Abstract';
+          const isExpanded = card.getAttribute('aria-expanded') === 'true';
+          collapseOthers(card);
+          setExpanded(card, !isExpanded);
+        });
+
+        card.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') {
+            return;
           }
+          event.preventDefault();
+          const isExpanded = card.getAttribute('aria-expanded') === 'true';
+          collapseOthers(card);
+          setExpanded(card, !isExpanded);
         });
       });
     }
@@ -3129,7 +3207,7 @@
       }
 
       pubGrid.innerHTML = filtered.map(buildPublicationCard).join('');
-      bindAbstractToggleActions();
+      bindPublicationCardToggleActions();
       bindBibtexCopyActions();
     }
 

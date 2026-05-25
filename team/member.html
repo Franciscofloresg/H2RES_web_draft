@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H2RES Team Member</title>
+  <style>
+    :root[data-theme="dark"] {
+      --bg-dark: #0a0a0f;
+      --bg-darker: #050508;
+      --bg-card: #111118;
+      --bg-card-hover: #1a1a24;
+      --text-primary: #ffffff;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --accent-teal: #14b8a6;
+      --accent-green: #10b981;
+      --border-color: #1f2937;
+      --border-hover: #374151;
+    }
+
+    :root[data-theme="light"] {
+      --bg-dark: #ffffff;
+      --bg-darker: #f9fafb;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --accent-teal: #0d9488;
+      --accent-green: #059669;
+      --border-color: #e5e7eb;
+      --border-hover: #d1d5db;
+    }
+
+    :root {
+      --max-width: 1040px;
+      --radius: 12px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-darker);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .topbar {
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .back-link {
+      color: var(--accent-teal);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .theme-btn {
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .profile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card-hover);
+    }
+
+    .member-name {
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .member-role {
+      color: var(--accent-teal);
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .member-org {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .member-bio {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .topics {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topic-chip {
+      border: 1px solid var(--border-color);
+      background: var(--bg-card-hover);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .pub-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .pub-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .pub-subtitle {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .pub-status {
+      border: 1px dashed var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      background: var(--bg-card-hover);
+    }
+
+    .pub-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pub-item {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+    }
+
+    .pub-item h4 {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .pub-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pub-links a,
+    .pub-links button {
+      color: var(--accent-teal);
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .pub-links a:hover,
+    .pub-links button:hover {
+      text-decoration: underline;
+    }
+
+    .empty-box {
+      border: 1px dashed var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--text-secondary);
+      background: var(--bg-card-hover);
+      font-size: 14px;
+    }
+
+    @media (max-width: 840px) {
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo {
+        width: 140px;
+        height: 140px;
+      }
+
+      .member-name {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <a class="back-link" href="../index.html#team">← Back to Team</a>
+      <button class="theme-btn" id="themeToggleBtn" type="button">Toggle Theme</button>
+    </div>
+
+    <section class="profile-card">
+      <img class="profile-photo" id="memberPhoto" alt="Team member photo">
+      <div>
+        <h1 class="member-name" id="memberName">Team Member</h1>
+        <p class="member-role" id="memberRole"></p>
+        <p class="member-org" id="memberOrg"></p>
+        <p class="member-bio" id="memberBio"></p>
+        <div class="topics" id="topicsBox"></div>
+      </div>
+    </section>
+
+    <section class="pub-section">
+      <h2 class="pub-title">Selected Bibliography</h2>
+      <p class="pub-subtitle" id="pubSubtitle">Loading publications from H2RES.bib...</p>
+      <div id="pubRoot">
+        <div class="pub-status">Loading records...</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const PEOPLE = {
+      "felipe-feijoo": {
+        name: "Felipe Feijoo",
+        role: "Core Developer",
+        institution: "Pontificia Universidad Catolica de Valparaiso",
+        photo: "https://i.pravatar.cc/400?img=60",
+        bio: "Energy systems researcher focused on long-term planning, sector coupling, and deep decarbonization pathways in integrated energy systems.",
+        topics: ["Energy system planning", "Decarbonization pathways", "Sector coupling", "Power-to-X"],
+        aliases: ["felipe feijoo", "feijoo"]
+      },
+      "vladimir-gjorgievski": {
+        name: "Vladimir Z. Gjorgievski",
+        role: "Core Developer",
+        institution: "Ss. Cyril and Methodius University in Skopje",
+        photo: "https://i.pravatar.cc/400?img=14",
+        bio: "Researcher contributing to integrated optimization and high-resolution system modeling for renewable transition pathways.",
+        topics: ["Optimization modeling", "Grid integration", "Long-term scenarios"],
+        aliases: ["vladimir gjorgievski", "gjorgievski"]
+      },
+      "luka-herc": {
+        name: "Luka Herc",
+        role: "Core Developer",
+        institution: "University of Zagreb",
+        photo: "https://i.pravatar.cc/400?img=13",
+        bio: "Developer and researcher advancing H2RES for e-fuels, storage integration, and cross-sector analysis.",
+        topics: ["E-fuels", "Hydrogen systems", "Storage integration", "Model development"],
+        aliases: ["luka herc", "herc"]
+      },
+      "antun-pfeifer": {
+        name: "Antun Pfeifer",
+        role: "Core Developer",
+        institution: "University of Zagreb",
+        photo: "https://i.pravatar.cc/400?img=18",
+        bio: "Researcher working on renewable-based system flexibility and electrification pathways in integrated models.",
+        topics: ["Renewables integration", "Energy flexibility", "Electrification"],
+        aliases: ["antun pfeifer", "pfeifer"]
+      },
+      "doris-beljan": {
+        name: "Doris Beljan",
+        role: "Contributor and Alumni",
+        institution: "University of Zagreb",
+        photo: "https://i.pravatar.cc/400?img=47",
+        bio: "Contributor focused on scenario analysis and model sensitivity studies in future energy systems.",
+        topics: ["Scenario analysis", "Sensitivity analysis", "Resource availability"],
+        aliases: ["doris beljan", "beljan"]
+      },
+      "francisco-flores-gajardo": {
+        name: "Francisco Flores Gajardo",
+        role: "Contributor and Alumni",
+        institution: "Pontificia Universidad Catolica de Valparaiso",
+        photo: "https://i.pravatar.cc/400?img=11",
+        bio: "Research contributor on strategic transition planning, regional trade, and flexible technologies for decarbonization.",
+        topics: ["Regional planning", "Cross-border trade", "Flexibility technologies"],
+        aliases: ["francisco flores gajardo", "flores gajardo", "francisco flores", "flores"]
+      },
+      "francesca-pugliese": {
+        name: "Francesca Pugliese",
+        role: "Contributor and Alumni",
+        institution: "Universita degli Studi di Napoli Federico II",
+        photo: "https://i.pravatar.cc/400?img=49",
+        bio: "Contributor to H2RES applications in national-scale planning and integrated decarbonization case studies.",
+        topics: ["National planning", "Integrated modeling", "Case-study development"],
+        aliases: ["francesca pugliese", "pugliese"]
+      },
+      "moazzam-ali-khan": {
+        name: "Moazzam Ali Khan",
+        role: "Contributor and Alumni",
+        institution: "Politecnico di Torino",
+        photo: "https://i.pravatar.cc/400?img=12",
+        bio: "Contributor focused on district heating strategies, techno-economic evaluation, and sustainability integration.",
+        topics: ["District heating", "Techno-economics", "Sustainability"],
+        aliases: ["moazzam ali khan", "khan", "moazzam"]
+      },
+      "neven-duic": {
+        name: "Neven Duic",
+        role: "Scientific Advisory Board",
+        institution: "University of Zagreb",
+        photo: "https://i.pravatar.cc/400?img=62",
+        bio: "Senior advisor in renewable integration, hydrogen systems, and strategic long-term energy transition planning.",
+        topics: ["Hydrogen systems", "Renewables integration", "Strategic planning"],
+        aliases: ["neven duic", "neven dui", "duic", "dui"]
+      },
+      "henrik-lund": {
+        name: "Henrik Lund",
+        role: "Scientific Advisory Board",
+        institution: "Aalborg University",
+        photo: "https://i.pravatar.cc/400?img=65",
+        bio: "Advisor on smart energy systems and methodologies for integrating variable renewable resources.",
+        topics: ["Smart energy systems", "Scenario methods", "Wind integration"],
+        aliases: ["henrik lund", "lund"]
+      },
+      "maria-graca-carvalho": {
+        name: "Maria da Graca Carvalho",
+        role: "Scientific Advisory Board",
+        institution: "University of Lisbon",
+        photo: "https://i.pravatar.cc/400?img=45",
+        bio: "Advisor in policy-relevant energy modeling and sustainable transition pathways for integrated systems.",
+        topics: ["Energy policy", "Sustainable transitions", "Integrated planning"],
+        aliases: ["maria da graca carvalho", "carvalho", "maria carvalho"]
+      },
+      "goran-krajacic": {
+        name: "Goran Krajacic",
+        role: "Scientific Advisory Board",
+        institution: "University of Zagreb",
+        photo: "https://i.pravatar.cc/400?img=19",
+        bio: "Advisor on system integration, sector coupling, and renewable technologies in long-term planning studies.",
+        topics: ["Sector coupling", "Renewable technologies", "System integration"],
+        aliases: ["goran krajacic", "krajacic", "goran kraja"]
+      }
+    };
+
+    function escapeHtml(text) {
+      return String(text || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function normalizeBibValue(value) {
+      return (value || "")
+        .replace(/\r\n?/g, "\n")
+        .replace(/\\&/g, "&")
+        .replace(/\\%/g, "%")
+        .replace(/\\_/g, "_")
+        .replace(/[{}]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function foldText(value) {
+      return normalizeBibValue(value)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function findTopLevelComma(text) {
+      let depth = 0;
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const prev = i > 0 ? text[i - 1] : "";
+        if (char === "\"" && prev !== "\\") {
+          inQuotes = !inQuotes;
+          continue;
+        }
+        if (inQuotes) {
+          continue;
+        }
+        if (char === "{") {
+          depth++;
+        } else if (char === "}") {
+          depth = Math.max(0, depth - 1);
+        } else if (char === "," && depth === 0) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function readBibValue(text, startIndex) {
+      let index = startIndex;
+      while (index < text.length && /\s/.test(text[index])) {
+        index++;
+      }
+
+      const first = text[index];
+      if (!first) {
+        return { value: "", nextIndex: index };
+      }
+
+      if (first === "{") {
+        let depth = 1;
+        let i = index + 1;
+        let inQuotes = false;
+        while (i < text.length && depth > 0) {
+          const char = text[i];
+          const prev = i > 0 ? text[i - 1] : "";
+          if (char === "\"" && prev !== "\\") {
+            inQuotes = !inQuotes;
+          }
+          if (!inQuotes) {
+            if (char === "{") {
+              depth++;
+            } else if (char === "}") {
+              depth--;
+            }
+          }
+          i++;
+        }
+        return {
+          value: text.slice(index + 1, Math.max(index + 1, i - 1)),
+          nextIndex: i
+        };
+      }
+
+      if (first === "\"") {
+        let i = index + 1;
+        while (i < text.length) {
+          if (text[i] === "\"" && text[i - 1] !== "\\") {
+            break;
+          }
+          i++;
+        }
+        return {
+          value: text.slice(index + 1, i),
+          nextIndex: Math.min(i + 1, text.length)
+        };
+      }
+
+      let i = index;
+      while (i < text.length && text[i] !== ",") {
+        i++;
+      }
+      return {
+        value: text.slice(index, i).trim(),
+        nextIndex: i
+      };
+    }
+
+    function parseBibFields(fieldsText) {
+      const fields = {};
+      let index = 0;
+
+      while (index < fieldsText.length) {
+        while (index < fieldsText.length && /[\s,]/.test(fieldsText[index])) {
+          index++;
+        }
+        if (index >= fieldsText.length) {
+          break;
+        }
+
+        const fieldStart = index;
+        while (index < fieldsText.length && /[a-zA-Z0-9_-]/.test(fieldsText[index])) {
+          index++;
+        }
+        const fieldName = fieldsText.slice(fieldStart, index).toLowerCase();
+        while (index < fieldsText.length && /\s/.test(fieldsText[index])) {
+          index++;
+        }
+        if (fieldsText[index] !== "=") {
+          const nextComma = findTopLevelComma(fieldsText.slice(index));
+          if (nextComma === -1) {
+            break;
+          }
+          index += nextComma + 1;
+          continue;
+        }
+        index++;
+
+        const parsedValue = readBibValue(fieldsText, index);
+        fields[fieldName] = normalizeBibValue(parsedValue.value);
+        index = parsedValue.nextIndex;
+      }
+
+      return fields;
+    }
+
+    function parseBibTeX(text) {
+      const cleanText = (text || "")
+        .replace(/\r\n?/g, "\n")
+        .replace(/^\s*%.*$/gm, "");
+
+      const entries = [];
+      let index = 0;
+
+      while (index < cleanText.length) {
+        const atIndex = cleanText.indexOf("@", index);
+        if (atIndex === -1) {
+          break;
+        }
+
+        const headerMatch = cleanText.slice(atIndex + 1).match(/^([A-Za-z]+)\s*([{(])/);
+        if (!headerMatch) {
+          index = atIndex + 1;
+          continue;
+        }
+
+        const entryType = headerMatch[1].toLowerCase();
+        const openChar = headerMatch[2];
+        const closeChar = openChar === "{" ? "}" : ")";
+        const openIndex = atIndex + 1 + headerMatch[0].length - 1;
+
+        let i = openIndex + 1;
+        let depth = 1;
+        let inQuotes = false;
+
+        while (i < cleanText.length && depth > 0) {
+          const char = cleanText[i];
+          const prev = i > 0 ? cleanText[i - 1] : "";
+          if (char === "\"" && prev !== "\\") {
+            inQuotes = !inQuotes;
+          } else if (!inQuotes) {
+            if (char === openChar) {
+              depth++;
+            } else if (char === closeChar) {
+              depth--;
+            }
+          }
+          i++;
+        }
+
+        if (depth !== 0) {
+          break;
+        }
+
+        const rawBody = cleanText.slice(openIndex + 1, i - 1).trim();
+        const commaIndex = findTopLevelComma(rawBody);
+        if (commaIndex === -1) {
+          index = i;
+          continue;
+        }
+
+        const citationKey = rawBody.slice(0, commaIndex).trim();
+        const fieldsText = rawBody.slice(commaIndex + 1).trim();
+        const fields = parseBibFields(fieldsText);
+
+        entries.push({
+          entryType,
+          citationKey,
+          fields,
+          bibtex: cleanText.slice(atIndex, i).trim(),
+          sortYear: Number.parseInt(fields.year, 10) || 0
+        });
+
+        index = i;
+      }
+
+      return entries;
+    }
+
+    function formatAuthors(authorValue) {
+      const authors = (authorValue || "")
+        .split(/\s+and\s+/i)
+        .map(part => normalizeBibValue(part))
+        .filter(Boolean);
+
+      if (authors.length === 0) {
+        return "";
+      }
+      if (authors.length > 4) {
+        const first = authors[0];
+        return `${first} et al.`;
+      }
+      return authors.join(", ");
+    }
+
+    function typeLabel(entryType) {
+      const labels = {
+        article: "Journal Article",
+        inproceedings: "Conference Paper",
+        inbook: "Book Chapter",
+        incollection: "Book Chapter",
+        mastersthesis: "Master Thesis",
+        phdthesis: "PhD Thesis",
+        techreport: "Technical Report"
+      };
+      return labels[entryType] || "Publication";
+    }
+
+    function buildLinks(entry) {
+      const links = [];
+      const doiRaw = (entry.fields.doi || "").replace(/^doi:\s*/i, "").trim();
+      const doiUrl = doiRaw.startsWith("http") ? doiRaw : (doiRaw ? `https://doi.org/${doiRaw}` : "");
+      const url = entry.fields.url || "";
+
+      if (doiUrl) {
+        links.push(`<a href="${escapeHtml(doiUrl)}" target="_blank" rel="noopener noreferrer">DOI ↗</a>`);
+      }
+      if (url) {
+        links.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">URL ↗</a>`);
+      }
+      links.push(`<button type="button" class="bibtex-copy" data-key="${escapeHtml(entry.citationKey)}">BibTeX</button>`);
+      return links.join("");
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const helper = document.createElement("textarea");
+      helper.value = text;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "fixed";
+      helper.style.left = "-9999px";
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand("copy");
+      document.body.removeChild(helper);
+    }
+
+    function bindBibtexButtons(entries) {
+      document.querySelectorAll(".bibtex-copy").forEach(button => {
+        button.addEventListener("click", async () => {
+          const key = button.getAttribute("data-key");
+          const entry = entries.find(item => item.citationKey === key);
+          if (!entry) {
+            return;
+          }
+          const previous = button.textContent;
+          try {
+            await copyText(entry.bibtex);
+            button.textContent = "Copied";
+          } catch (error) {
+            button.textContent = "Copy failed";
+          }
+          window.setTimeout(() => {
+            button.textContent = previous;
+          }, 1200);
+        });
+      });
+    }
+
+    function fillProfile(person) {
+      document.title = `${person.name} - H2RES Team`;
+      document.getElementById("memberName").textContent = person.name;
+      document.getElementById("memberRole").textContent = person.role;
+      document.getElementById("memberOrg").textContent = person.institution;
+      document.getElementById("memberBio").textContent = person.bio;
+      const photo = document.getElementById("memberPhoto");
+      photo.src = person.photo;
+      photo.alt = person.name;
+
+      const topicsBox = document.getElementById("topicsBox");
+      topicsBox.innerHTML = person.topics
+        .map(topic => `<span class="topic-chip">${escapeHtml(topic)}</span>`)
+        .join("");
+    }
+
+    function matchesPerson(entry, person) {
+      const foldedAuthors = foldText(entry.fields.author || "");
+      if (!foldedAuthors) {
+        return false;
+      }
+      return person.aliases.some(alias => {
+        const foldedAlias = foldText(alias);
+        return foldedAlias && foldedAuthors.includes(foldedAlias);
+      });
+    }
+
+    function renderPublications(entries, person) {
+      const root = document.getElementById("pubRoot");
+      const subtitle = document.getElementById("pubSubtitle");
+      const matched = entries
+        .filter(entry => matchesPerson(entry, person))
+        .sort((a, b) => {
+          if (b.sortYear !== a.sortYear) {
+            return b.sortYear - a.sortYear;
+          }
+          return a.citationKey.localeCompare(b.citationKey);
+        });
+
+      subtitle.textContent = `${matched.length} publication${matched.length === 1 ? "" : "s"} found in H2RES.bib`;
+
+      if (matched.length === 0) {
+        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
+        return;
+      }
+
+      root.innerHTML = `
+        <ul class="pub-list">
+          ${matched.map(entry => {
+            const title = entry.fields.title || entry.citationKey || "Untitled publication";
+            const source = entry.fields.journal || entry.fields.booktitle || entry.fields.school || entry.fields.publisher || entry.fields.institution || "Unknown source";
+            const year = entry.fields.year || "n.d.";
+            const authors = formatAuthors(entry.fields.author);
+            const meta = `${typeLabel(entry.entryType)} · ${source}, ${year}${authors ? ` · ${authors}` : ""}`;
+            return `
+              <li class="pub-item">
+                <h4>${escapeHtml(title)}</h4>
+                <p class="pub-meta">${escapeHtml(meta)}</p>
+                <div class="pub-links">${buildLinks(entry)}</div>
+              </li>
+            `;
+          }).join("")}
+        </ul>
+      `;
+
+      bindBibtexButtons(matched);
+    }
+
+    async function bootstrap() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const person = PEOPLE[id];
+
+      if (!person) {
+        document.getElementById("memberName").textContent = "Member not found";
+        document.getElementById("memberRole").textContent = "";
+        document.getElementById("memberOrg").textContent = "";
+        document.getElementById("memberBio").textContent = "Use the Team page and open a valid member profile.";
+        document.getElementById("pubSubtitle").textContent = "";
+        document.getElementById("pubRoot").innerHTML = '<div class="empty-box">No profile loaded.</div>';
+        return;
+      }
+
+      fillProfile(person);
+
+      try {
+        const response = await fetch("../H2RES.bib", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const text = await response.text();
+        const entries = parseBibTeX(text);
+        renderPublications(entries, person);
+      } catch (error) {
+        document.getElementById("pubSubtitle").textContent = "";
+        document.getElementById("pubRoot").innerHTML = '<div class="pub-status">Could not load H2RES.bib for this profile.</div>';
+      }
+    }
+
+    function setupTheme() {
+      const html = document.documentElement;
+      const currentTheme = localStorage.getItem("theme") || "light";
+      html.setAttribute("data-theme", currentTheme);
+
+      const button = document.getElementById("themeToggleBtn");
+      button.addEventListener("click", () => {
+        const current = html.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    }
+
+    setupTheme();
+    bootstrap();
+  </script>
+</body>
+</html>
