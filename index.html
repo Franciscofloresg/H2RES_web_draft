@@ -1187,8 +1187,30 @@
       gap: 4px;
     }
 
+    button.pub-link {
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      line-height: inherit;
+    }
+
     .pub-link:hover {
       text-decoration: underline;
+    }
+
+    .pub-abstract {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .pub-abstract[hidden] {
+      display: none;
     }
 
     .pub-status {
@@ -2287,6 +2309,7 @@
         <button type="button" class="pub-tab active" data-filter="articles">Articles</button>
         <button type="button" class="pub-tab" data-filter="conference">Conferences</button>
         <button type="button" class="pub-tab" data-filter="report">Reports</button>
+        <button type="button" class="pub-tab" data-filter="thesis">Thesis</button>
         <button type="button" class="pub-tab" data-filter="project">Projects</button>
         <button type="button" class="pub-tab" data-filter="database">Databases</button>
       </div>
@@ -2905,8 +2928,13 @@
         fields.keywords,
         fields.note,
         fields.journal,
-        fields.booktitle
+        fields.booktitle,
+        fields.howpublished
       ].join(' ').toLowerCase();
+
+      if (normalizedType === 'mastersthesis' || normalizedType === 'phdthesis' || normalizedType === 'thesis') {
+        return 'thesis';
+      }
 
       if (
         normalizedType === 'dataset' ||
@@ -2930,15 +2958,14 @@
         normalizedType === 'techreport' ||
         normalizedType === 'report' ||
         normalizedType === 'manual' ||
-        normalizedType === 'mastersthesis' ||
-        normalizedType === 'phdthesis' ||
-        /report|deliverable|thesis|dissertation/.test(context)
+        /deliverable/.test(context)
       ) {
         return 'report';
       }
 
       if (
         normalizedType === 'misc' ||
+        normalizedType === 'unpublished' ||
         /project|horizon|grant|work package|wp\d+/.test(context)
       ) {
         return 'project';
@@ -2957,6 +2984,7 @@
         proceedings: 'Conference Proceedings',
         techreport: 'Technical Report',
         report: 'Report',
+        thesis: 'Thesis',
         mastersthesis: 'Master Thesis',
         phdthesis: 'PhD Thesis',
         dataset: 'Dataset',
@@ -2970,6 +2998,9 @@
     function publicationIcon(category) {
       if (category === 'conference') {
         return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>';
+      }
+      if (category === 'thesis') {
+        return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>';
       }
       if (category === 'database') {
         return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
@@ -2996,6 +3027,9 @@
       if (pdfUrl) {
         links.push(`<a class="pub-link" href="${escapeHtml(pdfUrl)}" target="_blank" rel="noopener noreferrer">PDF ↗</a>`);
       }
+      if (entry.fields.abstract) {
+        links.push(`<button type="button" class="pub-link abstract-toggle" data-key="${escapeHtml(entry.citationKey)}">Abstract</button>`);
+      }
       links.push(`<a class="pub-link bibtex-copy" href="#" data-key="${escapeHtml(entry.citationKey)}">BibTeX</a>`);
 
       return links.join('');
@@ -3007,6 +3041,7 @@
       const year = entry.fields.year || 'n.d.';
       const authors = formatAuthors(entry.fields.author);
       const meta = `${source}, ${year}${authors ? ` • ${authors}` : ''}`;
+      const abstractText = entry.fields.abstract ? normalizeBibValue(entry.fields.abstract) : '';
 
       return `
         <div class="pub-card" data-key="${escapeHtml(entry.citationKey)}">
@@ -3016,6 +3051,7 @@
             <h4 class="pub-title">${escapeHtml(title)}</h4>
             <p class="pub-meta">${escapeHtml(meta)}</p>
             <div class="pub-links">${buildPublicationLinks(entry)}</div>
+            ${abstractText ? `<p class="pub-abstract" id="abstract-${escapeHtml(entry.citationKey)}" hidden>${escapeHtml(abstractText)}</p>` : ''}
           </div>
         </div>
       `;
@@ -3065,6 +3101,26 @@
       });
     }
 
+    function bindAbstractToggleActions() {
+      document.querySelectorAll('.abstract-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+          const key = button.getAttribute('data-key');
+          const abstractElement = document.getElementById(`abstract-${key}`);
+          if (!abstractElement) {
+            return;
+          }
+          const isHidden = abstractElement.hasAttribute('hidden');
+          if (isHidden) {
+            abstractElement.removeAttribute('hidden');
+            button.textContent = 'Hide abstract';
+          } else {
+            abstractElement.setAttribute('hidden', '');
+            button.textContent = 'Abstract';
+          }
+        });
+      });
+    }
+
     function renderPublicationGrid() {
       const filtered = publicationEntries.filter(entry => entry.category === activePubFilter);
       if (filtered.length === 0) {
@@ -3073,6 +3129,7 @@
       }
 
       pubGrid.innerHTML = filtered.map(buildPublicationCard).join('');
+      bindAbstractToggleActions();
       bindBibtexCopyActions();
     }
 
