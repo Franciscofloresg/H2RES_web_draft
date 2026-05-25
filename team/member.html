@@ -180,6 +180,36 @@
       background: var(--bg-card-hover);
     }
 
+    .member-pub-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .member-pub-tab {
+      border: 1px solid var(--border-color);
+      background: var(--bg-card-hover);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .member-pub-tab:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+    }
+
+    .member-pub-tab.active {
+      background: var(--accent-teal);
+      color: #ffffff;
+      border-color: var(--accent-teal);
+    }
+
     .pub-list {
       list-style: none;
       display: flex;
@@ -274,6 +304,7 @@
 
     <section class="pub-section">
       <h2 class="pub-title">Selected Bibliography</h2>
+      <div class="member-pub-tabs" id="memberPubTabs"></div>
       <div id="pubRoot">
         <div class="pub-status">Loading records...</div>
       </div>
@@ -646,6 +677,69 @@
       return labels[entryType] || "Publication";
     }
 
+    function categoryLabel(category) {
+      const labels = {
+        articles: "Articles",
+        conference: "Conferences",
+        report: "Reports",
+        thesis: "Thesis",
+        project: "Projects",
+        database: "Databases"
+      };
+      return labels[category] || "Other";
+    }
+
+    function entryCategory(entry) {
+      const normalizedType = (entry.entryType || "").toLowerCase();
+      const fields = entry.fields || {};
+      const context = [
+        fields.title,
+        fields.keywords,
+        fields.note,
+        fields.journal,
+        fields.booktitle,
+        fields.howpublished
+      ].join(" ").toLowerCase();
+
+      if (normalizedType === "article") {
+        return "articles";
+      }
+      if (normalizedType === "inproceedings") {
+        return "conference";
+      }
+      if (normalizedType === "mastersthesis" || normalizedType === "phdthesis" || normalizedType === "thesis") {
+        return "thesis";
+      }
+      if (
+        normalizedType === "dataset" ||
+        normalizedType === "data" ||
+        normalizedType === "software" ||
+        /dataset|data set|database|zenodo|figshare|kaggle/.test(context)
+      ) {
+        return "database";
+      }
+      if (
+        normalizedType === "techreport" ||
+        normalizedType === "report" ||
+        normalizedType === "manual" ||
+        normalizedType === "inbook" ||
+        normalizedType === "incollection" ||
+        normalizedType === "book" ||
+        /deliverable/.test(context)
+      ) {
+        return "report";
+      }
+      if (
+        normalizedType === "misc" ||
+        normalizedType === "unpublished" ||
+        /project|horizon|grant|work package|wp\d+/.test(context)
+      ) {
+        return "project";
+      }
+
+      return "report";
+    }
+
     function buildLinks(entry) {
       const links = [];
       const doiRaw = (entry.fields.doi || "").replace(/^doi:\s*/i, "").trim();
@@ -765,6 +859,93 @@
       bindBibtexButtons(matched);
     }
 
+    function renderPublicationsWithTabs(entries, person) {
+      const root = document.getElementById("pubRoot");
+      const tabsRoot = document.getElementById("memberPubTabs");
+      const matched = entries
+        .filter(entry => matchesPerson(entry, person))
+        .sort((a, b) => {
+          if (b.sortYear !== a.sortYear) {
+            return b.sortYear - a.sortYear;
+          }
+          return a.citationKey.localeCompare(b.citationKey);
+        });
+
+      if (matched.length === 0) {
+        tabsRoot.innerHTML = "";
+        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
+        return;
+      }
+
+      const categoryOrder = ["articles", "conference", "report", "thesis", "project", "database"];
+      const grouped = {
+        articles: [],
+        conference: [],
+        report: [],
+        thesis: [],
+        project: [],
+        database: []
+      };
+
+      matched.forEach(entry => {
+        const category = entryCategory(entry);
+        if (!grouped[category]) {
+          grouped[category] = [];
+        }
+        grouped[category].push(entry);
+      });
+
+      const visibleCategories = categoryOrder.filter(category => (grouped[category] || []).length > 0);
+      if (visibleCategories.length === 0) {
+        tabsRoot.innerHTML = "";
+        root.innerHTML = '<div class="empty-box">No categorized publications were found for this member.</div>';
+        return;
+      }
+
+      function renderCategory(category) {
+        const selectedEntries = grouped[category] || [];
+        root.innerHTML = `
+          <ul class="pub-list">
+            ${selectedEntries.map(entry => {
+              const title = entry.fields.title || entry.citationKey || "Untitled publication";
+              const source = entry.fields.journal || entry.fields.booktitle || entry.fields.school || entry.fields.publisher || entry.fields.institution || "Unknown source";
+              const year = entry.fields.year || "n.d.";
+              const authors = formatAuthors(entry.fields.author);
+              const meta = `${typeLabel(entry.entryType)} · ${source}, ${year}${authors ? ` · ${authors}` : ""}`;
+              return `
+                <li class="pub-item">
+                  <h4>${escapeHtml(title)}</h4>
+                  <p class="pub-meta">${escapeHtml(meta)}</p>
+                  <div class="pub-links">${buildLinks(entry)}</div>
+                </li>
+              `;
+            }).join("")}
+          </ul>
+        `;
+        bindBibtexButtons(selectedEntries);
+      }
+
+      tabsRoot.innerHTML = visibleCategories
+        .map((category, index) => {
+          const count = grouped[category].length;
+          const activeClass = index === 0 ? " active" : "";
+          return `<button type="button" class="member-pub-tab${activeClass}" data-category="${escapeHtml(category)}">${escapeHtml(categoryLabel(category))} (${count})</button>`;
+        })
+        .join("");
+
+      const tabButtons = Array.from(tabsRoot.querySelectorAll(".member-pub-tab"));
+      tabButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const category = button.getAttribute("data-category");
+          tabButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+          renderCategory(category);
+        });
+      });
+
+      renderCategory(visibleCategories[0]);
+    }
+
     async function bootstrap() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
@@ -788,7 +969,7 @@
         }
         const text = await response.text();
         const entries = parseBibTeX(text);
-        renderPublications(entries, person);
+        renderPublicationsWithTabs(entries, person);
       } catch (error) {
         document.getElementById("pubRoot").innerHTML = '<div class="pub-status">Could not load H2RES.bib for this profile.</div>';
       }
