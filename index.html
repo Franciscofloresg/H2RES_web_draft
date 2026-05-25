@@ -319,12 +319,21 @@
 
     /* Sections */
     .section {
-      padding: 100px 0;
+      padding: 72px 0;
       scroll-margin-top: 80px;
     }
 
+    /* Reduce only the visual gap between About and Guided Learning Path */
+    #about.section {
+      padding-bottom: 48px;
+    }
+
+    #tutorials.section {
+      padding-top: 48px;
+    }
+
     .section-header {
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
 
     .section-header.center {
@@ -363,7 +372,7 @@
     .section-divider {
       height: 1px;
       background: var(--border-color);
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
 
     /* ==================== */
@@ -1044,6 +1053,63 @@
       margin-top: 32px;
     }
 
+    .tutorials-split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .tutorials-split .tutorials-list {
+      margin-top: 0;
+    }
+
+    .tutorials-panel {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tutorials-panel .tutorials-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .tutorials-panel .tutorial-item {
+      margin-bottom: 0;
+      padding: 14px 16px;
+    }
+
+    .tutorials-browse-btn {
+      margin-top: 12px;
+      padding: 5px 10px;
+      font-size: 11px;
+      white-space: nowrap;
+      width: fit-content;
+      align-self: flex-start;
+    }
+
+    .tutorials-panel p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .tutorials-training-list {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tutorials-training-list li + li {
+      margin-top: 6px;
+    }
+
     .tutorial-item {
       display: flex;
       align-items: center;
@@ -1525,6 +1591,45 @@
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .cite-box-large {
+      padding: 16px;
+      min-height: 0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .cite-main-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .cite-main-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cite-main-column h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 10px;
+      color: var(--text-primary);
+    }
+
+    .cite-main-column .cite-box {
+      flex: 1;
+    }
+
+    .cite-card-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
     .newsletter-form {
@@ -1882,6 +1987,9 @@
       .news-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      .tutorials-split {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 900px) {
@@ -1918,6 +2026,10 @@
       }
 
       .competition-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cite-main-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2104,7 +2216,13 @@
         grid-template-columns: 1fr;
       }
       .section {
-        padding: 60px 0;
+        padding: 44px 0;
+      }
+      #about.section {
+        padding-bottom: 32px;
+      }
+      #tutorials.section {
+        padding-top: 32px;
       }
     }
 
@@ -2142,6 +2260,7 @@
           <a href="#about">About</a>
           <a href="#get-started">Get Started</a>
           <a href="#publications">Publications</a>
+          <a href="#tutorials">Tutorials</a>
           <a href="#team">Team</a>
           <a href="#community">Community</a>
           <a href="#news">News</a>
@@ -2204,6 +2323,7 @@
         <a href="#about">About</a>
         <a href="#get-started">Get Started</a>
         <a href="#publications">Publications</a>
+        <a href="#tutorials">Tutorials</a>
         <a href="#team">Team</a>
         <a href="#community">Community</a>
         <a href="#news">News</a>
@@ -2412,6 +2532,78 @@
           </p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. TUTORIALS ========== -->
+  <section id="tutorials" class="section docs-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Guided Learning Path</div>
+        <h2 class="section-title">Learning Hub</h2>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="tutorials-split">
+        <div class="team-category tutorials-panel">
+          <div class="team-category-header">
+            <div class="team-category-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h3 class="team-category-title">Tutorials &#038; Training</h3>
+          </div>
+          <p>Learning resources for new and advanced H2RES users.</p>
+          <ul class="tutorials-training-list">
+            <li>Beginner quickstart tutorials (installation, first model run, outputs)</li>
+            <li>Sector-coupling workflows (power, heat, transport, hydrogen)</li>
+            <li>Scenario-building workshops (assumptions, constraints, sensitivity analysis)</li>
+            <li>Data preparation notebooks (time series, demand, technology parameters)</li>
+            <li>Reproducibility guides (versioning, input tracking, result validation)</li>
+            <li>Advanced case-study templates (islands, national systems, decarbonization pathways)</li>
+            <li>Video walkthroughs (setup, calibration, result interpretation)</li>
+            <li>FAQ and troubleshooting playbooks (common errors and fixes)</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-sm tutorials-browse-btn">Browse materials →</a>
+        </div>
+
+        <div class="team-category tutorials-panel">
+          <div class="team-category-header">
+            <div class="team-category-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3 class="team-category-title">Hands-On Tutorials</h3>
+          </div>
+
+          <div class="tutorials-list">
+            <div class="tutorial-item">
+              <div class="tutorial-num">01</div>
+              <div class="tutorial-content">
+                <h4>Install &#038; First Run</h4>
+                <p>Set up H2RES, run your first baseline case, and verify that outputs are generated correctly.</p>
+              </div>
+              <a href="#" class="btn btn-outline btn-sm">Start →</a>
+            </div>
+
+            <div class="tutorial-item">
+              <div class="tutorial-num">02</div>
+              <div class="tutorial-content">
+                <h4>Build Your Scenario</h4>
+                <p>Create a custom H2RES scenario by editing demand, technology, and policy assumptions.</p>
+              </div>
+              <a href="#" class="btn btn-outline btn-sm">Start →</a>
+            </div>
+
+            <div class="tutorial-item">
+              <div class="tutorial-num">03</div>
+              <div class="tutorial-content">
+                <h4>Analyze &#038; Compare Results</h4>
+                <p>Compare scenarios using key policy assumptions and core indicators.</p>
+              </div>
+              <a href="#" class="btn btn-outline btn-sm">Start →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2643,42 +2835,35 @@
 
       <div class="community-grid">
         <!-- How to Cite -->
-        <div class="community-card">
+        <div class="community-card community-card-full">
           <h3>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             How to Cite
           </h3>
-          <p>Use this reference when citing H2RES in academic work:</p>
-          <div class="cite-box">
-            Feijoo, F., Pfeifer, A., Herc, L., Groppi, D., and Duic, N. (2022). A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies. <em>Renewable and Sustainable Energy Reviews</em>, 167, 112781. DOI: 10.1016/j.rser.2022.112781
-          </div>
-          <button type="button" class="btn btn-outline btn-sm" id="copy-h2res-bibtex">Copy BibTeX</button>
-          <button type="button" class="btn btn-ghost btn-sm" id="copy-h2res-ack">Copy Acknowledgement Text</button>
-          <p style="margin-top: 16px;">For citing the H2RES website:</p>
-          <div class="cite-box">
-            Duic, N., et al. (2026). <em>H2RES Web Platform</em>. Retrieved May 25, 2026, from https://franciscofloresg.github.io/H2RES_web_draft/
-          </div>
-          <button type="button" class="btn btn-outline btn-sm" id="copy-h2res-webcite">Copy Web Citation</button>
-        </div>
+          <div class="cite-main-grid">
+            <div class="cite-main-column">
+              <h4>Academic citation</h4>
+              <p>Use this reference when citing H2RES in academic work:</p>
+              <div class="cite-box">
+                Feijoo, F., Pfeifer, A., Herc, L., Groppi, D., and Duic, N. (2022). A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies. <em>Renewable and Sustainable Energy Reviews</em>, 167, 112781. DOI: 10.1016/j.rser.2022.112781
+              </div>
+              <div class="cite-card-actions">
+                <button type="button" class="btn btn-outline btn-sm" id="copy-h2res-bibtex">Copy BibTeX</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="copy-h2res-ack">Copy Acknowledgement Text</button>
+              </div>
+            </div>
 
-        <!-- Tutorials & Training -->
-        <div class="community-card">
-          <h3>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            Tutorials &#038; Training
-          </h3>
-          <p>Learning resources for new and advanced H2RES users.</p>
-          <ul style="margin-top: 12px; padding-left: 20px; color: var(--text-secondary); font-size: 14px;">
-            <li>Beginner quickstart tutorials (installation, first model run, outputs)</li>
-            <li>Sector-coupling workflows (power, heat, transport, hydrogen)</li>
-            <li>Scenario-building workshops (assumptions, constraints, sensitivity analysis)</li>
-            <li>Data preparation notebooks (time series, demand, technology parameters)</li>
-            <li>Reproducibility guides (versioning, input tracking, result validation)</li>
-            <li>Advanced case-study templates (islands, national systems, decarbonization pathways)</li>
-            <li>Video walkthroughs (setup, calibration, result interpretation)</li>
-            <li>FAQ and troubleshooting playbooks (common errors and fixes)</li>
-          </ul>
-          <a href="#" class="btn btn-outline btn-sm" style="margin-top: 16px;">Browse materials →</a>
+            <div class="cite-main-column">
+              <h4>Website citation</h4>
+              <p>Use this reference when citing the H2RES website:</p>
+              <div class="cite-box cite-box-large">
+                Duic, N., et al. (2026). <em>H2RES Web Platform</em>. Retrieved May 25, 2026, from https://franciscofloresg.github.io/H2RES_web_draft/
+              </div>
+              <div class="cite-card-actions">
+                <button type="button" class="btn btn-outline btn-sm" id="copy-h2res-webcite">Copy Web Citation</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Summer School -->
@@ -2916,40 +3101,6 @@
         </div>
       </div>
 
-      <!-- Tutorials -->
-      <div class="tutorials-list">
-        <h3 style="font-size: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Tutorials
-        </h3>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">01</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>Consectetur adipiscing elit sed do eiusmod</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">02</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>Quis nostrud exercitation ullamco laboris</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-
-        <div class="tutorial-item">
-          <div class="tutorial-num">03</div>
-          <div class="tutorial-content">
-            <h4>Lorem ipsum dolor sit amet</h4>
-            <p>In reprehenderit in voluptate velit esse</p>
-          </div>
-          <a href="#" class="btn btn-outline btn-sm">Start →</a>
-        </div>
-      </div>
     </div>
   </section>
 
