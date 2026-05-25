@@ -120,6 +120,10 @@
       margin-bottom: 24px;
     }
 
+    .profile-card.no-photo {
+      grid-template-columns: 1fr;
+    }
+
     .profile-photo {
       width: 180px;
       height: 180px;
@@ -127,6 +131,10 @@
       object-fit: cover;
       border: 1px solid var(--border-color);
       background: var(--bg-card-hover);
+    }
+
+    .profile-photo.is-hidden {
+      display: none;
     }
 
     .member-name {
@@ -384,7 +392,7 @@
         name: "Felipe Feijoo",
         role: "Core Developer",
         institution: "Pontificia Universidad Catolica de Valparaiso",
-        photo: "https://i.pravatar.cc/400?img=60",
+        photo: "",
         bio: "Energy systems researcher focused on long-term planning, sector coupling, and deep decarbonization pathways in integrated energy systems.",
         topics: ["Energy system planning", "Decarbonization pathways", "Sector coupling", "Power-to-X"],
         aliases: ["felipe feijoo", "feijoo"]
@@ -393,7 +401,7 @@
         name: "Vladimir Z. Gjorgievski",
         role: "Core Developer",
         institution: "Ss. Cyril and Methodius University in Skopje",
-        photo: "https://i.pravatar.cc/400?img=14",
+        photo: "",
         bio: "Researcher contributing to integrated optimization and high-resolution system modeling for renewable transition pathways.",
         topics: ["Optimization modeling", "Grid integration", "Long-term scenarios"],
         aliases: ["vladimir gjorgievski", "gjorgievski"]
@@ -402,61 +410,124 @@
         name: "Luka Herc",
         role: "Core Developer",
         institution: "University of Zagreb",
-        photo: "https://i.pravatar.cc/400?img=13",
+        photo: "",
         bio: "Developer and researcher advancing H2RES for e-fuels, storage integration, and cross-sector analysis.",
         topics: ["E-fuels", "Hydrogen systems", "Storage integration", "Model development"],
         aliases: ["luka herc", "herc"]
       },
       "antun-pfeifer": {
-        name: "Antun Pfeifer",
+        name: "Dr. Antun Pfeifer",
         role: "Core Developer",
         institution: "University of Zagreb",
-        photo: "https://i.pravatar.cc/400?img=18",
+        photo: "",
         bio: "Researcher working on renewable-based system flexibility and electrification pathways in integrated models.",
         topics: ["Renewables integration", "Energy flexibility", "Electrification"],
-        aliases: ["antun pfeifer", "pfeifer"]
+        aliases: ["dr antun pfeifer", "antun pfeifer", "pfeifer"]
+      },
+      "abhishake-kundu": {
+        name: "Abhishake Kundu",
+        role: "Core Developer",
+        institution: "Pontificia Universidad Catolica de Valparaiso",
+        photo: "",
+        bio: "Core developer contributing to integrated energy system modeling and transition pathway analysis.",
+        topics: ["Energy system modeling", "Integrated planning", "Decarbonization analysis"],
+        aliases: ["abhishake kundu", "dr abhishake kundu", "kundu"]
       },
       "doris-beljan": {
         name: "Doris Beljan",
-        role: "Contributor and Alumni",
+        role: "Research Contributor",
         institution: "University of Zagreb",
-        photo: "https://i.pravatar.cc/400?img=47",
+        photo: "",
         bio: "Contributor focused on scenario analysis and model sensitivity studies in future energy systems.",
         topics: ["Scenario analysis", "Sensitivity analysis", "Resource availability"],
         aliases: ["doris beljan", "beljan"]
       },
       "francisco-flores-gajardo": {
-        name: "Francisco Flores Gajardo",
-        role: "Contributor and Alumni",
+        name: "Dr. Francisco Flores",
+        role: "Research Contributor",
         institution: "Pontificia Universidad Catolica de Valparaiso",
-        photo: "https://i.pravatar.cc/400?img=11",
+        photo: "",
         bio: "Research contributor on strategic transition planning, regional trade, and flexible technologies for decarbonization.",
         topics: ["Regional planning", "Cross-border trade", "Flexibility technologies"],
         aliases: ["francisco flores gajardo", "flores gajardo", "francisco flores", "flores"]
       },
-      "francesca-pugliese": {
-        name: "Francesca Pugliese",
-        role: "Contributor and Alumni",
-        institution: "Universita degli Studi di Napoli Federico II",
-        photo: "https://i.pravatar.cc/400?img=49",
-        bio: "Contributor to H2RES applications in national-scale planning and integrated decarbonization case studies.",
-        topics: ["National planning", "Integrated modeling", "Case-study development"],
-        aliases: ["francesca pugliese", "pugliese"]
+      "marko-starcevic": {
+        name: "Marko Star\u010devi\u0107",
+        role: "Research Contributor",
+        institution: "Institution to be updated",
+        photo: "",
+        bio: "Research contributor profile will be updated soon.",
+        topics: ["Research topic to be updated"],
+        aliases: ["marko starcevic", "marko star\u010devi\u0107", "starcevic", "star\u010devi\u0107", "marko"]
       },
-      "moazzam-ali-khan": {
-        name: "Moazzam Ali Khan",
-        role: "Contributor and Alumni",
-        institution: "Politecnico di Torino",
-        photo: "https://i.pravatar.cc/400?img=12",
-        bio: "Contributor focused on district heating strategies, techno-economic evaluation, and sustainability integration.",
-        topics: ["District heating", "Techno-economics", "Sustainability"],
-        aliases: ["moazzam ali khan", "khan", "moazzam"]
+      "sebastian-gajardo": {
+        name: "Sebastian Gajardo",
+        role: "Research Contributor",
+        institution: "Institution to be updated",
+        photo: "",
+        bio: "Research contributor profile will be updated soon.",
+        topics: ["Research topic to be updated"],
+        aliases: ["sebastian gajardo", "gajardo", "sebastian"]
+      },
+      "ana-redep": {
+        name: "Ana Re\u0111ep",
+        role: "Research Contributor",
+        institution: "Institution to be updated",
+        photo: "",
+        bio: "Research contributor profile will be updated soon.",
+        topics: ["Research topic to be updated"],
+        aliases: ["ana redep", "ana re\u0111ep", "ana", "redep", "re\u0111ep"]
+      },
+      "katarina-misic": {
+        name: "Katarina Mi\u0161i\u0107",
+        role: "Research Contributor",
+        institution: "Institution to be updated",
+        photo: "",
+        bio: "Research contributor profile will be updated soon.",
+        topics: ["Research topic to be updated"],
+        aliases: ["katarina misic", "katarina mi\u0161i\u0107", "katarina", "misic", "mi\u0161i\u0107"]
+      },
+      "daniele-groppi": {
+        name: "Daniele Groppi",
+        role: "Scientific Advisory Board",
+        institution: "Sapienza Universita di Roma, Rome, Italy",
+        photo: "../assets/team/cv-dg.jpeg",
+        bio: "Daniele Groppi is Associate Professor of Energy Planning and Building Physics at the Department of Planning, Design, Technology for Architecture of Sapienza University of Rome. The research areas on which Daniele Groppi works focus on the topic of energy planning, therefore including issues of energy policy and economics to plan a sustainable and fair energy transition. In particular, his research focuses on the optimal use of renewable energy sources, with particular reference to flexible energy systems based on the concepts of smart energy systems, sector coupling and Power-to-X through the development of optimization models and energy scenarios at different scales. He has extensive experience in national and international projects funded through competitive calls in the field of energy transition with a particular focus on energy and territorial planning at national, island and coastal levels. He is the author of more than 65 scientific publications indexed on Scopus database on the above-mentioned research topics with more than 2,000 citations and H index 27. In 2024 he was included in the world ranking of scientists with the highest level of scientific productivity 'World's Top 2% Scientists List' for publications in the last year, drawn up by Stanford University, with reference to the sub-field 'Energy'.",
+        topics: ["Smart energy system", "Energy modelling", "100% renewable energy system", "Energy economy"],
+        aliases: ["daniele groppi", "groppi"]
+      },
+      "henning-meschede": {
+        name: "Henning Meschede",
+        role: "Scientific Advisory Board",
+        institution: "Paderborn University, Paderborn, Germany",
+        photo: "../assets/team/cv-hm.png",
+        bio: "Advisor focused on integrated energy systems, sector coupling, and renewable transition modeling methods.",
+        topics: ["Energy Efficiency", "Decarbonization", "Energy flexibility", "Renewable energy"],
+        aliases: ["henning meschede", "meschede"]
+      },
+      "gregorio-iglesias": {
+        name: "Gregorio Iglesias",
+        role: "Scientific Advisory Board",
+        institution: "University College Cork, Cork, Ireland",
+        photo: "../assets/team/cv-gi.png",
+        bio: "Prof. Gregorio Iglesias is Professor of Marine Renewable Energy at University College Cork (Ireland) and Honorary Professor of Coastal Engineering at the University of Plymouth (U.K.) He graduated as Ingenieur Civil des Ponts et Chaussees from the Ecole Nationale des Ponts et Chaussees in Paris (1992) and obtained his PhD cum laude from the Technical University of Madrid (2001). He has over 25 years of experience in offshore renewable energy and coastal engineering. Prof. Iglesias was awarded a Marie Sklodowska-Curie (MSCA) individual fellowship ('WaveImpact') to investigate the effects of wave energy farms on coastal processes. He pioneered the application of Artificial Intelligence to coastal engineering, starting in 2008. Recently, he served as an expert witness on behalf of Spain's State Ports for the new, EUR700M breakwater at the Port of Gijon. Prof. Iglesias is a co-inventor on three patents: a wave energy converter (WaveCat), a hybrid wave-wind system and an Artificial Vision system for coastal engineering laboratories. He directed numerous laboratory tests of coastal structures and wave energy converters. He contributed to the IEC standards for wave energy device development (scale-model testing) and the Spanish Standards for Maritime Works (ROM). Prof. Iglesias regularly acts as a reviewer for international journals, and as an expert evaluator for several research councils and the European Commission. He is a member of various Editorial Boards and the Subject Editor of Energy (Elsevier) for wind energy, wave, tidal and hydro power. He has published over 300 journal papers and attracted over EUR70M of research funding. With 17197 citations and an h-index of 77, Prof. Iglesias is the most cited researcher in Offshore Renewable Energy, Offshore Wind Energy and Ocean Energy (Google Scholar).",
+        topics: ["Offshore Renewable Energy", "Ocean Energy", "Coastal Engineering", "Climate Change"],
+        aliases: ["gregorio iglesias", "iglesias"]
+      },
+      "lorenzo-pastore": {
+        name: "Lorenzo Pastore",
+        role: "Scientific Advisory Board",
+        institution: "Sapienza Universita di Roma, Rome, Italy",
+        photo: "../assets/team/cv-lp.jpeg",
+        bio: "Lorenzo Mario Pastore is an Assistant Professor at the Department of Electrical and Energy Engineering, Sapienza University of Rome. His research interests include smart energy systems modelling, national energy planning, sector coupling technologies and energy economics. He has been a Visiting Researcher at the Pontificia Universidad Catolica de Valparaiso, Chile. He serves as an editorial board member and guest editor for several international scientific journals. He has published 47 indexed papers leading to an h-index of 18 (Scopus database, January 2026). He has collaborated on EU-funded projects and conducted studies and scientific research for public institutions.",
+        topics: ["Energy planning", "Smart energy systems", "Industry decarbonisation", "Integrated energy systems"],
+        aliases: ["lorenzo pastore", "lorenzo mario pastore", "pastore"]
       },
       "neven-duic": {
         name: "Neven Duic",
         role: "Scientific Advisory Board",
         institution: "University of Zagreb",
-        photo: "https://i.pravatar.cc/400?img=62",
+        photo: "",
         bio: "Senior advisor in renewable integration, hydrogen systems, and strategic long-term energy transition planning.",
         topics: ["Hydrogen systems", "Renewables integration", "Strategic planning"],
         aliases: ["neven duic", "neven dui", "duic", "dui"]
@@ -518,6 +589,47 @@
         .replace(/[^a-z0-9\s]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
+    }
+
+    function splitBibAuthors(authorValue) {
+      return normalizeBibValue(authorValue)
+        .split(/\s+and\s+/i)
+        .map(part => part.trim())
+        .filter(Boolean);
+    }
+
+    function buildAuthorMatchKeys(authorName) {
+      const keys = new Set();
+      const clean = normalizeBibValue(authorName);
+      const folded = foldText(clean);
+      if (!folded) {
+        return keys;
+      }
+      keys.add(folded);
+
+      if (clean.includes(",")) {
+        const commaParts = clean
+          .split(",")
+          .map(part => foldText(part))
+          .filter(Boolean);
+        if (commaParts.length >= 2) {
+          const family = commaParts[0];
+          const given = commaParts.slice(1).join(" ");
+          const reordered = `${given} ${family}`.replace(/\s+/g, " ").trim();
+          if (reordered) {
+            keys.add(reordered);
+          }
+        }
+      }
+
+      Array.from(keys).forEach(key => {
+        const tokens = key.split(" ").filter(Boolean);
+        if (tokens.length >= 2) {
+          keys.add(`${tokens[0]} ${tokens[tokens.length - 1]}`);
+        }
+      });
+
+      return keys;
     }
 
     function findTopLevelComma(text) {
@@ -964,8 +1076,25 @@
       document.getElementById("memberOrg").textContent = person.institution;
       document.getElementById("memberBio").textContent = person.bio;
       const photo = document.getElementById("memberPhoto");
-      photo.src = person.photo;
-      photo.alt = person.name;
+      const profileCard = document.querySelector(".profile-card");
+      const hasPhoto = Boolean((person.photo || "").trim());
+      if (hasPhoto) {
+        photo.src = person.photo;
+        photo.alt = `${person.name} photo`;
+        photo.classList.remove("is-hidden");
+        photo.removeAttribute("hidden");
+        if (profileCard) {
+          profileCard.classList.remove("no-photo");
+        }
+      } else {
+        photo.removeAttribute("src");
+        photo.alt = "";
+        photo.classList.add("is-hidden");
+        photo.setAttribute("hidden", "");
+        if (profileCard) {
+          profileCard.classList.add("no-photo");
+        }
+      }
 
       const topicsBox = document.getElementById("topicsBox");
       topicsBox.innerHTML = person.topics
@@ -974,13 +1103,21 @@
     }
 
     function matchesPerson(entry, person) {
-      const foldedAuthors = foldText(entry.fields.author || "");
-      if (!foldedAuthors) {
+      const authors = splitBibAuthors(entry.fields.author || "");
+      if (authors.length === 0) {
         return false;
       }
-      return person.aliases.some(alias => {
-        const foldedAlias = foldText(alias);
-        return foldedAlias && foldedAuthors.includes(foldedAlias);
+
+      const aliasKeys = (person.aliases || [])
+        .map(alias => foldText(alias))
+        .filter(alias => alias.split(" ").length >= 2);
+      if (aliasKeys.length === 0) {
+        return false;
+      }
+
+      return authors.some(author => {
+        const authorKeys = buildAuthorMatchKeys(author);
+        return aliasKeys.some(alias => authorKeys.has(alias));
       });
     }
 
