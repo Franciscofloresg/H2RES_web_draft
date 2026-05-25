@@ -131,28 +131,13 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0;
     }
 
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .logo-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 20px;
-      color: var(--text-primary);
+    .logo-image {
+      height: 40px;
+      width: auto;
+      display: block;
     }
 
     .nav {
@@ -244,6 +229,10 @@
       cursor: pointer;
       transition: all 0.2s;
       border: none;
+    }
+
+    .btn[hidden] {
+      display: none !important;
     }
 
     .btn-sm {
@@ -1102,6 +1091,41 @@
       flex-wrap: wrap;
     }
 
+    .pub-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin: -12px 0 22px;
+    }
+
+    .pub-year-filter-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .pub-year-filter {
+      padding: 8px 10px;
+      min-width: 140px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+
+    .pub-year-filter:focus {
+      outline: none;
+      border-color: var(--accent-teal);
+      box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.15);
+    }
+
+    .pub-more-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
     .pub-tab {
       padding: 10px 20px;
       background: var(--bg-card);
@@ -1353,12 +1377,6 @@
       grid-column: 1 / -1;
     }
 
-    .team-member-note {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 12px;
-    }
-
     /* ==================== */
     /* 7. COMMUNITY */
     /* ==================== */
@@ -1547,25 +1565,14 @@
     .footer-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 0;
       margin-bottom: 16px;
     }
 
-    .footer-logo-icon {
-      width: 40px;
-      height: 40px;
-    }
-
-    .footer-logo-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .footer-logo-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 24px;
-      color: var(--text-primary);
+    .footer-logo-image {
+      height: 160px;
+      width: auto;
+      display: block;
     }
 
     .footer-tagline {
@@ -1748,7 +1755,11 @@
     .mobile-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0;
+    }
+
+    .mobile-logo .logo-image {
+      height: 34px;
     }
 
     .mobile-close-btn {
@@ -1865,6 +1876,9 @@
       .news-grid {
         grid-template-columns: 1fr;
       }
+      .pub-controls {
+        justify-content: flex-start;
+      }
       .footer-main {
         flex-direction: column;
       }
@@ -1903,15 +1917,7 @@
     <div class="header-inner">
       <div class="nav-pill">
         <a href="#home" class="logo">
-          <div class="logo-icon">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="8" r="5" fill="#FBBF24"/>
-              <circle cx="12" cy="28" r="5" fill="#EC4899"/>
-              <circle cx="28" cy="28" r="5" fill="#10B981"/>
-              <path d="M20 13 L12 23 L28 23 Z" fill="none" stroke="#60A5FA" stroke-width="2"/>
-            </svg>
-          </div>
-          <span class="logo-text">H2RES</span>
+          <img src="assets/h2res-logo.png" alt="H2RES" class="logo-image">
         </a>
 
         <nav class="nav">
@@ -1963,15 +1969,7 @@
     <!-- Top bar: Logo left, X button right -->
     <div class="mobile-nav-header">
       <a href="#home" class="mobile-logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="8" r="5" fill="#FBBF24"/>
-            <circle cx="12" cy="28" r="5" fill="#EC4899"/>
-            <circle cx="28" cy="28" r="5" fill="#10B981"/>
-            <path d="M20 13 L12 23 L28 23 Z" fill="none" stroke="#60A5FA" stroke-width="2"/>
-          </svg>
-        </div>
-        <span class="logo-text">H2RES</span>
+        <img src="assets/h2res-logo.png" alt="H2RES" class="logo-image">
       </a>
 
       <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close menu">
@@ -2219,8 +2217,18 @@
         <button type="button" class="pub-tab" data-filter="database">Databases</button>
       </div>
 
+      <div class="pub-controls">
+        <label class="pub-year-filter-label" for="pubYearFilter">Filter by year</label>
+        <select id="pubYearFilter" class="pub-year-filter" aria-label="Filter publications by year">
+          <option value="all">All years</option>
+        </select>
+      </div>
+
       <div id="pubGrid" class="pub-grid">
         <div class="pub-status">Loading publications from <code>H2RES.bib</code>...</div>
+      </div>
+      <div class="pub-more-actions">
+        <button type="button" id="pubShowMore" class="btn btn-outline btn-sm" hidden>Show more</button>
       </div>
     </div>
   </section>
@@ -2320,7 +2328,6 @@
               </div>
             </a>
           </div>
-          <p class="team-member-note">Each profile includes bio, research topics, and publications linked from H2RES BibTeX.</p>
         </div>
 
         <!-- Scientific Advisory Board -->
@@ -2664,15 +2671,7 @@
         <div class="footer-main">
           <div class="footer-brand">
             <a href="#home" class="footer-logo">
-              <div class="footer-logo-icon">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="8" r="5" fill="#FBBF24"/>
-                  <circle cx="12" cy="28" r="5" fill="#EC4899"/>
-                  <circle cx="28" cy="28" r="5" fill="#10B981"/>
-                  <path d="M20 13 L12 23 L28 23 Z" fill="none" stroke="#60A5FA" stroke-width="2"/>
-                </svg>
-              </div>
-              <span class="footer-logo-text">H2RES</span>
+              <img src="assets/h2res-logo.png" alt="H2RES" class="footer-logo-image">
             </a>
             <p class="footer-tagline">
               Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.
@@ -2706,7 +2705,7 @@
               <a href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
               <a href="#community">How to Cite</a>
               <a href="#news">Releases &amp; Changelog</a>
-              <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer">Summer School 2026</a>
+              <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer">Summer School</a>
             </div>
 
             <div class="footer-links-group">
@@ -2783,7 +2782,12 @@
     const H2RES_WEBSITE_CITATION_TEXT = 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://franciscofloresg.github.io/H2RES_web_draft/';
     const pubGrid = document.getElementById('pubGrid');
     const pubTabs = document.querySelectorAll('.pub-tab');
+    const pubYearFilter = document.getElementById('pubYearFilter');
+    const pubShowMoreButton = document.getElementById('pubShowMore');
+    const PUB_PAGE_SIZE = 4;
     let activePubFilter = 'articles';
+    let activePubYear = 'all';
+    let visiblePubCount = PUB_PAGE_SIZE;
     let publicationEntries = [];
 
     function escapeHtml(text) {
@@ -3316,16 +3320,81 @@
       });
     }
 
-    function renderPublicationGrid() {
-      const filtered = publicationEntries.filter(entry => entry.category === activePubFilter);
-      if (filtered.length === 0) {
-        pubGrid.innerHTML = '<div class="pub-status">No records found for this category in <code>H2RES.bib</code>.</div>';
+    function updatePublicationYearOptions(resetSelection = false) {
+      if (!pubYearFilter) {
         return;
       }
 
-      pubGrid.innerHTML = filtered.map(buildPublicationCard).join('');
+      const years = Array.from(new Set(
+        publicationEntries
+          .filter(entry => entry.category === activePubFilter && entry.sortYear > 0)
+          .map(entry => entry.sortYear)
+      )).sort((a, b) => b - a);
+
+      if (resetSelection || !years.includes(Number(activePubYear))) {
+        activePubYear = 'all';
+      }
+
+      const options = ['<option value="all">All years</option>']
+        .concat(years.map(year => `<option value="${year}">${year}</option>`));
+
+      pubYearFilter.innerHTML = options.join('');
+      pubYearFilter.value = activePubYear;
+      pubYearFilter.disabled = years.length === 0;
+    }
+
+    function filteredPublicationEntries() {
+      let filtered = publicationEntries.filter(entry => entry.category === activePubFilter);
+      if (activePubYear !== 'all') {
+        filtered = filtered.filter(entry => String(entry.sortYear) === activePubYear);
+      }
+      return filtered;
+    }
+
+    function activePublicationSectionLabel() {
+      const labels = {
+        articles: 'Articles',
+        conference: 'Conferences',
+        report: 'Reports',
+        thesis: 'Thesis',
+        project: 'Projects',
+        database: 'Databases'
+      };
+      return labels[activePubFilter] || 'Records';
+    }
+
+    function updateShowMoreButton(totalItems) {
+      if (!pubShowMoreButton) {
+        return;
+      }
+
+      if (totalItems <= visiblePubCount) {
+        pubShowMoreButton.textContent = 'Show more';
+        pubShowMoreButton.setAttribute('hidden', '');
+        return;
+      }
+
+      const sectionLabel = activePublicationSectionLabel();
+      pubShowMoreButton.textContent = `Show more (${totalItems} ${sectionLabel})`;
+      pubShowMoreButton.removeAttribute('hidden');
+    }
+
+    function renderPublicationGrid() {
+      const filtered = filteredPublicationEntries();
+      if (filtered.length === 0) {
+        const yearHint = activePubYear === 'all' ? '' : ` for year <code>${escapeHtml(activePubYear)}</code>`;
+        pubGrid.innerHTML = `<div class="pub-status">No records found for this category${yearHint} in <code>H2RES.bib</code>.</div>`;
+        if (pubShowMoreButton) {
+          pubShowMoreButton.setAttribute('hidden', '');
+        }
+        return;
+      }
+
+      const visible = filtered.slice(0, visiblePubCount);
+      pubGrid.innerHTML = visible.map(buildPublicationCard).join('');
       bindPublicationCardToggleActions();
       bindBibtexCopyActions();
+      updateShowMoreButton(filtered.length);
     }
 
     function activatePublicationTabs() {
@@ -3334,8 +3403,33 @@
           activePubFilter = tab.getAttribute('data-filter') || 'articles';
           pubTabs.forEach(item => item.classList.remove('active'));
           tab.classList.add('active');
+          visiblePubCount = PUB_PAGE_SIZE;
+          updatePublicationYearOptions(true);
           renderPublicationGrid();
         });
+      });
+    }
+
+    function activatePublicationYearFilter() {
+      if (!pubYearFilter) {
+        return;
+      }
+
+      pubYearFilter.addEventListener('change', () => {
+        activePubYear = pubYearFilter.value || 'all';
+        visiblePubCount = PUB_PAGE_SIZE;
+        renderPublicationGrid();
+      });
+    }
+
+    function activatePublicationShowMore() {
+      if (!pubShowMoreButton) {
+        return;
+      }
+
+      pubShowMoreButton.addEventListener('click', () => {
+        visiblePubCount = Math.max(PUB_PAGE_SIZE, filteredPublicationEntries().length);
+        renderPublicationGrid();
       });
     }
 
@@ -3360,17 +3454,26 @@
             return a.citationKey.localeCompare(b.citationKey);
           });
 
+        updatePublicationYearOptions(true);
         renderPublicationGrid();
       } catch (error) {
         const protocolHint = window.location.protocol === 'file:'
           ? ' Open this page through a local web server to allow loading external files.'
           : '';
         pubGrid.innerHTML = `<div class="pub-status">Could not load <code>${escapeHtml(PUB_BIB_SOURCE)}</code>.${protocolHint}</div>`;
+        if (pubShowMoreButton) {
+          pubShowMoreButton.setAttribute('hidden', '');
+        }
+        if (pubYearFilter) {
+          pubYearFilter.disabled = true;
+        }
       }
     }
 
     bindCommunityCopyActions();
     activatePublicationTabs();
+    activatePublicationYearFilter();
+    activatePublicationShowMore();
     loadPublicationsFromBib();
 
     // Smooth scroll for navigation

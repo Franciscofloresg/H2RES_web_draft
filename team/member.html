@@ -67,6 +67,26 @@
       gap: 16px;
     }
 
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .site-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+    }
+
+    .site-logo-image {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
     .back-link {
       color: var(--accent-teal);
       text-decoration: none;
@@ -222,6 +242,22 @@
       border-radius: 10px;
       padding: 14px 16px;
       background: var(--bg-card);
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .pub-item[data-has-details="true"] {
+      cursor: pointer;
+    }
+
+    .pub-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .pub-item.expanded {
+      border-color: var(--accent-teal);
+      background: var(--bg-card-hover);
     }
 
     .pub-item h4 {
@@ -259,6 +295,28 @@
       text-decoration: underline;
     }
 
+    .pub-details {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .pub-details[hidden] {
+      display: none;
+    }
+
+    .pub-details-row + .pub-details-row {
+      margin-top: 8px;
+    }
+
+    .pub-details-label {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
     .empty-box {
       border: 1px dashed var(--border-color);
       border-radius: 10px;
@@ -269,6 +327,10 @@
     }
 
     @media (max-width: 840px) {
+      .topbar {
+        flex-wrap: wrap;
+      }
+
       .profile-card {
         grid-template-columns: 1fr;
       }
@@ -287,7 +349,12 @@
 <body>
   <div class="container">
     <div class="topbar">
-      <a class="back-link" href="../index.html#team">← Back to Team</a>
+      <div class="topbar-left">
+        <a class="site-logo" href="../index.html#home" aria-label="H2RES Home">
+          <img src="../assets/h2res-logo.png" alt="H2RES" class="site-logo-image">
+        </a>
+        <a class="back-link" href="../index.html#team">&larr; Back to Team</a>
+      </div>
       <button class="theme-btn" id="themeToggleBtn" type="button">Toggle Theme</button>
     </div>
 
@@ -794,6 +861,102 @@
       });
     }
 
+    function detailsIdFromKey(citationKey) {
+      return `pub-details-${String(citationKey || "").replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+    }
+
+    function buildPublicationDetails(entry) {
+      const abstract = normalizeBibValue(entry.fields.abstract || "");
+      const keywords = normalizeBibValue(entry.fields.keywords || "");
+      const detailParts = [];
+
+      if (abstract) {
+        detailParts.push(`<div class="pub-details-row"><span class="pub-details-label">Abstract:</span> ${escapeHtml(abstract)}</div>`);
+      }
+      if (keywords) {
+        detailParts.push(`<div class="pub-details-row"><span class="pub-details-label">Keywords:</span> ${escapeHtml(keywords)}</div>`);
+      }
+      if (detailParts.length === 0) {
+        return "";
+      }
+
+      const detailsId = detailsIdFromKey(entry.citationKey);
+      return `<div class="pub-details" id="${escapeHtml(detailsId)}" hidden>${detailParts.join("")}</div>`;
+    }
+
+    function buildPublicationItem(entry) {
+      const title = entry.fields.title || entry.citationKey || "Untitled publication";
+      const source = entry.fields.journal || entry.fields.booktitle || entry.fields.school || entry.fields.publisher || entry.fields.institution || "Unknown source";
+      const year = entry.fields.year || "n.d.";
+      const authors = formatAuthors(entry.fields.author);
+      const meta = `${typeLabel(entry.entryType)} - ${source}, ${year}${authors ? ` - ${authors}` : ""}`;
+      const detailsHtml = buildPublicationDetails(entry);
+      const hasDetails = detailsHtml ? "true" : "false";
+      const detailsId = detailsHtml ? detailsIdFromKey(entry.citationKey) : "";
+      const interactiveAttrs = detailsHtml
+        ? ` role="button" tabindex="0" aria-expanded="false" aria-controls="${escapeHtml(detailsId)}"`
+        : "";
+
+      return `
+        <li class="pub-item" data-has-details="${hasDetails}" data-details-id="${escapeHtml(detailsId)}"${interactiveAttrs}>
+          <h4>${escapeHtml(title)}</h4>
+          <p class="pub-meta">${escapeHtml(meta)}</p>
+          <div class="pub-links">${buildLinks(entry)}</div>
+          ${detailsHtml}
+        </li>
+      `;
+    }
+
+    function bindPublicationItemToggleActions() {
+      const cards = Array.from(document.querySelectorAll('.pub-item[data-has-details="true"]'));
+
+      function setExpanded(card, expanded) {
+        const detailsId = card.getAttribute("data-details-id");
+        const details = detailsId ? document.getElementById(detailsId) : null;
+        if (!details) {
+          return;
+        }
+        if (expanded) {
+          card.classList.add("expanded");
+          card.setAttribute("aria-expanded", "true");
+          details.removeAttribute("hidden");
+        } else {
+          card.classList.remove("expanded");
+          card.setAttribute("aria-expanded", "false");
+          details.setAttribute("hidden", "");
+        }
+      }
+
+      function collapseOthers(activeCard) {
+        cards.forEach(card => {
+          if (card !== activeCard) {
+            setExpanded(card, false);
+          }
+        });
+      }
+
+      cards.forEach(card => {
+        card.addEventListener("click", event => {
+          if (event.target.closest(".pub-links")) {
+            return;
+          }
+          const isExpanded = card.getAttribute("aria-expanded") === "true";
+          collapseOthers(card);
+          setExpanded(card, !isExpanded);
+        });
+
+        card.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") {
+            return;
+          }
+          event.preventDefault();
+          const isExpanded = card.getAttribute("aria-expanded") === "true";
+          collapseOthers(card);
+          setExpanded(card, !isExpanded);
+        });
+      });
+    }
+
     function fillProfile(person) {
       document.title = `${person.name} - H2RES Team`;
       document.getElementById("memberName").textContent = person.name;
@@ -831,32 +994,17 @@
           }
           return a.citationKey.localeCompare(b.citationKey);
         });
-
       if (matched.length === 0) {
         root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
         return;
       }
-
       root.innerHTML = `
         <ul class="pub-list">
-          ${matched.map(entry => {
-            const title = entry.fields.title || entry.citationKey || "Untitled publication";
-            const source = entry.fields.journal || entry.fields.booktitle || entry.fields.school || entry.fields.publisher || entry.fields.institution || "Unknown source";
-            const year = entry.fields.year || "n.d.";
-            const authors = formatAuthors(entry.fields.author);
-            const meta = `${typeLabel(entry.entryType)} · ${source}, ${year}${authors ? ` · ${authors}` : ""}`;
-            return `
-              <li class="pub-item">
-                <h4>${escapeHtml(title)}</h4>
-                <p class="pub-meta">${escapeHtml(meta)}</p>
-                <div class="pub-links">${buildLinks(entry)}</div>
-              </li>
-            `;
-          }).join("")}
+          ${matched.map(buildPublicationItem).join("")}
         </ul>
       `;
-
       bindBibtexButtons(matched);
+      bindPublicationItemToggleActions();
     }
 
     function renderPublicationsWithTabs(entries, person) {
@@ -906,25 +1054,12 @@
         const selectedEntries = grouped[category] || [];
         root.innerHTML = `
           <ul class="pub-list">
-            ${selectedEntries.map(entry => {
-              const title = entry.fields.title || entry.citationKey || "Untitled publication";
-              const source = entry.fields.journal || entry.fields.booktitle || entry.fields.school || entry.fields.publisher || entry.fields.institution || "Unknown source";
-              const year = entry.fields.year || "n.d.";
-              const authors = formatAuthors(entry.fields.author);
-              const meta = `${typeLabel(entry.entryType)} · ${source}, ${year}${authors ? ` · ${authors}` : ""}`;
-              return `
-                <li class="pub-item">
-                  <h4>${escapeHtml(title)}</h4>
-                  <p class="pub-meta">${escapeHtml(meta)}</p>
-                  <div class="pub-links">${buildLinks(entry)}</div>
-                </li>
-              `;
-            }).join("")}
+            ${selectedEntries.map(buildPublicationItem).join("")}
           </ul>
         `;
         bindBibtexButtons(selectedEntries);
+        bindPublicationItemToggleActions();
       }
-
       tabsRoot.innerHTML = visibleCategories
         .map((category, index) => {
           const count = grouped[category].length;
@@ -994,3 +1129,4 @@
   </script>
 </body>
 </html>
+
