@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>H2RES Branch</title>
+  <title>H2RES Model</title>
   <style>
     :root {
       --bg: #eef2f7;
@@ -311,16 +311,16 @@
         <a class="logo" href="../index.html#home">
           <img src="../assets/h2res-logo.png" alt="H2RES logo">
         </a>
-        <a class="pill-link" href="index.html">Back to Model Branches</a>
+        <a class="pill-link" href="index.html">Back to Model Versions</a>
       </div>
       <a class="pill-link" href="../index.html#home">Home</a>
     </div>
 
     <section class="card">
-      <p class="eyebrow">H2RES Branch Profile</p>
-      <h1 id="branchName">Unknown branch</h1>
-      <p id="branchSubtitle" class="subtitle">Branch details are not available.</p>
-      <p id="branchDescription" class="desc">Open this page from the branch tree to see the selected branch profile.</p>
+      <p class="eyebrow">H2RES Model Profile</p>
+      <h1 id="branchName">Unknown model</h1>
+      <p id="branchSubtitle" class="subtitle">Model details are not available.</p>
+      <p id="branchDescription" class="desc">Open this page from the version tree to see the selected model profile.</p>
 
       <dl class="meta">
         <dt>Lineage</dt>
@@ -329,7 +329,7 @@
         <dd id="branchStatus">To be documented</dd>
       </dl>
 
-      <div id="branchKeywords" class="chips" aria-label="Branch keywords"></div>
+      <div id="branchKeywords" class="chips" aria-label="Model keywords"></div>
     </section>
 
     <section class="card">
@@ -366,7 +366,7 @@
       <p class="eyebrow">Decision Guide</p>
       <div class="decision-grid">
         <article class="decision-box use">
-          <h3>Use this branch if...</h3>
+          <h3>Use this model if...</h3>
           <ul id="branchUseIf" class="detail-list">
             <li>To be documented.</li>
           </ul>
@@ -381,15 +381,15 @@
     </section>
 
     <section class="card">
-      <p class="eyebrow">Branch Resources</p>
+      <p class="eyebrow">Model Resources</p>
       <div class="resources-grid">
         <a id="branchFormulationLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
           <strong>Model Formulation</strong>
-          <span id="branchFormulationText">Open the mathematical and methodological formulation for this branch.</span>
+          <span id="branchFormulationText">Open the mathematical and methodological formulation for this model version.</span>
         </a>
         <a id="branchManualLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
           <strong>User Manual</strong>
-          <span id="branchManualText">Open the branch-specific user guide and workflow instructions.</span>
+          <span id="branchManualText">Open the version-specific user guide and workflow instructions.</span>
         </a>
       </div>
     </section>
@@ -404,31 +404,31 @@
     const BRANCHES = {
       "v1-0": {
         name: "H2RES v1.0",
-        subtitle: "Baseline branch in the version tree.",
-        description: "Root branch shown in the H2RES tree diagram. Use this page as the anchor point for branch lineage documentation and changelog notes.",
-        lineage: "Root of this branch tree",
-        status: "Reference branch",
-        keywords: ["Baseline", "Core structure", "Branch root"],
+        subtitle: "Baseline version in the model tree.",
+        description: "Root model shown in the H2RES version tree. Use this page as the anchor point for version lineage documentation and changelog notes.",
+        lineage: "Root of this model tree",
+        status: "Reference version",
+        keywords: ["Baseline", "Core structure", "Model root"],
         whatChanged: [
-          "Initial baseline structure for the H2RES branch line.",
-          "Defines reference assumptions used for later v1.x branches."
+          "Initial baseline structure for the H2RES model line.",
+          "Defines reference assumptions used for later v1.x versions."
         ],
         useCases: [
           "Run baseline scenarios for comparison with later versions.",
-          "Establish a common starting point for branch validation."
+          "Establish a common starting point for model validation."
         ],
         compatibility: [
-          "Reference-compatible with downstream v1.x branch assumptions.",
+          "Reference-compatible with downstream v1.x model assumptions.",
           "Used as parent context for version lineage checks."
         ],
         keyIO: [
           "Inputs: baseline demand, technology, and resource assumptions.",
           "Outputs: reference system balances and indicator set.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need a baseline benchmark before comparing advanced branches.",
+          "You need a baseline benchmark before comparing advanced models.",
           "You want a transparent starting point for validating datasets and assumptions."
         ],
         avoidIf: [
@@ -436,18 +436,18 @@
           "You are targeting next-generation architecture capabilities."
         ],
         links: [
-          { id: "v1-1", label: "H2RES v1.1", note: "Next branch in the diagram" }
+          { id: "v1-1", label: "H2RES v1.1", note: "Next model in the diagram" }
         ]
       },
       "v1-1": {
         name: "H2RES v1.1",
-        subtitle: "First branch after v1.0.",
-        description: "Intermediate branch in the v1.x line connecting the initial version to multizonal developments.",
+        subtitle: "First model after v1.0.",
+        description: "Intermediate model in the v1.x line connecting the initial version to multizonal developments.",
         lineage: "Derived from H2RES v1.0",
-        status: "Historical branch",
-        keywords: ["v1.x", "Intermediate branch", "Evolution path"],
+        status: "Historical model",
+        keywords: ["v1.x", "Intermediate model", "Evolution path"],
         whatChanged: [
-          "Incremental update over the v1.0 baseline branch.",
+          "Incremental update over the v1.0 baseline model.",
           "Prepared the path toward multizonal developments."
         ],
         useCases: [
@@ -456,75 +456,75 @@
         ],
         compatibility: [
           "Backwards aligned with v1.0 reference structures.",
-          "Forward aligned with v1.2 multizonal branch lineage."
+          "Forward aligned with v1.2 multizonal model lineage."
         ],
         keyIO: [
           "Inputs: baseline structure plus updated v1.1 assumptions.",
-          "Outputs: intermediate branch metrics for transition studies.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Outputs: intermediate model metrics for transition studies.",
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
           "You need continuity from v1.0 with moderate updates.",
-          "You want transitional analysis before moving to multizonal branches."
+          "You want transitional analysis before moving to multizonal models."
         ],
         avoidIf: [
           "You need explicit multizonal logic or myopic planning behavior.",
           "You require dedicated e-fuels functionality."
         ],
         links: [
-          { id: "v1-0", label: "H2RES v1.0", note: "Previous branch" },
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Next branch" }
+          { id: "v1-0", label: "H2RES v1.0", note: "Previous model" },
+          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Next model" }
         ]
       },
       "v1-2-multizonal": {
         name: "H2RES v1.2 (Multizonal)",
-        subtitle: "Multizonal branch line in the v1.x sequence.",
-        description: "Version branch associated with multizonal development and linked to both the myopic line and the v2.0 branch in the tree.",
+        subtitle: "Multizonal model line in the v1.x sequence.",
+        description: "Model version associated with multizonal development and linked to both the myopic line and the v2.0 model in the tree.",
         lineage: "Derived from H2RES v1.1",
-        status: "Major branch point",
-        keywords: ["Multizonal", "v1.2", "Branch split"],
+        status: "Major version point",
+        keywords: ["Multizonal", "v1.2", "Version split"],
         whatChanged: [
-          "Introduced multizonal branch structure in the v1.x sequence.",
+          "Introduced multizonal model structure in the v1.x sequence.",
           "Created a key split point for both v1.3 and v2.0 lines."
         ],
         useCases: [
-          "Evaluate multi-region interactions within branch scenarios.",
-          "Test branch configurations requiring zonal representation."
+          "Evaluate multi-region interactions within model scenarios.",
+          "Test model configurations requiring zonal representation."
         ],
         compatibility: [
           "Compatible with v1.1 predecessor assumptions.",
-          "Upstream source for v1.3 myopic and v2.0 branch lineage."
+          "Upstream source for v1.3 myopic and v2.0 model lineage."
         ],
         keyIO: [
           "Inputs: zonal demand, transmission, and technology assumptions.",
           "Outputs: zone-level balances and cross-zone performance metrics.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
           "You need multiple zones with interaction across regions.",
-          "You are selecting the branch that connects to both v1.3 and v2.0 lines."
+          "You are selecting the model that connects to both v1.3 and v2.0 lines."
         ],
         avoidIf: [
           "You only need quick single-system baseline runs.",
           "You do not have zonal data required for calibration."
         ],
         links: [
-          { id: "v1-1", label: "H2RES v1.1", note: "Previous branch" },
-          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Forward branch" },
-          { id: "v2-0", label: "H2RES v2.0", note: "Downstream branch" }
+          { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
+          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Forward model" },
+          { id: "v2-0", label: "H2RES v2.0", note: "Downstream model" }
         ]
       },
       "v1-3-myopic": {
         name: "H2RES v1.3 (Myopic)",
-        subtitle: "Myopic branch extension from the v1.x line.",
-        description: "Version branch identified as myopic in the tree and linked forward to the e-fuels branch.",
+        subtitle: "Myopic model extension from the v1.x line.",
+        description: "Model version identified as myopic in the tree and linked forward to the e-fuels model.",
         lineage: "Derived from H2RES v1.2 (Multizonal)",
-        status: "Advanced v1.x branch",
-        keywords: ["Myopic", "v1.3", "Transition branch"],
+        status: "Advanced v1.x model",
+        keywords: ["Myopic", "v1.3", "Transition model"],
         whatChanged: [
-          "Added myopic branch perspective in the v1.x chain.",
+          "Added myopic model perspective in the v1.x chain.",
           "Extended the multizonal line toward specialized derivatives."
         ],
         useCases: [
@@ -532,14 +532,14 @@
           "Benchmark pathway differences versus other v1.x variants."
         ],
         compatibility: [
-          "Compatible with v1.2 multizonal upstream branch structure.",
-          "Parent branch for v1.4 e-fuels derivative."
+          "Compatible with v1.2 multizonal upstream model structure.",
+          "Parent model for v1.4 e-fuels derivative."
         ],
         keyIO: [
-          "Inputs: stage-wise planning parameters and branch assumptions.",
-          "Outputs: myopic pathway indicators and branch-level system metrics.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Inputs: stage-wise planning parameters and model assumptions.",
+          "Outputs: myopic pathway indicators and model-level system metrics.",
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
           "You need phased or sequential transition decision analysis.",
@@ -550,82 +550,82 @@
           "You need direct e-fuels specialization rather than transition staging."
         ],
         links: [
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Previous branch" },
-          { id: "v1-4-efuels", label: "H2RES v1.4 (efuels)", note: "Next branch" }
+          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Previous model" },
+          { id: "v1-4-efuels", label: "H2RES v1.4 (efuels)", note: "Next model" }
         ]
       },
       "v1-4-efuels": {
         name: "H2RES v1.4 (efuels)",
-        subtitle: "E-fuels branch extension.",
-        description: "Branch shown as the rightmost node in the v1.x chain, continuing the v1.3 line with an e-fuels focus.",
+        subtitle: "E-fuels model extension.",
+        description: "Model shown as the rightmost node in the v1.x chain, continuing the v1.3 line with an e-fuels focus.",
         lineage: "Derived from H2RES v1.3 (Myopic)",
-        status: "Specialized v1.4 branch",
-        keywords: ["E-fuels", "v1.4", "Specialized branch"],
+        status: "Specialized v1.4 model",
+        keywords: ["E-fuels", "v1.4", "Specialized model"],
         whatChanged: [
-          "Extended v1.3 with an e-fuels-oriented branch configuration.",
-          "Added specialized branch focus in the v1.x family."
+          "Extended v1.3 with an e-fuels-oriented model configuration.",
+          "Added specialized model focus in the v1.x family."
         ],
         useCases: [
-          "Assess e-fuels integration pathways in branch scenarios.",
+          "Assess e-fuels integration pathways in model scenarios.",
           "Compare sector-coupled outcomes with non-e-fuels variants."
         ],
         compatibility: [
-          "Derived compatibility with v1.3 myopic branch data structure.",
+          "Derived compatibility with v1.3 myopic model data structure.",
           "Maintains alignment with the broader v1.x lineage."
         ],
         keyIO: [
           "Inputs: e-fuels pathway assumptions and conversion chain parameters.",
           "Outputs: e-fuels balances, system costs, and integration indicators.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
           "You are evaluating electrofuels and conversion-chain strategies.",
-          "You need branch logic focused on sector coupling around e-fuels."
+          "You need model logic focused on sector coupling around e-fuels."
         ],
         avoidIf: [
           "Your study does not require e-fuels representation.",
-          "You need a generic major-version architecture branch."
+          "You need a generic major-version model architecture."
         ],
         links: [
-          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Previous branch" }
+          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Previous model" }
         ]
       },
       "v2-0": {
         name: "H2RES v2.0",
-        subtitle: "Next generation branch in the diagram.",
-        description: "Branch represented below the v1.x chain in the tree. Use this page to expand major updates, assumptions, and model architecture notes for v2.0.",
+        subtitle: "Next generation model in the diagram.",
+        description: "Model represented below the v1.x chain in the tree. Use this page to expand major updates, assumptions, and model architecture notes for v2.0.",
         lineage: "Downstream from the v1.x development line",
-        status: "Major version branch",
-        keywords: ["v2.0", "Next generation", "Main branch"],
+        status: "Major version model",
+        keywords: ["v2.0", "Next generation", "Main model"],
         whatChanged: [
-          "Introduced the next major branch generation after v1.x.",
-          "Represents a distinct downstream line from the v1.2 branch point."
+          "Introduced the next major model generation after v1.x.",
+          "Represents a distinct downstream line from the v1.2 version point."
         ],
         useCases: [
           "Build forward-looking studies with major-version assumptions.",
           "Compare v2.0 architecture against v1.x performance baselines."
         ],
         compatibility: [
-          "Lineage connection to v1.2 multizonal branch context.",
-          "Intended as a major-version branch with its own roadmap."
+          "Lineage connection to v1.2 multizonal model context.",
+          "Intended as a major-version model with its own roadmap."
         ],
         keyIO: [
           "Inputs: next-generation planning assumptions and updated datasets.",
           "Outputs: major-version system metrics and comparative indicators.",
-          "Model formulation: branch-specific reference to be linked.",
-          "User manual: branch-specific reference to be linked."
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need the major-version branch for forward-looking studies.",
+          "You need the major-version model for forward-looking studies.",
           "You are testing upgraded architecture and expanded capabilities."
         ],
         avoidIf: [
           "You need strict continuity with early v1.x baseline behavior.",
-          "You are not ready for migration effort from earlier branches."
+          "You are not ready for migration effort from earlier versions."
         ],
         links: [
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Related upstream branch" }
+          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Related upstream model" }
         ]
       }
     };
@@ -686,7 +686,7 @@
     }
 
     if (branch) {
-      document.title = branch.name + " - H2RES Branch";
+      document.title = branch.name + " - H2RES Model";
       document.getElementById("branchName").textContent = branch.name;
       document.getElementById("branchSubtitle").textContent = branch.subtitle;
       document.getElementById("branchDescription").textContent = branch.description;
