@@ -363,12 +363,12 @@
     </div>
 
     <section class="project-card" id="projectRoot">
-      <div class="status-box">Loading project from <code>H2RES.bib</code>...</div>
+      <div class="status-box">Loading project from <code>h2res_research_outputs.bib</code>...</div>
     </section>
   </div>
 
   <script>
-    const BIB_SOURCE = '../H2RES.bib';
+    const BIB_SOURCE = '../h2res_research_outputs.bib';
     const PROJECT_EXTRA = {};
 
     function escapeHtml(text) {
@@ -767,7 +767,7 @@
         const entries = parseBibTeX(text);
         const entry = entries.find(item => item.citationKey === id);
         if (!entry) {
-          root.innerHTML = '<div class="status-box">Project not found in <code>H2RES.bib</code>.</div>';
+          root.innerHTML = '<div class="status-box">Project not found in <code>h2res_research_outputs.bib</code>.</div>';
           return;
         }
         renderProject(entry);

@@ -2637,7 +2637,7 @@
       </div>
 
       <div id="pubGrid" class="pub-grid">
-        <div class="pub-status">Loading publications from <code>H2RES.bib</code>...</div>
+        <div class="pub-status">Loading publications from <code>h2res_research_outputs.bib</code>...</div>
       </div>
       <div class="pub-more-actions">
         <button type="button" id="pubShowMore" class="btn btn-outline btn-sm" hidden>Show more</button>
@@ -3216,7 +3216,7 @@
     });
 
     // Publications from BibTeX
-    const PUB_BIB_SOURCE = 'H2RES.bib';
+    const PUB_BIB_SOURCE = 'h2res_research_outputs.bib';
     const H2RES_CITATION_BIBTEX = `@article{FEIJOO2022112781,
   title = {A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies},
   author = {Feijoo, Felipe and Pfeifer, Antun and Herc, Luka and Groppi, Daniele and Duic, Neven},
@@ -3877,7 +3877,7 @@
       const filtered = filteredPublicationEntries();
       if (filtered.length === 0) {
         const yearHint = activePubYear === 'all' ? '' : ` for year <code>${escapeHtml(activePubYear)}</code>`;
-        pubGrid.innerHTML = `<div class="pub-status">No records found for this category${yearHint} in <code>H2RES.bib</code>.</div>`;
+        pubGrid.innerHTML = `<div class="pub-status">No records found for this category${yearHint} in <code>h2res_research_outputs.bib</code>.</div>`;
         if (pubShowMoreButton) {
           pubShowMoreButton.setAttribute('hidden', '');
         }

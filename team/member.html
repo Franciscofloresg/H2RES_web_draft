@@ -1194,7 +1194,7 @@
           return a.citationKey.localeCompare(b.citationKey);
         });
       if (matched.length === 0) {
-        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
+        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in h2res_research_outputs.bib yet.</div>';
         return;
       }
       root.innerHTML = `
@@ -1220,7 +1220,7 @@
 
       if (matched.length === 0) {
         tabsRoot.innerHTML = "";
-        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in H2RES.bib yet.</div>';
+        root.innerHTML = '<div class="empty-box">No matching publications were found for this member in h2res_research_outputs.bib yet.</div>';
         return;
       }
 
@@ -1297,7 +1297,7 @@
       fillProfile(person);
 
       try {
-        const response = await fetch("../H2RES.bib", { cache: "no-store" });
+        const response = await fetch("../h2res_research_outputs.bib", { cache: "no-store" });
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
@@ -1305,7 +1305,7 @@
         const entries = parseBibTeX(text);
         renderPublicationsWithTabs(entries, person);
       } catch (error) {
-        document.getElementById("pubRoot").innerHTML = '<div class="pub-status">Could not load H2RES.bib for this profile.</div>';
+        document.getElementById("pubRoot").innerHTML = '<div class="pub-status">Could not load h2res_research_outputs.bib for this profile.</div>';
       }
     }
 
