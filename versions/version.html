@@ -474,83 +474,83 @@
         ],
         links: [
           { id: "v1-0", label: "H2RES v1.0", note: "Previous model" },
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Next model" }
+          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Next model" }
         ]
       },
-      "v1-2-multizonal": {
-        name: "H2RES v1.2 (Multizonal)",
-        subtitle: "Multizonal model line in the v1.x sequence.",
-        description: "Model version associated with multizonal development and linked to both the myopic line and the v2.0 model in the tree.",
+      "v1-2-myopic": {
+        name: "H2RES v1.2 (Myopic)",
+        subtitle: "Myopic model line in the v1.x sequence.",
+        description: "Model version associated with myopic development and linked to both the multizonal myopic line and the v2.0 model in the tree.",
         lineage: "Derived from H2RES v1.1",
         status: "Major version point",
-        keywords: ["Multizonal", "v1.2", "Version split"],
+        keywords: ["Myopic", "v1.2", "Version split"],
         whatChanged: [
-          "Introduced multizonal model structure in the v1.x sequence.",
+          "Introduced myopic planning structure in the v1.x sequence.",
           "Created a key split point for both v1.3 and v2.0 lines."
         ],
         useCases: [
-          "Evaluate multi-region interactions within model scenarios.",
-          "Test model configurations requiring zonal representation."
+          "Run phased pathway studies with staged planning decisions.",
+          "Test transition dynamics under sequential decision logic."
         ],
         compatibility: [
           "Compatible with v1.1 predecessor assumptions.",
-          "Upstream source for v1.3 myopic and v2.0 model lineage."
+          "Upstream source for v1.3 multizonal myopic and v2.0 model lineage."
         ],
         keyIO: [
-          "Inputs: zonal demand, transmission, and technology assumptions.",
-          "Outputs: zone-level balances and cross-zone performance metrics.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
-        ],
-        useIf: [
-          "You need multiple zones with interaction across regions.",
-          "You are selecting the model that connects to both v1.3 and v2.0 lines."
-        ],
-        avoidIf: [
-          "You only need quick single-system baseline runs.",
-          "You do not have zonal data required for calibration."
-        ],
-        links: [
-          { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
-          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Forward model" },
-          { id: "v2-0", label: "H2RES v2.0", note: "Downstream model" }
-        ]
-      },
-      "v1-3-myopic": {
-        name: "H2RES v1.3 (Myopic)",
-        subtitle: "Myopic model extension from the v1.x line.",
-        description: "Model version identified as myopic in the tree and linked forward to the e-fuels model.",
-        lineage: "Derived from H2RES v1.2 (Multizonal)",
-        status: "Advanced v1.x model",
-        keywords: ["Myopic", "v1.3", "Transition model"],
-        whatChanged: [
-          "Added myopic model perspective in the v1.x chain.",
-          "Extended the multizonal line toward specialized derivatives."
-        ],
-        useCases: [
-          "Run sequential transition studies with myopic decision framing.",
-          "Benchmark pathway differences versus other v1.x variants."
-        ],
-        compatibility: [
-          "Compatible with v1.2 multizonal upstream model structure.",
-          "Parent model for v1.4 e-fuels derivative."
-        ],
-        keyIO: [
-          "Inputs: stage-wise planning parameters and model assumptions.",
-          "Outputs: myopic pathway indicators and model-level system metrics.",
+          "Inputs: staged planning parameters and transition assumptions.",
+          "Outputs: pathway indicators and model-level system metrics.",
           "Model formulation: version-specific reference to be linked.",
           "User manual: version-specific reference to be linked."
         ],
         useIf: [
           "You need phased or sequential transition decision analysis.",
-          "You want to explore pathway sensitivity under staged planning."
+          "You are selecting the model that connects to both v1.3 and v2.0 lines."
         ],
         avoidIf: [
-          "You need a purely baseline benchmark with minimal complexity.",
-          "You need direct e-fuels specialization rather than transition staging."
+          "You only need a static baseline benchmark.",
+          "You require spatial detail across multiple zones."
         ],
         links: [
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Previous model" },
+          { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
+          { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Forward model" },
+          { id: "v2-0", label: "H2RES v2.0", note: "Downstream model" }
+        ]
+      },
+      "v1-3-multizonal-myopic": {
+        name: "H2RES v1.3 (Multizonal Myopic)",
+        subtitle: "Multizonal myopic model extension from the v1.x line.",
+        description: "Model version identified as multizonal myopic in the tree and linked forward to the e-fuels model.",
+        lineage: "Derived from H2RES v1.2 (Myopic)",
+        status: "Advanced v1.x model",
+        keywords: ["Multizonal", "Myopic", "v1.3", "Transition model"],
+        whatChanged: [
+          "Added multizonal structure to the myopic model line.",
+          "Extended the v1.x line toward specialized derivatives."
+        ],
+        useCases: [
+          "Run regional transition studies with staged planning logic.",
+          "Benchmark pathway differences versus other v1.x variants."
+        ],
+        compatibility: [
+          "Compatible with v1.2 myopic upstream model structure.",
+          "Parent model for v1.4 e-fuels derivative."
+        ],
+        keyIO: [
+          "Inputs: zonal demand, transmission, staged planning parameters, and model assumptions.",
+          "Outputs: zonal myopic pathway indicators and system metrics.",
+          "Model formulation: version-specific reference to be linked.",
+          "User manual: version-specific reference to be linked."
+        ],
+        useIf: [
+          "You need multi-zone representation with staged planning decisions.",
+          "You want to explore pathway sensitivity under spatially detailed transition analysis."
+        ],
+        avoidIf: [
+          "You need a simpler non-spatial myopic setup.",
+          "You need direct e-fuels specialization rather than broader zonal transition analysis."
+        ],
+        links: [
+          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Previous model" },
           { id: "v1-4-efuels", label: "H2RES v1.4 (efuels)", note: "Next model" }
         ]
       },
@@ -558,7 +558,7 @@
         name: "H2RES v1.4 (efuels)",
         subtitle: "E-fuels model extension.",
         description: "Model shown as the rightmost node in the v1.x chain, continuing the v1.3 line with an e-fuels focus.",
-        lineage: "Derived from H2RES v1.3 (Myopic)",
+        lineage: "Derived from H2RES v1.3 (Multizonal Myopic)",
         status: "Specialized v1.4 model",
         keywords: ["E-fuels", "v1.4", "Specialized model"],
         whatChanged: [
@@ -570,7 +570,7 @@
           "Compare sector-coupled outcomes with non-e-fuels variants."
         ],
         compatibility: [
-          "Derived compatibility with v1.3 myopic model data structure.",
+          "Derived compatibility with v1.3 multizonal myopic model data structure.",
           "Maintains alignment with the broader v1.x lineage."
         ],
         keyIO: [
@@ -588,7 +588,7 @@
           "You need a generic major-version model architecture."
         ],
         links: [
-          { id: "v1-3-myopic", label: "H2RES v1.3 (Myopic)", note: "Previous model" }
+          { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Previous model" }
         ]
       },
       "v2-0": {
@@ -607,7 +607,7 @@
           "Compare v2.0 architecture against v1.x performance baselines."
         ],
         compatibility: [
-          "Lineage connection to v1.2 multizonal model context.",
+          "Lineage connection to v1.2 myopic model context.",
           "Intended as a major-version model with its own roadmap."
         ],
         keyIO: [
@@ -625,43 +625,12 @@
           "You are not ready for migration effort from earlier versions."
         ],
         links: [
-          { id: "v1-2-multizonal", label: "H2RES v1.2 (Multizonal)", note: "Related upstream model" }
+          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Related upstream model" }
         ]
       }
     };
 
-    const BRANCH_ENRICH = {
-      "v1-0": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      },
-      "v1-1": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      },
-      "v1-2-multizonal": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      },
-      "v1-3-myopic": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      },
-      "v1-4-efuels": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      },
-      "v2-0": {
-        formulationUrl: "../index.html#documentation",
-        manualUrl: "../index.html#documentation"
-      }
-    };
-
-    Object.keys(BRANCH_ENRICH).forEach((id) => {
-      if (VERSIONS[id]) {
-        Object.assign(VERSIONS[id], BRANCH_ENRICH[id]);
-      }
-    });
+    const DEFAULT_RESOURCE_FALLBACK = "../index.html#documentation";
 
     const params = new URLSearchParams(window.location.search);
     const versionId = params.get("id");
@@ -685,7 +654,36 @@
       link.href = href || fallbackHref;
     }
 
-    if (version) {
+    async function fileExists(url) {
+      try {
+        const response = await fetch(url, { method: "GET", cache: "no-store" });
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function setVersionResources(versionKey) {
+      const base = `../assets/version-resources/${versionKey}`;
+      const formulationUrl = `${base}/model-formulation.pdf`;
+      const manualUrl = `${base}/user-manual.pdf`;
+      const formulationExists = await fileExists(formulationUrl);
+      const manualExists = await fileExists(manualUrl);
+
+      setResourceLink("versionFormulationLink", formulationExists ? formulationUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
+      setResourceLink("versionManualLink", manualExists ? manualUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
+
+      document.getElementById("versionFormulationText").textContent = formulationExists
+        ? "Open the mathematical and methodological formulation for this model version."
+        : "Model formulation PDF not added yet. The link currently falls back to the general documentation page.";
+
+      document.getElementById("versionManualText").textContent = manualExists
+        ? "Open the version-specific user guide and workflow instructions."
+        : "User manual PDF not added yet. The link currently falls back to the general documentation page.";
+    }
+
+    async function renderVersionPage() {
+      if (!version) return;
       document.title = version.name + " - H2RES Model";
       document.getElementById("versionName").textContent = version.name;
       document.getElementById("versionSubtitle").textContent = version.subtitle;
@@ -707,8 +705,7 @@
       renderList("versionKeyIO", version.keyIO);
       renderList("versionUseIf", version.useIf);
       renderList("versionAvoidIf", version.avoidIf);
-      setResourceLink("versionFormulationLink", version.formulationUrl, "../index.html#documentation");
-      setResourceLink("versionManualLink", version.manualUrl, "../index.html#documentation");
+      await setVersionResources(versionId);
 
       const navWrap = document.getElementById("versionNav");
       version.links.forEach((item) => {
@@ -719,6 +716,8 @@
         navWrap.appendChild(link);
       });
     }
+
+    renderVersionPage();
   </script>
 </body>
 </html>

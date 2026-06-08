@@ -664,13 +664,13 @@
             <strong>Need a baseline reference?</strong>
             <span>Start with v1.0 to anchor comparisons.</span>
           </a>
-          <a class="goal-card" href="version.html?id=v1-2-multizonal">
-            <strong>Need multi-zone modeling?</strong>
-            <span>Use v1.2 (Multizonal) as the key split-point version.</span>
-          </a>
-          <a class="goal-card" href="version.html?id=v1-3-myopic">
+          <a class="goal-card" href="version.html?id=v1-2-myopic">
             <strong>Need myopic planning behavior?</strong>
-            <span>Use v1.3 (Myopic) for staged decision pathways.</span>
+            <span>Use v1.2 (Myopic) for staged decision pathways.</span>
+          </a>
+          <a class="goal-card" href="version.html?id=v1-3-multizonal-myopic">
+            <strong>Need multi-zone myopic modeling?</strong>
+            <span>Use v1.3 (Multizonal Myopic) for coupled zonal pathway analysis.</span>
           </a>
           <a class="goal-card" href="version.html?id=v1-4-efuels">
             <strong>Evaluating e-fuels pathways?</strong>
@@ -720,16 +720,16 @@
             <text class="node-label" x="150" y="242">H2RES v1.1</text>
           </a>
 
-          <a class="node-link" href="version.html?id=v1-2-multizonal" data-version="v1-2-multizonal">
+          <a class="node-link" href="version.html?id=v1-2-myopic" data-version="v1-2-myopic">
             <rect class="node-box node-core" x="350" y="200" width="210" height="84"></rect>
             <text class="node-label" x="455" y="230">H2RES v1.2</text>
-            <text class="node-label" x="455" y="256">(Multizonal)</text>
+            <text class="node-label" x="455" y="256">(Myopic)</text>
           </a>
 
-          <a class="node-link" href="version.html?id=v1-3-myopic" data-version="v1-3-myopic">
+          <a class="node-link" href="version.html?id=v1-3-multizonal-myopic" data-version="v1-3-multizonal-myopic">
             <rect class="node-box node-core" x="660" y="200" width="210" height="84"></rect>
             <text class="node-label" x="765" y="230">H2RES v1.3</text>
-            <text class="node-label" x="765" y="256">(Myopic)</text>
+            <text class="node-label" x="765" y="256">(Multizonal Myopic)</text>
           </a>
 
           <a class="node-link" href="version.html?id=v1-4-efuels" data-version="v1-4-efuels">
@@ -767,15 +767,15 @@
             <span>Derived from v1.0</span>
           </div>
         </a>
-        <a class="timeline-item core" href="version.html?id=v1-2-multizonal">
+        <a class="timeline-item core" href="version.html?id=v1-2-myopic">
           <div class="timeline-content">
-            <strong>H2RES v1.2 (Multizonal)</strong>
+            <strong>H2RES v1.2 (Myopic)</strong>
             <span>Derived from v1.1</span>
           </div>
         </a>
-        <a class="timeline-item core" href="version.html?id=v1-3-myopic">
+        <a class="timeline-item core" href="version.html?id=v1-3-multizonal-myopic">
           <div class="timeline-content">
-            <strong>H2RES v1.3 (Myopic)</strong>
+            <strong>H2RES v1.3 (Multizonal Myopic)</strong>
             <span>Derived from v1.2</span>
           </div>
         </a>
@@ -803,13 +803,13 @@
         <strong>H2RES v1.1</strong>
         <span>Early development version that transitions the model toward expanded v1.x capabilities.</span>
       </a>
-      <a class="version-card" href="version.html?id=v1-2-multizonal">
-        <strong>H2RES v1.2 (Multizonal)</strong>
-        <span>Major version point introducing multizonal logic and enabling multiple downstream paths.</span>
+      <a class="version-card" href="version.html?id=v1-2-myopic">
+        <strong>H2RES v1.2 (Myopic)</strong>
+        <span>Version focused on myopic planning behavior and staged transition analysis.</span>
       </a>
-      <a class="version-card" href="version.html?id=v1-3-myopic">
-        <strong>H2RES v1.3 (Myopic)</strong>
-        <span>Advanced v1.x model focused on myopic planning behavior and transition dynamics.</span>
+      <a class="version-card" href="version.html?id=v1-3-multizonal-myopic">
+        <strong>H2RES v1.3 (Multizonal Myopic)</strong>
+        <span>Advanced v1.x model combining multizonal structure with myopic pathway analysis.</span>
       </a>
       <a class="version-card" href="version.html?id=v1-4-efuels">
         <strong>H2RES v1.4 (efuels)</strong>
@@ -852,7 +852,7 @@
       </div>
 
       <div class="compare-links">
-        <a id="compareLinkA" href="version.html?id=v1-2-multizonal">Open Model A</a>
+        <a id="compareLinkA" href="version.html?id=v1-2-myopic">Open Model A</a>
         <a id="compareLinkB" href="version.html?id=v2-0">Open Model B</a>
       </div>
     </section>
@@ -882,27 +882,27 @@
         keyStrength: "Strong continuity with v1.0 assumptions",
         limitations: "Less specialized than later models"
       },
-      "v1-2-multizonal": {
-        name: "H2RES v1.2 (Multizonal)",
-        link: "version.html?id=v1-2-multizonal",
-        preview: "Major split-point version introducing multizonal capabilities and new development paths.",
-        planningApproach: "Multizonal model framework",
-        spatialScope: "Multi-zone representation",
-        primaryFocus: "Zonal interactions and version split",
-        bestFor: "Regional coupling and transmission-aware studies",
-        keyStrength: "Enables both v1.3 and v2.0 model lines",
-        limitations: "Higher data and setup requirements"
-      },
-      "v1-3-myopic": {
-        name: "H2RES v1.3 (Myopic)",
-        link: "version.html?id=v1-3-myopic",
+      "v1-2-myopic": {
+        name: "H2RES v1.2 (Myopic)",
+        link: "version.html?id=v1-2-myopic",
         preview: "Myopic model version focused on staged pathway decisions and transition-oriented analysis.",
         planningApproach: "Myopic sequential planning",
-        spatialScope: "Inherits multizonal model context",
+        spatialScope: "Single- or aggregated-system representation",
         primaryFocus: "Stage-based transition dynamics",
         bestFor: "Policy pathway and phased investment analyses",
         keyStrength: "Captures stepwise decision behavior",
         limitations: "Depends on quality of stage assumptions"
+      },
+      "v1-3-multizonal-myopic": {
+        name: "H2RES v1.3 (Multizonal Myopic)",
+        link: "version.html?id=v1-3-multizonal-myopic",
+        preview: "Multizonal myopic model version combining zonal representation with staged pathway analysis.",
+        planningApproach: "Multizonal myopic planning",
+        spatialScope: "Multi-zone representation",
+        primaryFocus: "Zonal interactions with staged transition dynamics",
+        bestFor: "Regional pathway analysis with phased planning decisions",
+        keyStrength: "Combines spatial detail with sequential planning logic",
+        limitations: "Requires richer data and more careful calibration"
       },
       "v1-4-efuels": {
         name: "H2RES v1.4 (efuels)",
@@ -1003,7 +1003,7 @@
         selectB.appendChild(optionB);
       });
 
-      selectA.value = "v1-2-multizonal";
+      selectA.value = "v1-2-myopic";
       selectB.value = "v2-0";
       renderCompareTable();
       selectA.addEventListener("change", renderCompareTable);
