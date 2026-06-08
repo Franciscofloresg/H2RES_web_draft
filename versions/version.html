@@ -404,36 +404,36 @@
     const VERSIONS = {
       "v1-0": {
         name: "H2RES v1.0",
-        subtitle: "Baseline version in the model tree.",
-        description: "Root model shown in the H2RES version tree. Use this page as the anchor point for version lineage documentation and changelog notes.",
+        subtitle: "Baseline integrated energy system planning model.",
+        description: "H2RES v1.0 is the baseline open-source model version for long-term energy planning at hourly resolution. It is designed to evaluate transition pathways in integrated energy systems by combining capacity expansion, technology retirement, system operation, sector coupling, storage, hydrogen, and power-to-X options within a single optimization framework.",
         lineage: "Root of this model tree",
         status: "Reference version",
         keywords: ["Baseline", "Core structure", "Model root"],
         whatChanged: [
-          "Initial baseline structure for the H2RES model line.",
-          "Defines reference assumptions used for later v1.x versions."
+          "Establishes the baseline optimization structure used in later H2RES versions.",
+          "Combines data processing, model building, and LP/MILP optimization into a single workflow for scenario analysis."
         ],
         useCases: [
-          "Run baseline scenarios for comparison with later versions.",
-          "Establish a common starting point for model validation."
+          "Run baseline long-term energy transition scenarios at hourly resolution.",
+          "Study investments, dispatch, flexibility, sector coupling, hydrogen, and power-to-X strategies in an integrated framework."
         ],
         compatibility: [
-          "Reference-compatible with downstream v1.x model assumptions.",
-          "Used as parent context for version lineage checks."
+          "Acts as the reference structure for downstream v1.x versions.",
+          "Suitable as the parent benchmark for methodological comparisons across later versions."
         ],
         keyIO: [
-          "Inputs: baseline demand, technology, and resource assumptions.",
-          "Outputs: reference system balances and indicator set.",
+          "Inputs: demand, technology, policy, economic, and resource data processed through read_process_data.py.",
+          "Outputs: costs, dispatch, capacity expansion, reserves, and emissions indicators from the optimization model.",
           "Model formulation: version-specific reference to be linked.",
           "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need a baseline benchmark before comparing advanced models.",
-          "You want a transparent starting point for validating datasets and assumptions."
+          "You need a transparent baseline model for long-term integrated energy planning.",
+          "You want to analyze energy transition pathways with investments, hourly operation, storage, hydrogen, and sector coupling in one framework."
         ],
         avoidIf: [
-          "You require multizonal representation or specialized pathway features.",
-          "You are targeting next-generation architecture capabilities."
+          "You require a later version with additional specialized features or revised structure.",
+          "You are specifically looking for a more advanced version tailored to myopic or multizonal-myopic analysis."
         ],
         links: [
           { id: "v1-1", label: "H2RES v1.1", note: "Next model in the diagram" }
