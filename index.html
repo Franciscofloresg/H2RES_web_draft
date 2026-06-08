@@ -2985,82 +2985,93 @@
     <div class="container">
       <div class="section-header">
         <div class="section-badge">Get Started</div>
-        <h2 class="section-title">Lorem Ipsum Dolor</h2>
+        <h2 class="section-title">Set Up H2RES for Your First Run</h2>
       </div>
       <div class="section-divider"></div>
 
       <div class="accordion-list">
-        <!-- Installation -->
+        <!-- Requirements -->
         <div class="accordion open">
           <div class="accordion-header">
             <h3>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Installation
+              Requirements and Environment
             </h3>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-content">
             <div class="accordion-inner">
               <ul>
-                <li>Lorem ipsum dolor sit amet consectetur adipiscing elit</li>
-                <li>Sed do eiusmod tempor incididunt ut labore</li>
-                <li>Ut enim ad minim veniam quis nostrud exercitation</li>
+                <li>Install Python in a local or Anaconda environment.</li>
+                <li>Install Gurobi and activate a valid license.</li>
+                <li>Use Spyder, VS Code, or another Python editor to run the model.</li>
               </ul>
               <div class="code-block">
-                <span class="prompt">$</span> <span class="command">pip install h2res</span><br>
-                <span class="prompt">$</span> <span class="command">h2res &#8211;version</span>
+                <span class="prompt">$</span> <span class="command">python --version</span><br>
+                <span class="prompt">$</span> <span class="command">gurobi_cl --version</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Download -->
+        <!-- Dependencies -->
         <div class="accordion">
           <div class="accordion-header">
             <h3>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download
+              Install Dependencies and Activate Gurobi
             </h3>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-content">
             <div class="accordion-inner">
               <ul>
-                <li>Lorem ipsum dolor sit amet (DOI: 10.5281/xxxxx)</li>
-                <li>Consectetur adipiscing elit sed do eiusmod</li>
-                <li>Tempor incididunt ut labore et dolore magna</li>
+                <li>Install the required Python dependencies.</li>
+                <li>Request a Gurobi license if you do not already have one.</li>
+                <li>Academic users can typically use the named-user academic license.</li>
               </ul>
+              <div class="code-block">
+                <span class="prompt">$</span> <span class="command">pip install gurobipy pandas numpy matplotlib</span>
+              </div>
               <div style="margin-top: 16px;">
-                <a href="#" class="btn btn-primary btn-sm">Download v2.0.0</a>
-                <a href="#" class="btn btn-outline btn-sm" style="margin-left: 8px;">All Releases</a>
+                <a href="https://portal.gurobi.com/iam/register" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Register for Gurobi</a>
+                <a href="https://h2res.org/how-to-install-h2res/" class="btn btn-outline btn-sm" style="margin-left: 8px;" target="_blank" rel="noopener noreferrer">Official Install Guide</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- GitHub Repository -->
+        <!-- First Run -->
         <div class="accordion">
           <div class="accordion-header">
             <h3>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub Repository
+              Download the Model and Run a Baseline Case
             </h3>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-content">
             <div class="accordion-inner">
               <ul>
-                <li><strong>/core</strong> – Lorem ipsum dolor sit amet</li>
-                <li><strong>/io</strong> – Consectetur adipiscing elit</li>
-                <li><strong>/data</strong> – Sed do eiusmod tempor</li>
-                <li><strong>/examples</strong> – Ut enim ad minim veniam</li>
+                <li>Download the model files and extract them into a working directory.</li>
+                <li>Open <code>main.py</code> and start from the baseline configuration.</li>
+                <li>Review the version resources before adapting the model to a new case study.</li>
               </ul>
+              <div class="code-block">
+                <span class="prompt">$</span> <span class="command">python main.py</span>
+              </div>
               <div style="margin-top: 16px;">
-                <a href="#" class="btn btn-secondary btn-sm">View on GitHub →</a>
+                <a href="versions/version.html?id=v1-0" class="btn btn-primary btn-sm">Open v1.0 Resources</a>
+                <a href="https://github.com/Franciscofloresg/H2RES_web_draft" class="btn btn-outline btn-sm" style="margin-left: 8px;" target="_blank" rel="noopener noreferrer">Project Repository</a>
               </div>
             </div>
           </div>
         </div>
+
+      </div>
+      <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="versions/index.html" class="btn btn-secondary btn-sm">Browse Model Versions</a>
+        <a href="#documentation" class="btn btn-outline btn-sm">Go to Documentation</a>
       </div>
     </div>
   </section>
