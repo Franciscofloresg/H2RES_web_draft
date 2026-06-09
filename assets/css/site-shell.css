@@ -44,7 +44,10 @@ body.h2res-shell.mobile-nav-open {
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 18px 0 0;
+  padding: 14px 0 0;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
 }
 
 .site-header-inner {
@@ -57,23 +60,25 @@ body.h2res-shell.mobile-nav-open {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 12px 14px;
-  border: 1px solid rgba(217, 225, 237, 0.9);
-  border-radius: 999px;
-  background: var(--nav-bg);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+  gap: 24px;
+  padding: 0 0 14px;
+  border: none;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 
 .site-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
+  flex: 0 0 auto;
 }
 
 .site-logo img {
-  height: 38px;
+  height: 34px;
   width: auto;
   display: block;
 }
@@ -81,16 +86,20 @@ body.h2res-shell.mobile-nav-open {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex: 1;
+  gap: 24px;
+  flex: 1 1 auto;
   justify-content: center;
+  min-width: 0;
 }
 
 .site-nav a {
   text-decoration: none;
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  position: relative;
+  padding: 10px 0;
 }
 
 .site-nav a:hover,
@@ -98,30 +107,52 @@ body.h2res-shell.mobile-nav-open {
   color: var(--accent);
 }
 
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.85;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.site-nav a:hover::after,
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
 .site-header-actions {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 0 0 auto;
 }
 
 .icon-btn {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 999px;
   background: #ffffff;
   color: var(--text);
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .icon-btn:hover {
-  border-color: #99f6e4;
+  border-color: rgba(13, 148, 136, 0.24);
   color: var(--accent);
+  background: rgba(255, 255, 255, 0.92);
   transform: translateY(-1px);
 }
 
@@ -303,15 +334,17 @@ body.h2res-shell.mobile-nav-open {
 }
 
 .site-footer {
-  padding: 16px 0 34px;
+  background: #ffffff;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 28px 0 24px;
 }
 
 .site-footer-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,250,255,0.98));
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  box-shadow: var(--shadow);
-  padding: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
 .site-footer-main {
@@ -321,9 +354,10 @@ body.h2res-shell.mobile-nav-open {
 }
 
 .site-footer-brand p {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.7;
+  font-size: 14px;
   max-width: 420px;
 }
 
@@ -335,9 +369,9 @@ body.h2res-shell.mobile-nav-open {
 
 .site-footer-links-group h4 {
   margin: 0 0 12px;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: #64748b;
 }
 
@@ -356,7 +390,7 @@ body.h2res-shell.mobile-nav-open {
 .site-footer-divider {
   height: 1px;
   background: var(--line);
-  margin: 22px 0 18px;
+  margin: 24px 0 18px;
 }
 
 .site-footer-bottom {
@@ -407,7 +441,11 @@ body.h2res-shell.mobile-nav-open {
   }
 
   .site-nav-pill {
-    padding: 10px 12px;
+    padding-bottom: 12px;
+  }
+
+  .site-logo img {
+    height: 32px;
   }
 
   .site-footer-card {
