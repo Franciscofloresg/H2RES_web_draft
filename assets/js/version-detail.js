@@ -1,0 +1,118 @@
+(function () {
+  const VERSIONS = window.H2RES_VERSION_DATA || {};
+  const DEFAULT_RESOURCE_FALLBACK = "../index.html#documentation";
+  const params = new URLSearchParams(window.location.search);
+  const versionId = params.get("id");
+  const version = VERSIONS[versionId];
+
+  function setSectionVisibility(isVisible) {
+    document.querySelectorAll("[data-version-section]").forEach((section) => {
+      section.hidden = !isVisible;
+    });
+  }
+
+  function renderMissingVersionState() {
+    document.title = "Model Version Not Found - H2RES Model";
+    document.getElementById("crumbVersionName").textContent = "Not found";
+    document.getElementById("versionName").textContent = "Model version not found";
+    document.getElementById("versionSubtitle").textContent = "The requested model version is not available in the current version tree.";
+    document.getElementById("versionDescription").textContent = "Use the version index to open a documented model page or return to the general documentation section.";
+    document.getElementById("versionLineage").textContent = "Unavailable";
+    document.getElementById("versionStatus").textContent = "Check the version URL";
+    document.getElementById("versionKeywords").innerHTML = "<span class=\"chip\">Invalid or missing version ID</span>";
+    document.getElementById("versionFallbackActions").hidden = false;
+    setSectionVisibility(false);
+  }
+
+  function renderList(targetId, items) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    target.innerHTML = "";
+    const safeItems = (items && items.length) ? items : ["To be documented."];
+    safeItems.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      target.appendChild(li);
+    });
+  }
+
+  function setResourceLink(anchorId, href, fallbackHref) {
+    const link = document.getElementById(anchorId);
+    if (link) link.href = href || fallbackHref;
+  }
+
+  async function fileExists(url) {
+    try {
+      const response = await fetch(url, { method: "GET", cache: "no-store" });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function setVersionResources(versionKey) {
+    const base = `../assets/version-resources/${versionKey}`;
+    const formulationUrl = `${base}/model-formulation.pdf`;
+    const manualUrl = `${base}/user-manual.pdf`;
+    const formulationExists = await fileExists(formulationUrl);
+    const manualExists = await fileExists(manualUrl);
+
+    setResourceLink("versionFormulationLink", formulationExists ? formulationUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
+    setResourceLink("versionManualLink", manualExists ? manualUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
+
+    document.getElementById("versionFormulationText").textContent = formulationExists
+      ? "Open the mathematical and methodological formulation for this model version."
+      : "Model formulation PDF not added yet. The link currently falls back to the general documentation page.";
+
+    document.getElementById("versionManualText").textContent = manualExists
+      ? "Open the version-specific user guide and workflow instructions."
+      : "User manual PDF not added yet. The link currently falls back to the general documentation page.";
+  }
+
+  async function renderVersionPage() {
+    if (!version) {
+      renderMissingVersionState();
+      return;
+    }
+
+    setSectionVisibility(true);
+    document.title = version.name + " - H2RES Model";
+    document.getElementById("crumbVersionName").textContent = version.name;
+    document.getElementById("versionName").textContent = version.name;
+    document.getElementById("versionSubtitle").textContent = version.subtitle;
+    document.getElementById("versionDescription").textContent = version.description;
+    document.getElementById("versionLineage").textContent = version.lineage;
+    document.getElementById("versionStatus").textContent = version.status;
+
+    const keywordWrap = document.getElementById("versionKeywords");
+    version.keywords.forEach((keyword) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = keyword;
+      keywordWrap.appendChild(chip);
+    });
+
+    renderList("versionWhatChanged", version.whatChanged);
+    renderList("versionUseCases", version.useCases);
+    renderList("versionCompatibility", version.compatibility);
+    renderList("versionKeyIO", version.keyIO);
+    renderList("versionUseIf", version.useIf);
+    renderList("versionAvoidIf", version.avoidIf);
+    await setVersionResources(versionId);
+
+    const navWrap = document.getElementById("versionNav");
+    version.links.forEach((item) => {
+      const link = document.createElement("a");
+      link.className = "version-link";
+      link.href = "version.html?id=" + encodeURIComponent(item.id);
+      link.innerHTML = "<strong>" + item.label + "</strong><span>" + item.note + "</span>";
+      navWrap.appendChild(link);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderVersionPage);
+  } else {
+    renderVersionPage();
+  }
+})();

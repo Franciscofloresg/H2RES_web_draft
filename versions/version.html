@@ -4,549 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>H2RES Model</title>
-  <style>
-    :root {
-      --bg: #f3f6fb;
-      --card: #ffffff;
-      --line: #d9e1ed;
-      --line-strong: #b5c1d3;
-      --text: #0f172a;
-      --muted: #475569;
-      --accent: #0f5ea8;
-      --shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
-      --shadow-strong: 0 28px 60px rgba(15, 23, 42, 0.12);
-      --nav-bg: rgba(255, 255, 255, 0.8);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(1200px 460px at 8% -10%, #dbeafe 0%, transparent 60%),
-        radial-gradient(900px 420px at 92% -16%, #e0f2fe 0%, transparent 55%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .page-shell {
-      padding: 110px 0 48px;
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 18px 0 0;
-    }
-
-    .header-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .nav-pill {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 14px;
-      border: 1px solid rgba(217, 225, 237, 0.9);
-      border-radius: 999px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .logo img {
-      height: 38px;
-      width: auto;
-      display: block;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      color: var(--accent);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #ffffff;
-      color: var(--text);
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .icon-btn:hover {
-      border-color: #93c5fd;
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .mobile-menu-btn {
-      display: none;
-    }
-
-    .mobile-nav {
-      position: fixed;
-      inset: 0;
-      z-index: 60;
-      background: rgba(15, 23, 42, 0.55);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .mobile-nav.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mobile-nav-panel {
-      position: absolute;
-      inset: 0 0 0 auto;
-      width: min(360px, 100%);
-      background: #ffffff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      box-shadow: -20px 0 50px rgba(15, 23, 42, 0.16);
-    }
-
-    .mobile-nav-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .mobile-nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .mobile-nav-links a {
-      text-decoration: none;
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .mobile-nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .crumb {
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
-
-    .crumb a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .hero-card,
-    .card {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.94));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
-    }
-
-    .hero-card {
-      box-shadow: var(--shadow-strong);
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: 42px;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-    }
-
-    .subtitle {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .desc {
-      margin: 0;
-      color: #1f2937;
-      font-size: 17px;
-      line-height: 1.75;
-      max-width: 920px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 12px 16px;
-      margin-top: 22px;
-    }
-
-    .meta dt {
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .meta dd {
-      margin: 0;
-      color: #111827;
-      font-size: 15px;
-    }
-
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .chip {
-      border: 1px solid var(--line);
-      background: #f8fafc;
-      border-radius: 999px;
-      padding: 7px 11px;
-      font-size: 12px;
-      color: #334155;
-      font-weight: 700;
-    }
-
-    .section-title {
-      margin: 0 0 14px;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .detail-box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #f8fafc;
-      padding: 16px;
-    }
-
-    .detail-box h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      line-height: 1.3;
-    }
-
-    .detail-list {
-      margin: 0;
-      padding-left: 18px;
-      color: #1f2937;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .detail-list li + li {
-      margin-top: 6px;
-    }
-
-    .decision-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .decision-box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #f8fafc;
-      padding: 16px;
-    }
-
-    .decision-box.use {
-      border-color: #86efac;
-      background: #f0fdf4;
-    }
-
-    .decision-box.avoid {
-      border-color: #fecaca;
-      background: #fef2f2;
-    }
-
-    .decision-box h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      line-height: 1.3;
-    }
-
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .resource-link {
-      display: block;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      text-decoration: none;
-      color: inherit;
-      background: #f8fafc;
-      padding: 16px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .resource-link:hover {
-      border-color: #93c5fd;
-      transform: translateY(-1px);
-    }
-
-    .resource-link strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 15px;
-    }
-
-    .resource-link span {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-      display: block;
-    }
-
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .version-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      background: #f8fafc;
-    }
-
-    .version-link:hover {
-      border-color: #93c5fd;
-    }
-
-    .version-link strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 2px;
-    }
-
-    .version-link span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer {
-      padding: 16px 0 34px;
-    }
-
-    .footer-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,250,255,0.98));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 28px;
-    }
-
-    .footer-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
-      gap: 28px;
-    }
-
-    .footer-brand p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      line-height: 1.65;
-      max-width: 420px;
-    }
-
-    .footer-links-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .footer-links-group h4 {
-      margin: 0 0 12px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #64748b;
-    }
-
-    .footer-links-group a {
-      display: block;
-      color: var(--text);
-      text-decoration: none;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-
-    .footer-links-group a:hover {
-      color: var(--accent);
-    }
-
-    .footer-divider {
-      height: 1px;
-      background: var(--line);
-      margin: 22px 0 18px;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    @media (max-width: 980px) {
-      .nav {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: inline-flex;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .footer-main,
-      .footer-links-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .meta {
-        grid-template-columns: 1fr;
-      }
-
-      .details-grid,
-      .decision-grid,
-      .resources-grid,
-      .nav-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .page-shell {
-        padding-top: 98px;
-      }
-
-      .hero-card,
-      .card {
-        padding: 22px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .subtitle,
-      .desc {
-        font-size: 16px;
-      }
-
-      .nav-pill {
-        padding: 10px 12px;
-      }
-
-      .footer-card {
-        padding: 22px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link rel="stylesheet" href="../assets/css/versions.css">
 </head>
-<body>
-  <header class="header">
-    <div class="header-inner">
-      <div class="nav-pill">
-        <a class="logo" href="../index.html#home">
+<body class="h2res-shell version-detail">
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-nav-pill">
+        <a class="site-logo" href="../index.html#home">
           <img src="../assets/h2res-logo.png" alt="H2RES logo">
         </a>
 
-        <nav class="nav">
+        <nav class="site-nav">
           <a href="../index.html#about">About</a>
           <a href="../index.html#get-started">Get Started</a>
           <a href="../index.html#publications">Publications</a>
@@ -557,13 +26,13 @@
           <a href="../index.html#documentation">Documentation</a>
         </nav>
 
-        <div class="header-actions">
+        <div class="site-header-actions">
           <a class="icon-btn" href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
             </svg>
           </a>
-          <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+          <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="12" x2="21" y2="12"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
@@ -575,10 +44,10 @@
     </div>
   </header>
 
-  <nav class="mobile-nav" id="mobileNav">
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
     <div class="mobile-nav-panel">
       <div class="mobile-nav-top">
-        <a class="logo" href="../index.html#home">
+        <a class="site-logo" href="../index.html#home">
           <img src="../assets/h2res-logo.png" alt="H2RES logo">
         </a>
         <button class="icon-btn" id="mobileCloseBtn" aria-label="Close menu">
@@ -605,11 +74,15 @@
     <div class="container">
       <div class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Model Versions</a> / <span id="crumbVersionName">Version</span></div>
 
-      <section class="hero-card">
-        <p class="eyebrow">H2RES Model Profile</p>
-        <h1 id="versionName">Unknown model</h1>
-        <p id="versionSubtitle" class="subtitle">Model details are not available.</p>
-        <p id="versionDescription" class="desc">Open this page from the version tree to see the selected model profile.</p>
+      <section class="page-hero">
+        <p class="section-badge">H2RES Model Profile</p>
+        <h1 class="page-title" id="versionName">Unknown model</h1>
+        <p id="versionSubtitle" class="page-subtitle">Model details are not available.</p>
+        <p id="versionDescription" class="page-subtitle">Open this page from the version tree to see the selected model profile.</p>
+        <div id="versionFallbackActions" class="page-actions" hidden>
+          <a class="btn btn-primary" href="index.html">Browse Model Versions</a>
+          <a class="btn btn-secondary" href="../index.html#documentation">Open Documentation</a>
+        </div>
 
         <dl class="meta">
           <dt>Lineage</dt>
@@ -621,56 +94,44 @@
         <div id="versionKeywords" class="chips" aria-label="Model keywords"></div>
       </section>
 
-      <section class="card">
-        <p class="section-title">Version Details</p>
+      <section class="page-card" data-version-section>
+        <p class="page-section-title">Version Details</p>
         <div class="details-grid">
           <article class="detail-box">
             <h3>What changed</h3>
-            <ul id="versionWhatChanged" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionWhatChanged" class="detail-list"><li>To be documented.</li></ul>
           </article>
           <article class="detail-box">
             <h3>Use cases</h3>
-            <ul id="versionUseCases" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionUseCases" class="detail-list"><li>To be documented.</li></ul>
           </article>
           <article class="detail-box">
             <h3>Compatibility</h3>
-            <ul id="versionCompatibility" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionCompatibility" class="detail-list"><li>To be documented.</li></ul>
           </article>
           <article class="detail-box">
             <h3>Key inputs/outputs</h3>
-            <ul id="versionKeyIO" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionKeyIO" class="detail-list"><li>To be documented.</li></ul>
           </article>
         </div>
       </section>
 
-      <section class="card">
-        <p class="section-title">Decision Guide</p>
+      <section class="page-card" data-version-section>
+        <p class="page-section-title">Decision Guide</p>
         <div class="decision-grid">
           <article class="decision-box use">
             <h3>Use this model if...</h3>
-            <ul id="versionUseIf" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionUseIf" class="detail-list"><li>To be documented.</li></ul>
           </article>
           <article class="decision-box avoid">
             <h3>Avoid if...</h3>
-            <ul id="versionAvoidIf" class="detail-list">
-              <li>To be documented.</li>
-            </ul>
+            <ul id="versionAvoidIf" class="detail-list"><li>To be documented.</li></ul>
           </article>
         </div>
       </section>
 
-      <section class="card">
-        <p class="section-title">Model Resources</p>
+      <section class="page-card" data-version-section>
+        <p class="page-section-title">Model Resources</p>
         <div class="resources-grid">
           <a id="versionFormulationLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
             <strong>Model Formulation</strong>
@@ -683,40 +144,40 @@
         </div>
       </section>
 
-      <section class="card">
-        <p class="section-title">Navigation</p>
+      <section class="page-card" data-version-section>
+        <p class="page-section-title">Navigation</p>
         <div id="versionNav" class="nav-grid"></div>
       </section>
     </div>
   </main>
 
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container">
-      <div class="footer-card">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <a class="logo" href="../index.html#home">
+      <div class="site-footer-card">
+        <div class="site-footer-main">
+          <div class="site-footer-brand">
+            <a class="site-logo" href="../index.html#home">
               <img src="../assets/h2res-logo.png" alt="H2RES logo">
             </a>
             <p>Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.</p>
           </div>
 
-          <div class="footer-links-grid">
-            <div class="footer-links-group">
+          <div class="site-footer-links-grid">
+            <div class="site-footer-links-group">
               <h4>Quick Links</h4>
               <a href="../index.html#about">About H2RES</a>
               <a href="../index.html#publications">Publications</a>
               <a href="index.html">Model Versions</a>
               <a href="../index.html#team">Team</a>
             </div>
-            <div class="footer-links-group">
+            <div class="site-footer-links-group">
               <h4>Resources</h4>
               <a href="../index.html#get-started">Get Started</a>
               <a href="../index.html#documentation">Documentation</a>
               <a href="../index.html#tutorials">Tutorials</a>
               <a href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
             </div>
-            <div class="footer-links-group">
+            <div class="site-footer-links-group">
               <h4>Community</h4>
               <a href="../index.html#community">How to Cite</a>
               <a href="https://www.youtube.com/@H2REScommunity" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
@@ -724,8 +185,8 @@
             </div>
           </div>
         </div>
-        <div class="footer-divider"></div>
-        <div class="footer-bottom">
+        <div class="site-footer-divider"></div>
+        <div class="site-footer-bottom">
           <div>Ivana Lucica 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.</div>
           <div>&copy; 2026 H2RES Team.</div>
         </div>
@@ -733,343 +194,8 @@
     </div>
   </footer>
 
-  <script>
-    const VERSIONS = {
-      "v1-0": {
-        name: "H2RES v1.0",
-        subtitle: "Baseline integrated energy system planning model.",
-        description: "H2RES v1.0 is the baseline open-source model version for long-term energy planning at hourly resolution. It is designed to evaluate transition pathways in integrated energy systems by combining capacity expansion, technology retirement, system operation, sector coupling, storage, hydrogen, and power-to-X options within a single optimization framework.",
-        lineage: "Root of this model tree",
-        status: "Reference version",
-        keywords: ["Baseline", "Core structure", "Model root"],
-        whatChanged: [
-          "Establishes the baseline optimization structure used in later H2RES versions.",
-          "Combines data processing, model building, and LP/MILP optimization into a single workflow for scenario analysis."
-        ],
-        useCases: [
-          "Run baseline long-term energy transition scenarios at hourly resolution.",
-          "Study investments, dispatch, flexibility, sector coupling, hydrogen, and power-to-X strategies in an integrated framework."
-        ],
-        compatibility: [
-          "Acts as the reference structure for downstream v1.x versions.",
-          "Suitable as the parent benchmark for methodological comparisons across later versions."
-        ],
-        keyIO: [
-          "Inputs: demand, technology, policy, economic, and resource data processed through read_process_data.py.",
-          "Outputs: costs, dispatch, capacity expansion, reserves, and emissions indicators from the optimization model.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
-        ],
-        useIf: [
-          "You need a transparent baseline model for long-term integrated energy planning.",
-          "You want to analyze energy transition pathways with investments, hourly operation, storage, hydrogen, and sector coupling in one framework."
-        ],
-        avoidIf: [
-          "You require a later version with additional specialized features or revised structure.",
-          "You are specifically looking for a more advanced version tailored to myopic or multizonal-myopic analysis."
-        ],
-        links: [
-          { id: "v1-1", label: "H2RES v1.1", note: "Next model in the diagram" }
-        ]
-      },
-      "v1-1": {
-        name: "H2RES v1.1",
-        subtitle: "Baseline-plus formulation update with explicit adequacy treatment.",
-        description: "H2RES v1.1 builds directly on the v1.0 baseline while introducing a clearer implementation of adequacy relaxation, unmet-service accounting, and active data preprocessing. It keeps the integrated long-term optimization structure, but adds explicit unmet-service variables for electricity and heat services, monetized scarcity terms in the objective, scenario controls affecting CEEP and fossil dispatch, and an updated CSV/XLSX preprocessing workflow for active data packages and technology-specific CAPEX trajectories.",
-        lineage: "Derived from H2RES v1.0",
-        status: "Reference upgrade within v1.x",
-        keywords: ["v1.1", "Adequacy relaxation", "Unmet-service variables", "Data preprocessing"],
-        whatChanged: [
-          "Introduced explicit unmet-service variables for electricity, district heating, and general or industrial heat instead of relying only on the legacy aggregate slack representation.",
-          "Extended the objective with explicit scarcity and unmet-service penalty terms, together with scenario controls such as ceep_penalty and fossil_dispatch.",
-          "Updated preprocessing to read the active v1.1 CSV/XLSX data package and build technology-specific annual CAPEX trajectories for major flexibility technologies."
-        ],
-        useCases: [
-          "Compare baseline v1.0 behavior against a more explicit adequacy and scarcity formulation.",
-          "Run integrated energy planning studies where unmet electricity and heat service should appear transparently in balances, outputs, and objective costs."
-        ],
-        compatibility: [
-          "Maintains continuity with the v1.0 integrated model structure and version lineage.",
-          "Acts as the methodological predecessor to later v1.x developments, while still remaining a non-myopic and non-multizonal implementation."
-        ],
-        keyIO: [
-          "Inputs: active v1.1 CSV and XLSX data packages, identifier-matched technology data, policy and economic assumptions, and annual CAPEX trajectories for flexibility technologies.",
-          "Outputs: costs, dispatch, capacity, reserves, and explicit unmet-service indicators across electricity and heat balances.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
-        ],
-        useIf: [
-          "You need the v1.0 logic but want scarcity treatment and unmet-service behavior represented more explicitly.",
-          "You want a traceable formulation tied closely to the implemented Build_model.py and read_process_data.py workflow."
-        ],
-        avoidIf: [
-          "You require myopic planning, multizonal representation, or later specialized derivatives.",
-          "You need a full-horizon implementation that does not rely on the reduced time-horizon setting currently present in the v1.1 code."
-        ],
-        links: [
-          { id: "v1-0", label: "H2RES v1.0", note: "Previous model" },
-          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Next model" }
-        ]
-      },
-      "v1-2-myopic": {
-        name: "H2RES v1.2 (Myopic)",
-        subtitle: "Rolling-horizon and myopic planning extension within v1.x.",
-        description: "H2RES v1.2 extends the v1.1 structure by adding a rolling-horizon counterpart to the core optimization model while preserving the integrated system representation. It introduces explicit horizon controls for periods, years, and windows, investment carryover logic between linked subproblems, overflow investment variables with penalty costs, and monetized hydro spillage. The result is a version suited to phased or myopic pathway analysis while remaining directly comparable with full-horizon studies.",
-        lineage: "Derived from H2RES v1.1",
-        status: "Major transition-planning upgrade",
-        keywords: ["Myopic", "Rolling horizon", "Investment carryover", "v1.2"],
-        whatChanged: [
-          "Added a rolling-horizon implementation alongside the full-horizon model so the same system can be solved through linked subproblems.",
-          "Made the active optimization horizon explicit through periods, years, and window controls rather than leaving horizon definition hidden inside builder internals.",
-          "Introduced cumulative investment carryover equations, overflow investment variables, hydro spill costs, and clearer non-negativity domains for most continuous variables."
-        ],
-        useCases: [
-          "Run phased pathway studies where investment decisions should depend on previous-window commitments.",
-          "Compare full-horizon and rolling-horizon behavior under the same integrated system structure."
-        ],
-        compatibility: [
-          "Builds directly on the v1.1 formulation and preprocessing workflow.",
-          "Acts as the upstream methodological base for both the v1.3 multizonal-myopic line and the v2.0 downstream branch."
-        ],
-        keyIO: [
-          "Inputs: rolling-window controls, explicit horizon definitions, investment carryover settings, policy and economic trajectories, and the active data package processed through read_process_data.py.",
-          "Outputs: pathway indicators, window-linked investment decisions, dispatch, capacity, reserves, costs, and hydro spill or unmet-service effects relevant to phased transition analysis.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
-        ],
-        useIf: [
-          "You need phased or sequential transition decision analysis rather than only a single full-horizon solve.",
-          "You want to study how investment decisions evolve across linked planning windows under explicit carryover rules."
-        ],
-        avoidIf: [
-          "You only need the simpler baseline or v1.1 full-horizon formulation without rolling-horizon logic.",
-          "You require spatial detail across multiple zones rather than a single-system myopic formulation."
-        ],
-        links: [
-          { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
-          { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Forward model" },
-          { id: "v2-0", label: "H2RES v2.0", note: "Downstream model" }
-        ]
-      },
-      "v1-3-multizonal-myopic": {
-        name: "H2RES v1.3 (Multizonal Myopic)",
-        subtitle: "Multizone and rolling-horizon regional extension of the v1.x line.",
-        description: "H2RES v1.3 preserves the sector-coupled logic of earlier releases but restructures the implementation around an explicit multizone architecture. Core operational, investment, storage, heat, hydrogen, import, and emissions variables are instantiated by system and linked through bilateral inter-system electricity flows, endogenous transfer-capacity investments, and national policy layers. Rolling-horizon execution is embedded procedurally through the workflow wrapper rather than a separate builder, making this version appropriate for regional pathway studies with cross-zone interactions.",
-        lineage: "Derived from H2RES v1.2 (Myopic)",
-        status: "Advanced regional planning upgrade",
-        keywords: ["Multizonal", "Rolling horizon", "Transfer investment", "v1.3"],
-        whatChanged: [
-          "Restructured most operational and investment variables so they carry a leading system index and are evaluated region by region.",
-          "Introduced a dedicated multizone preprocessing layer and a system-level workbook defining topology and transfer limits before technology and demand mapping.",
-          "Added bilateral electricity transfer variables, endogenous transfer-capacity investment, explicit national policy layers, and wrapper-managed rolling-horizon sequencing."
-        ],
-        useCases: [
-          "Run regional transition studies where electricity exchanges and transmission expansion between zones matter.",
-          "Analyze interactions between regional balances, transfer limits, and national policy constraints under phased planning."
-        ],
-        compatibility: [
-          "Builds directly on the v1.2 rolling-horizon and sector-coupled logic while extending it to multiple systems.",
-          "Acts as the parent regional platform for the downstream v1.4 e-fuels derivative."
-        ],
-        keyIO: [
-          "Inputs: system-level topology data, transfer limits, regional demand and technology datasets, national policy vectors, and rolling-window controls.",
-          "Outputs: regional flows, transfer-capacity decisions, exported result dictionaries, and multizone pathway indicators across costs, dispatch, capacity, reserves, and emissions.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
-        ],
-        useIf: [
-          "You need multi-zone representation with explicit electricity exchanges and possible transfer-capacity expansion.",
-          "You want staged or rolling-horizon transition analysis that keeps both regional and national policy layers visible."
-        ],
-        avoidIf: [
-          "You need a simpler single-system setup without multiregional topology and transfer data requirements.",
-          "You need a more specialized downstream model focused specifically on e-fuels rather than general regional coupling."
-        ],
-        links: [
-          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Previous model" },
-          { id: "v1-4-efuels", label: "H2RES v1.4 (efuels)", note: "Next model" }
-        ]
-      },
-      "v1-4-efuels": {
-        name: "H2RES v1.4 (efuels)",
-        subtitle: "Documentation in preparation for the e-fuels extension.",
-        description: "The detailed description for H2RES v1.4 is currently being prepared. This version is positioned as the e-fuels-oriented continuation of the v1.3 multizonal-myopic line, but the full methodological documentation and version-specific explanatory material are still under development.",
-        lineage: "Derived from H2RES v1.3 (Multizonal Myopic)",
-        status: "Documentation in progress",
-        keywords: ["E-fuels", "v1.4", "Documentation in preparation"],
-        whatChanged: [
-          "The detailed formulation changes for v1.4 are currently being documented.",
-          "This page will be updated once the version-specific methodological notes and supporting files are finalized."
-        ],
-        useCases: [
-          "Use this page as a placeholder reference while the v1.4 documentation is being assembled.",
-          "Return here once the user manual and mathematical formulation for the e-fuels branch are published."
-        ],
-        compatibility: [
-          "Expected to remain aligned with the v1.3 multizonal-myopic lineage.",
-          "Detailed compatibility notes will be added when the technical documentation is completed."
-        ],
-        keyIO: [
-          "Inputs: to be documented.",
-          "Outputs: to be documented.",
-          "Model formulation: documentation in preparation.",
-          "User manual: documentation in preparation."
-        ],
-        useIf: [
-          "You want to track the upcoming documentation for the e-fuels branch.",
-          "You need to know where the v1.x e-fuels extension sits within the overall version tree."
-        ],
-        avoidIf: [
-          "You need a fully documented version today for immediate methodological use.",
-          "You need version-specific implementation details that have not yet been published."
-        ],
-        links: [
-          { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Previous model" }
-        ]
-      },
-      "v2-0": {
-        name: "H2RES v2.0",
-        subtitle: "Documentation in preparation for the next-generation model line.",
-        description: "The detailed description for H2RES v2.0 is currently under development. In the version tree, v2.0 appears as the major downstream branch from the v1.x line, but its full documentation, assumptions, and implementation notes are still being prepared.",
-        lineage: "Downstream from the v1.x development line",
-        status: "Documentation in progress",
-        keywords: ["v2.0", "Next generation", "Documentation in preparation"],
-        whatChanged: [
-          "The major-version changes for v2.0 are currently being compiled and documented.",
-          "This page will be expanded once the methodological description and supporting resources are finalized."
-        ],
-        useCases: [
-          "Use this page as a reference point for the upcoming next-generation branch.",
-          "Return here when the formal v2.0 documentation package becomes available."
-        ],
-        compatibility: [
-          "Maintains a lineage connection to the v1.x development path.",
-          "Detailed compatibility and migration notes will be added once documentation is completed."
-        ],
-        keyIO: [
-          "Inputs: to be documented.",
-          "Outputs: to be documented.",
-          "Model formulation: documentation in preparation.",
-          "User manual: documentation in preparation."
-        ],
-        useIf: [
-          "You want to track the upcoming documentation for the next-generation branch.",
-          "You need to understand where v2.0 sits in the overall H2RES evolution."
-        ],
-        avoidIf: [
-          "You need a fully documented model version for immediate use.",
-          "You need implementation details or resources that have not yet been published."
-        ],
-        links: [
-          { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Related upstream model" }
-        ]
-      }
-    };
-
-    const DEFAULT_RESOURCE_FALLBACK = "../index.html#documentation";
-
-    const params = new URLSearchParams(window.location.search);
-    const versionId = params.get("id");
-    const version = VERSIONS[versionId];
-
-    function renderList(targetId, items) {
-      const target = document.getElementById(targetId);
-      if (!target) return;
-      target.innerHTML = "";
-      const safeItems = (items && items.length) ? items : ["To be documented."];
-      safeItems.forEach((item) => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        target.appendChild(li);
-      });
-    }
-
-    function setResourceLink(anchorId, href, fallbackHref) {
-      const link = document.getElementById(anchorId);
-      if (!link) return;
-      link.href = href || fallbackHref;
-    }
-
-    async function fileExists(url) {
-      try {
-        const response = await fetch(url, { method: "GET", cache: "no-store" });
-        return response.ok;
-      } catch (error) {
-        return false;
-      }
-    }
-
-    async function setVersionResources(versionKey) {
-      const base = `../assets/version-resources/${versionKey}`;
-      const formulationUrl = `${base}/model-formulation.pdf`;
-      const manualUrl = `${base}/user-manual.pdf`;
-      const formulationExists = await fileExists(formulationUrl);
-      const manualExists = await fileExists(manualUrl);
-
-      setResourceLink("versionFormulationLink", formulationExists ? formulationUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
-      setResourceLink("versionManualLink", manualExists ? manualUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
-
-      document.getElementById("versionFormulationText").textContent = formulationExists
-        ? "Open the mathematical and methodological formulation for this model version."
-        : "Model formulation PDF not added yet. The link currently falls back to the general documentation page.";
-
-      document.getElementById("versionManualText").textContent = manualExists
-        ? "Open the version-specific user guide and workflow instructions."
-        : "User manual PDF not added yet. The link currently falls back to the general documentation page.";
-    }
-
-    async function renderVersionPage() {
-      if (!version) return;
-      document.title = version.name + " - H2RES Model";
-      document.getElementById("crumbVersionName").textContent = version.name;
-      document.getElementById("versionName").textContent = version.name;
-      document.getElementById("versionSubtitle").textContent = version.subtitle;
-      document.getElementById("versionDescription").textContent = version.description;
-      document.getElementById("versionLineage").textContent = version.lineage;
-      document.getElementById("versionStatus").textContent = version.status;
-
-      const keywordWrap = document.getElementById("versionKeywords");
-      version.keywords.forEach((keyword) => {
-        const chip = document.createElement("span");
-        chip.className = "chip";
-        chip.textContent = keyword;
-        keywordWrap.appendChild(chip);
-      });
-
-      renderList("versionWhatChanged", version.whatChanged);
-      renderList("versionUseCases", version.useCases);
-      renderList("versionCompatibility", version.compatibility);
-      renderList("versionKeyIO", version.keyIO);
-      renderList("versionUseIf", version.useIf);
-      renderList("versionAvoidIf", version.avoidIf);
-      await setVersionResources(versionId);
-
-      const navWrap = document.getElementById("versionNav");
-      version.links.forEach((item) => {
-        const link = document.createElement("a");
-        link.className = "version-link";
-        link.href = "version.html?id=" + encodeURIComponent(item.id);
-        link.innerHTML = "<strong>" + item.label + "</strong><span>" + item.note + "</span>";
-        navWrap.appendChild(link);
-      });
-    }
-
-    renderVersionPage();
-
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const mobileCloseBtn = document.getElementById("mobileCloseBtn");
-    const mobileNav = document.getElementById("mobileNav");
-
-    if (mobileMenuBtn && mobileCloseBtn && mobileNav) {
-      mobileMenuBtn.addEventListener("click", () => mobileNav.classList.add("open"));
-      mobileCloseBtn.addEventListener("click", () => mobileNav.classList.remove("open"));
-      mobileNav.addEventListener("click", (event) => {
-        if (event.target === mobileNav) mobileNav.classList.remove("open");
-      });
-      document.querySelectorAll(".mobile-nav-links a").forEach((link) => {
-        link.addEventListener("click", () => mobileNav.classList.remove("open"));
-      });
-    }
-  </script>
+  <script src="../assets/js/version-data.js"></script>
+  <script src="../assets/js/site-shell.js"></script>
+  <script src="../assets/js/version-detail.js"></script>
 </body>
 </html>
