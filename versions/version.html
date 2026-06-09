@@ -441,36 +441,37 @@
       },
       "v1-1": {
         name: "H2RES v1.1",
-        subtitle: "First model after v1.0.",
-        description: "Intermediate model in the v1.x line connecting the initial version to multizonal developments.",
+        subtitle: "Baseline-plus formulation update with explicit adequacy treatment.",
+        description: "H2RES v1.1 builds directly on the v1.0 baseline while introducing a clearer implementation of adequacy relaxation, unmet-service accounting, and active data preprocessing. It keeps the integrated long-term optimization structure, but adds explicit unmet-service variables for electricity and heat services, monetized scarcity terms in the objective, scenario controls affecting CEEP and fossil dispatch, and an updated CSV/XLSX preprocessing workflow for active data packages and technology-specific CAPEX trajectories.",
         lineage: "Derived from H2RES v1.0",
-        status: "Historical model",
-        keywords: ["v1.x", "Intermediate model", "Evolution path"],
+        status: "Reference upgrade within v1.x",
+        keywords: ["v1.1", "Adequacy relaxation", "Unmet-service variables", "Data preprocessing"],
         whatChanged: [
-          "Incremental update over the v1.0 baseline model.",
-          "Prepared the path toward multizonal developments."
+          "Introduced explicit unmet-service variables for electricity, district heating, and general or industrial heat instead of relying only on the legacy aggregate slack representation.",
+          "Extended the objective with explicit scarcity and unmet-service penalty terms, together with scenario controls such as ceep_penalty and fossil_dispatch.",
+          "Updated preprocessing to read the active v1.1 CSV/XLSX data package and build technology-specific annual CAPEX trajectories for major flexibility technologies."
         ],
         useCases: [
-          "Bridge analyses between baseline and multizonal variants.",
-          "Compare progressive improvements in v1.x."
+          "Compare baseline v1.0 behavior against a more explicit adequacy and scarcity formulation.",
+          "Run integrated energy planning studies where unmet electricity and heat service should appear transparently in balances, outputs, and objective costs."
         ],
         compatibility: [
-          "Backwards aligned with v1.0 reference structures.",
-          "Forward aligned with v1.2 multizonal model lineage."
+          "Maintains continuity with the v1.0 integrated model structure and version lineage.",
+          "Acts as the methodological predecessor to later v1.x developments, while still remaining a non-myopic and non-multizonal implementation."
         ],
         keyIO: [
-          "Inputs: baseline structure plus updated v1.1 assumptions.",
-          "Outputs: intermediate model metrics for transition studies.",
+          "Inputs: active v1.1 CSV and XLSX data packages, identifier-matched technology data, policy and economic assumptions, and annual CAPEX trajectories for flexibility technologies.",
+          "Outputs: costs, dispatch, capacity, reserves, and explicit unmet-service indicators across electricity and heat balances.",
           "Model formulation: version-specific reference to be linked.",
           "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need continuity from v1.0 with moderate updates.",
-          "You want transitional analysis before moving to multizonal models."
+          "You need the v1.0 logic but want scarcity treatment and unmet-service behavior represented more explicitly.",
+          "You want a traceable formulation tied closely to the implemented Build_model.py and read_process_data.py workflow."
         ],
         avoidIf: [
-          "You need explicit multizonal logic or myopic planning behavior.",
-          "You require dedicated e-fuels functionality."
+          "You require myopic planning, multizonal representation, or later specialized derivatives.",
+          "You need a full-horizon implementation that does not rely on the reduced time-horizon setting currently present in the v1.1 code."
         ],
         links: [
           { id: "v1-0", label: "H2RES v1.0", note: "Previous model" },
@@ -479,36 +480,37 @@
       },
       "v1-2-myopic": {
         name: "H2RES v1.2 (Myopic)",
-        subtitle: "Myopic model line in the v1.x sequence.",
-        description: "Model version associated with myopic development and linked to both the multizonal myopic line and the v2.0 model in the tree.",
+        subtitle: "Rolling-horizon and myopic planning extension within v1.x.",
+        description: "H2RES v1.2 extends the v1.1 structure by adding a rolling-horizon counterpart to the core optimization model while preserving the integrated system representation. It introduces explicit horizon controls for periods, years, and windows, investment carryover logic between linked subproblems, overflow investment variables with penalty costs, and monetized hydro spillage. The result is a version suited to phased or myopic pathway analysis while remaining directly comparable with full-horizon studies.",
         lineage: "Derived from H2RES v1.1",
-        status: "Major version point",
-        keywords: ["Myopic", "v1.2", "Version split"],
+        status: "Major transition-planning upgrade",
+        keywords: ["Myopic", "Rolling horizon", "Investment carryover", "v1.2"],
         whatChanged: [
-          "Introduced myopic planning structure in the v1.x sequence.",
-          "Created a key split point for both v1.3 and v2.0 lines."
+          "Added a rolling-horizon implementation alongside the full-horizon model so the same system can be solved through linked subproblems.",
+          "Made the active optimization horizon explicit through periods, years, and window controls rather than leaving horizon definition hidden inside builder internals.",
+          "Introduced cumulative investment carryover equations, overflow investment variables, hydro spill costs, and clearer non-negativity domains for most continuous variables."
         ],
         useCases: [
-          "Run phased pathway studies with staged planning decisions.",
-          "Test transition dynamics under sequential decision logic."
+          "Run phased pathway studies where investment decisions should depend on previous-window commitments.",
+          "Compare full-horizon and rolling-horizon behavior under the same integrated system structure."
         ],
         compatibility: [
-          "Compatible with v1.1 predecessor assumptions.",
-          "Upstream source for v1.3 multizonal myopic and v2.0 model lineage."
+          "Builds directly on the v1.1 formulation and preprocessing workflow.",
+          "Acts as the upstream methodological base for both the v1.3 multizonal-myopic line and the v2.0 downstream branch."
         ],
         keyIO: [
-          "Inputs: staged planning parameters and transition assumptions.",
-          "Outputs: pathway indicators and model-level system metrics.",
+          "Inputs: rolling-window controls, explicit horizon definitions, investment carryover settings, policy and economic trajectories, and the active data package processed through read_process_data.py.",
+          "Outputs: pathway indicators, window-linked investment decisions, dispatch, capacity, reserves, costs, and hydro spill or unmet-service effects relevant to phased transition analysis.",
           "Model formulation: version-specific reference to be linked.",
           "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need phased or sequential transition decision analysis.",
-          "You are selecting the model that connects to both v1.3 and v2.0 lines."
+          "You need phased or sequential transition decision analysis rather than only a single full-horizon solve.",
+          "You want to study how investment decisions evolve across linked planning windows under explicit carryover rules."
         ],
         avoidIf: [
-          "You only need a static baseline benchmark.",
-          "You require spatial detail across multiple zones."
+          "You only need the simpler baseline or v1.1 full-horizon formulation without rolling-horizon logic.",
+          "You require spatial detail across multiple zones rather than a single-system myopic formulation."
         ],
         links: [
           { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
@@ -518,36 +520,37 @@
       },
       "v1-3-multizonal-myopic": {
         name: "H2RES v1.3 (Multizonal Myopic)",
-        subtitle: "Multizonal myopic model extension from the v1.x line.",
-        description: "Model version identified as multizonal myopic in the tree and linked forward to the e-fuels model.",
+        subtitle: "Multizone and rolling-horizon regional extension of the v1.x line.",
+        description: "H2RES v1.3 preserves the sector-coupled logic of earlier releases but restructures the implementation around an explicit multizone architecture. Core operational, investment, storage, heat, hydrogen, import, and emissions variables are instantiated by system and linked through bilateral inter-system electricity flows, endogenous transfer-capacity investments, and national policy layers. Rolling-horizon execution is embedded procedurally through the workflow wrapper rather than a separate builder, making this version appropriate for regional pathway studies with cross-zone interactions.",
         lineage: "Derived from H2RES v1.2 (Myopic)",
-        status: "Advanced v1.x model",
-        keywords: ["Multizonal", "Myopic", "v1.3", "Transition model"],
+        status: "Advanced regional planning upgrade",
+        keywords: ["Multizonal", "Rolling horizon", "Transfer investment", "v1.3"],
         whatChanged: [
-          "Added multizonal structure to the myopic model line.",
-          "Extended the v1.x line toward specialized derivatives."
+          "Restructured most operational and investment variables so they carry a leading system index and are evaluated region by region.",
+          "Introduced a dedicated multizone preprocessing layer and a system-level workbook defining topology and transfer limits before technology and demand mapping.",
+          "Added bilateral electricity transfer variables, endogenous transfer-capacity investment, explicit national policy layers, and wrapper-managed rolling-horizon sequencing."
         ],
         useCases: [
-          "Run regional transition studies with staged planning logic.",
-          "Benchmark pathway differences versus other v1.x variants."
+          "Run regional transition studies where electricity exchanges and transmission expansion between zones matter.",
+          "Analyze interactions between regional balances, transfer limits, and national policy constraints under phased planning."
         ],
         compatibility: [
-          "Compatible with v1.2 myopic upstream model structure.",
-          "Parent model for v1.4 e-fuels derivative."
+          "Builds directly on the v1.2 rolling-horizon and sector-coupled logic while extending it to multiple systems.",
+          "Acts as the parent regional platform for the downstream v1.4 e-fuels derivative."
         ],
         keyIO: [
-          "Inputs: zonal demand, transmission, staged planning parameters, and model assumptions.",
-          "Outputs: zonal myopic pathway indicators and system metrics.",
+          "Inputs: system-level topology data, transfer limits, regional demand and technology datasets, national policy vectors, and rolling-window controls.",
+          "Outputs: regional flows, transfer-capacity decisions, exported result dictionaries, and multizone pathway indicators across costs, dispatch, capacity, reserves, and emissions.",
           "Model formulation: version-specific reference to be linked.",
           "User manual: version-specific reference to be linked."
         ],
         useIf: [
-          "You need multi-zone representation with staged planning decisions.",
-          "You want to explore pathway sensitivity under spatially detailed transition analysis."
+          "You need multi-zone representation with explicit electricity exchanges and possible transfer-capacity expansion.",
+          "You want staged or rolling-horizon transition analysis that keeps both regional and national policy layers visible."
         ],
         avoidIf: [
-          "You need a simpler non-spatial myopic setup.",
-          "You need direct e-fuels specialization rather than broader zonal transition analysis."
+          "You need a simpler single-system setup without multiregional topology and transfer data requirements.",
+          "You need a more specialized downstream model focused specifically on e-fuels rather than general regional coupling."
         ],
         links: [
           { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Previous model" },
@@ -556,36 +559,36 @@
       },
       "v1-4-efuels": {
         name: "H2RES v1.4 (efuels)",
-        subtitle: "E-fuels model extension.",
-        description: "Model shown as the rightmost node in the v1.x chain, continuing the v1.3 line with an e-fuels focus.",
+        subtitle: "Documentation in preparation for the e-fuels extension.",
+        description: "The detailed description for H2RES v1.4 is currently being prepared. This version is positioned as the e-fuels-oriented continuation of the v1.3 multizonal-myopic line, but the full methodological documentation and version-specific explanatory material are still under development.",
         lineage: "Derived from H2RES v1.3 (Multizonal Myopic)",
-        status: "Specialized v1.4 model",
-        keywords: ["E-fuels", "v1.4", "Specialized model"],
+        status: "Documentation in progress",
+        keywords: ["E-fuels", "v1.4", "Documentation in preparation"],
         whatChanged: [
-          "Extended v1.3 with an e-fuels-oriented model configuration.",
-          "Added specialized model focus in the v1.x family."
+          "The detailed formulation changes for v1.4 are currently being documented.",
+          "This page will be updated once the version-specific methodological notes and supporting files are finalized."
         ],
         useCases: [
-          "Assess e-fuels integration pathways in model scenarios.",
-          "Compare sector-coupled outcomes with non-e-fuels variants."
+          "Use this page as a placeholder reference while the v1.4 documentation is being assembled.",
+          "Return here once the user manual and mathematical formulation for the e-fuels branch are published."
         ],
         compatibility: [
-          "Derived compatibility with v1.3 multizonal myopic model data structure.",
-          "Maintains alignment with the broader v1.x lineage."
+          "Expected to remain aligned with the v1.3 multizonal-myopic lineage.",
+          "Detailed compatibility notes will be added when the technical documentation is completed."
         ],
         keyIO: [
-          "Inputs: e-fuels pathway assumptions and conversion chain parameters.",
-          "Outputs: e-fuels balances, system costs, and integration indicators.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
+          "Inputs: to be documented.",
+          "Outputs: to be documented.",
+          "Model formulation: documentation in preparation.",
+          "User manual: documentation in preparation."
         ],
         useIf: [
-          "You are evaluating electrofuels and conversion-chain strategies.",
-          "You need model logic focused on sector coupling around e-fuels."
+          "You want to track the upcoming documentation for the e-fuels branch.",
+          "You need to know where the v1.x e-fuels extension sits within the overall version tree."
         ],
         avoidIf: [
-          "Your study does not require e-fuels representation.",
-          "You need a generic major-version model architecture."
+          "You need a fully documented version today for immediate methodological use.",
+          "You need version-specific implementation details that have not yet been published."
         ],
         links: [
           { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Previous model" }
@@ -593,36 +596,36 @@
       },
       "v2-0": {
         name: "H2RES v2.0",
-        subtitle: "Next generation model in the diagram.",
-        description: "Model represented below the v1.x chain in the tree. Use this page to expand major updates, assumptions, and model architecture notes for v2.0.",
+        subtitle: "Documentation in preparation for the next-generation model line.",
+        description: "The detailed description for H2RES v2.0 is currently under development. In the version tree, v2.0 appears as the major downstream branch from the v1.x line, but its full documentation, assumptions, and implementation notes are still being prepared.",
         lineage: "Downstream from the v1.x development line",
-        status: "Major version model",
-        keywords: ["v2.0", "Next generation", "Main model"],
+        status: "Documentation in progress",
+        keywords: ["v2.0", "Next generation", "Documentation in preparation"],
         whatChanged: [
-          "Introduced the next major model generation after v1.x.",
-          "Represents a distinct downstream line from the v1.2 version point."
+          "The major-version changes for v2.0 are currently being compiled and documented.",
+          "This page will be expanded once the methodological description and supporting resources are finalized."
         ],
         useCases: [
-          "Build forward-looking studies with major-version assumptions.",
-          "Compare v2.0 architecture against v1.x performance baselines."
+          "Use this page as a reference point for the upcoming next-generation branch.",
+          "Return here when the formal v2.0 documentation package becomes available."
         ],
         compatibility: [
-          "Lineage connection to v1.2 myopic model context.",
-          "Intended as a major-version model with its own roadmap."
+          "Maintains a lineage connection to the v1.x development path.",
+          "Detailed compatibility and migration notes will be added once documentation is completed."
         ],
         keyIO: [
-          "Inputs: next-generation planning assumptions and updated datasets.",
-          "Outputs: major-version system metrics and comparative indicators.",
-          "Model formulation: version-specific reference to be linked.",
-          "User manual: version-specific reference to be linked."
+          "Inputs: to be documented.",
+          "Outputs: to be documented.",
+          "Model formulation: documentation in preparation.",
+          "User manual: documentation in preparation."
         ],
         useIf: [
-          "You need the major-version model for forward-looking studies.",
-          "You are testing upgraded architecture and expanded capabilities."
+          "You want to track the upcoming documentation for the next-generation branch.",
+          "You need to understand where v2.0 sits in the overall H2RES evolution."
         ],
         avoidIf: [
-          "You need strict continuity with early v1.x baseline behavior.",
-          "You are not ready for migration effort from earlier versions."
+          "You need a fully documented model version for immediate use.",
+          "You need implementation details or resources that have not yet been published."
         ],
         links: [
           { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Related upstream model" }
