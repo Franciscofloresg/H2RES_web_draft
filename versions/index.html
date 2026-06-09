@@ -6,19 +6,21 @@
   <title>H2RES Model Versions</title>
   <style>
     :root {
-      --bg: #eef2f7;
+      --bg: #f3f6fb;
       --card: #ffffff;
       --line: #d9e1ed;
       --line-strong: #b5c1d3;
       --text: #0f172a;
       --muted: #475569;
-      --accent: #0f766e;
-      --accent-soft: #ccfbf1;
+      --accent: #0f5ea8;
+      --accent-soft: #dbeafe;
       --core: #dbeafe;
       --special: #dbeafe;
       --next: #dcfce7;
       --root: #ede9fe;
       --shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+      --shadow-strong: 0 28px 60px rgba(15, 23, 42, 0.12);
+      --nav-bg: rgba(255, 255, 255, 0.8);
     }
 
     * {
@@ -30,8 +32,8 @@
       font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1200px 400px at 8% -10%, #d1fae5 0%, transparent 60%),
-        radial-gradient(900px 380px at 92% -16%, #dbeafe 0%, transparent 55%),
+        radial-gradient(1200px 460px at 8% -10%, #dbeafe 0%, transparent 60%),
+        radial-gradient(900px 420px at 92% -16%, #e0f2fe 0%, transparent 55%),
         var(--bg);
     }
 
@@ -41,57 +43,157 @@
       padding: 0 20px;
     }
 
-    .topbar {
+    .page-shell {
+      padding: 110px 0 48px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 18px 0 0;
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-pill {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 20px 0;
+      padding: 12px 14px;
+      border: 1px solid rgba(217, 225, 237, 0.9);
+      border-radius: 999px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
     }
 
-    .topbar-left {
+    .logo {
       display: flex;
       align-items: center;
-      gap: 14px;
+      text-decoration: none;
     }
 
     .logo img {
-      height: 36px;
+      height: 38px;
       width: auto;
       display: block;
     }
 
-    .top-links {
+    .nav {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+      justify-content: center;
     }
 
-    .top-links a {
+    .nav a {
       text-decoration: none;
       color: var(--muted);
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(6px);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      transition: color 0.2s ease;
     }
 
-    .top-links a:hover {
+    .nav a:hover,
+    .nav a.active {
       color: var(--accent);
-      border-color: #99f6e4;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .icon-btn:hover {
+      border-color: #93c5fd;
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(15, 23, 42, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav-panel {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: min(360px, 100%);
+      background: #ffffff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      box-shadow: -20px 0 50px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mobile-nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--accent);
     }
 
     .hero {
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.94));
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 26px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 34px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-strong);
     }
 
     .badge {
@@ -103,7 +205,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .badge::before {
@@ -117,8 +219,8 @@
 
     h1 {
       margin: 0 0 8px;
-      font-size: 34px;
-      line-height: 1.16;
+      font-size: 42px;
+      line-height: 1.08;
       letter-spacing: -0.03em;
     }
 
@@ -127,6 +229,7 @@
       color: var(--muted);
       max-width: 860px;
       font-size: 16px;
+      line-height: 1.65;
     }
 
     .lead-aux {
@@ -134,14 +237,15 @@
       color: var(--muted);
       max-width: 900px;
       font-size: 15px;
+      line-height: 1.65;
     }
 
     .selection-goal {
-      margin-top: 18px;
+      margin-top: 22px;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #ffffff;
-      padding: 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      padding: 18px;
     }
 
     .selection-goal h2 {
@@ -155,6 +259,7 @@
       color: var(--muted);
       font-size: 14px;
       max-width: 860px;
+      line-height: 1.6;
     }
 
     .goal-grid {
@@ -165,16 +270,16 @@
 
     .goal-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 14px;
       background: #f8fafc;
-      padding: 11px 12px;
+      padding: 12px 13px;
       text-decoration: none;
       color: inherit;
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .goal-card:hover {
-      border-color: #5eead4;
+      border-color: #93c5fd;
       transform: translateY(-1px);
     }
 
@@ -194,9 +299,9 @@
     .diagram-card {
       background: #ffffff;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 18px;
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 22px;
       box-shadow: var(--shadow);
     }
 
@@ -211,14 +316,8 @@
 
     .diagram-header h2 {
       margin: 0;
-      font-size: 18px;
+      font-size: 20px;
       letter-spacing: -0.01em;
-    }
-
-    .diagram-header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
     }
 
     .preview-panel {
@@ -238,7 +337,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #0f766e;
+      color: var(--accent);
       font-weight: 700;
       margin-bottom: 3px;
     }
@@ -270,7 +369,7 @@
     }
 
     .preview-link:hover {
-      border-color: #5eead4;
+      border-color: #93c5fd;
       color: var(--accent);
     }
 
@@ -402,7 +501,7 @@
     }
 
     .timeline-item:hover .timeline-content {
-      border-color: #5eead4;
+      border-color: #93c5fd;
     }
 
     .timeline-content strong {
@@ -420,22 +519,22 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 30px;
     }
 
     .version-card {
       text-decoration: none;
       background: #ffffff;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 18px;
+      padding: 16px;
       color: inherit;
       transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .version-card:hover {
-      border-color: #5eead4;
+      border-color: #93c5fd;
       transform: translateY(-2px);
       box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
     }
@@ -456,8 +555,8 @@
     .compare-card {
       background: #ffffff;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 24px;
+      padding: 20px;
       box-shadow: var(--shadow);
       margin-bottom: 28px;
     }
@@ -544,7 +643,7 @@
     }
 
     .compare-diff {
-      background: #e6fffa;
+      background: #eff6ff;
     }
 
     .compare-links {
@@ -566,13 +665,79 @@
     }
 
     .compare-links a:hover {
-      border-color: #5eead4;
+      border-color: #93c5fd;
       color: var(--accent);
+    }
+
+    .footer {
+      padding: 0 0 34px;
+    }
+
+    .footer-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,250,255,0.98));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 28px;
+    }
+
+    .footer-brand p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 420px;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .footer-links-group h4 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+    }
+
+    .footer-links-group a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-links-group a:hover {
+      color: var(--accent);
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 22px 0 18px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     @media (max-width: 980px) {
       h1 {
-        font-size: 28px;
+        font-size: 34px;
       }
 
       .goal-grid {
@@ -582,14 +747,22 @@
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .footer-main,
+      .footer-links-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 900px) {
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
       .desktop-diagram {
         display: none;
       }
@@ -601,11 +774,15 @@
 
     @media (max-width: 620px) {
       h1 {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       .hero {
-        padding: 20px;
+        padding: 24px;
+      }
+
+      .page-shell {
+        padding-top: 98px;
       }
 
       .grid {
@@ -628,235 +805,338 @@
       .goal-grid {
         grid-template-columns: 1fr;
       }
+
+      .nav-pill {
+        padding: 10px 12px;
+      }
+
+      .footer-card {
+        padding: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="topbar">
-      <div class="topbar-left">
+  <header class="header">
+    <div class="header-inner">
+      <div class="nav-pill">
         <a class="logo" href="../index.html#home">
           <img src="../assets/h2res-logo.png" alt="H2RES logo">
         </a>
+
+        <nav class="nav">
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#get-started">Get Started</a>
+          <a href="../index.html#publications">Publications</a>
+          <a href="index.html" class="active">Model Versions</a>
+          <a href="../index.html#tutorials">Tutorials</a>
+          <a href="../index.html#team">Team</a>
+          <a href="../index.html#community">Community</a>
+          <a href="../index.html#documentation">Documentation</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="icon-btn" href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+          <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="top-links">
-        <a href="../index.html#home">Back to Home</a>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel">
+      <div class="mobile-nav-top">
+        <a class="logo" href="../index.html#home">
+          <img src="../assets/h2res-logo.png" alt="H2RES logo">
+        </a>
+        <button class="icon-btn" id="mobileCloseBtn" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#get-started">Get Started</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="index.html">Model Versions</a>
+        <a href="../index.html#tutorials">Tutorials</a>
+        <a href="../index.html#team">Team</a>
+        <a href="../index.html#community">Community</a>
         <a href="../index.html#documentation">Documentation</a>
       </div>
     </div>
+  </nav>
 
-    <section class="hero">
-      <div class="badge">Model Structure</div>
-      <h1>H2RES Model Versions</h1>
-      <p class="lead">
-        Track the evolution of H2RES from foundational releases to distinct model versions for integrated energy system planning and decarbonization analysis.
-      </p>
-      <p class="lead-aux">
-        Each node summarizes version scope, methodological updates, and practical use cases, with direct references to the model formulation and version-specific user manual for transparent and reproducible studies.
-      </p>
-      <div class="selection-goal">
-        <h2>What version should I use, and why?</h2>
-        <p>
-          Use this quick guide to select the right version for your planning objective, then open the model page for detailed assumptions and resources.
+  <main class="page-shell">
+    <div class="container">
+      <section class="hero">
+        <div class="badge">Model Structure</div>
+        <h1>H2RES Model Versions</h1>
+        <p class="lead">
+          Track the evolution of H2RES from foundational releases to distinct model versions for integrated energy system planning and decarbonization analysis.
         </p>
-        <div class="goal-grid">
-          <a class="goal-card" href="version.html?id=v1-0">
-            <strong>Need a baseline reference?</strong>
-            <span>Start with v1.0 to anchor comparisons.</span>
+        <p class="lead-aux">
+          Each node summarizes version scope, methodological updates, and practical use cases, with direct references to the model formulation and version-specific user manual for transparent and reproducible studies.
+        </p>
+        <div class="selection-goal">
+          <h2>What version should I use, and why?</h2>
+          <p>
+            Use this quick guide to select the right version for your planning objective, then open the model page for detailed assumptions and resources.
+          </p>
+          <div class="goal-grid">
+            <a class="goal-card" href="version.html?id=v1-0">
+              <strong>Need a baseline reference?</strong>
+              <span>Start with v1.0 to anchor comparisons.</span>
+            </a>
+            <a class="goal-card" href="version.html?id=v1-2-myopic">
+              <strong>Need myopic planning behavior?</strong>
+              <span>Use v1.2 (Myopic) for staged decision pathways.</span>
+            </a>
+            <a class="goal-card" href="version.html?id=v1-3-multizonal-myopic">
+              <strong>Need multi-zone myopic modeling?</strong>
+              <span>Use v1.3 (Multizonal Myopic) for coupled zonal pathway analysis.</span>
+            </a>
+            <a class="goal-card" href="version.html?id=v1-4-efuels">
+              <strong>Evaluating e-fuels pathways?</strong>
+              <span>Use v1.4 (efuels) for conversion-chain analysis.</span>
+            </a>
+            <a class="goal-card" href="version.html?id=v2-0">
+              <strong>Need major-version capabilities?</strong>
+              <span>Use v2.0 for next-generation architecture studies.</span>
+            </a>
+            <a class="goal-card" href="#compareVersions">
+              <strong>Not sure between two versions?</strong>
+              <span>Use Compare Models to identify key differences.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="diagram-card" aria-label="H2RES model version diagram">
+        <div class="diagram-header">
+          <h2>Version Tree</h2>
+        </div>
+
+        <div class="desktop-diagram">
+          <svg class="diagram" viewBox="0 0 1220 620" role="img" aria-label="H2RES version tree diagram">
+            <defs>
+              <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <polygon points="0 0, 9 3, 0 6" fill="#475569"></polygon>
+              </marker>
+            </defs>
+
+            <rect class="dashed-panel" x="12" y="12" width="1196" height="316"></rect>
+            <text class="diagram-title" x="826" y="66">H2RES Version Tree</text>
+
+            <path class="arrow" d="M500 110 H150 V205"></path>
+            <path class="arrow" d="M250 242 H350"></path>
+            <path class="arrow" d="M560 242 H660"></path>
+            <path class="arrow" d="M870 242 H970"></path>
+            <path class="arrow" d="M610 328 V458"></path>
+
+            <a class="node-link" href="version.html?id=v1-0" data-version="v1-0">
+              <rect class="node-box node-root" x="500" y="68" width="200" height="84"></rect>
+              <text class="node-label" x="600" y="110">H2RES v1.0</text>
+            </a>
+
+            <a class="node-link" href="version.html?id=v1-1" data-version="v1-1">
+              <rect class="node-box node-core" x="50" y="200" width="200" height="84"></rect>
+              <text class="node-label" x="150" y="242">H2RES v1.1</text>
+            </a>
+
+            <a class="node-link" href="version.html?id=v1-2-myopic" data-version="v1-2-myopic">
+              <rect class="node-box node-core" x="350" y="200" width="210" height="84"></rect>
+              <text class="node-label" x="455" y="230">H2RES v1.2</text>
+              <text class="node-label" x="455" y="256">(Myopic)</text>
+            </a>
+
+            <a class="node-link" href="version.html?id=v1-3-multizonal-myopic" data-version="v1-3-multizonal-myopic">
+              <rect class="node-box node-core" x="660" y="200" width="210" height="84"></rect>
+              <text class="node-label" x="765" y="230">H2RES v1.3</text>
+              <text class="node-label" x="765" y="256">(Multizonal Myopic)</text>
+            </a>
+
+            <a class="node-link" href="version.html?id=v1-4-efuels" data-version="v1-4-efuels">
+              <rect class="node-box node-special" x="970" y="200" width="210" height="84"></rect>
+              <text class="node-label" x="1075" y="230">H2RES v1.4</text>
+              <text class="node-label" x="1075" y="256">(efuels)</text>
+            </a>
+
+            <a class="node-link" href="version.html?id=v2-0" data-version="v2-0">
+              <rect class="node-box node-next" x="500" y="458" width="200" height="84"></rect>
+              <text class="node-label" x="600" y="500">H2RES v2.0</text>
+            </a>
+          </svg>
+        </div>
+
+        <div class="preview-panel" aria-live="polite">
+          <div class="preview-text">
+            <small>Hover Preview</small>
+            <strong id="versionPreviewTitle">H2RES v1.0</strong>
+            <span id="versionPreviewText">Baseline model used as the starting reference for downstream comparisons.</span>
+          </div>
+          <a id="versionPreviewLink" class="preview-link" href="version.html?id=v1-0">Open model page</a>
+        </div>
+
+        <div class="mobile-timeline" aria-label="H2RES model version timeline">
+          <a class="timeline-item root" href="version.html?id=v1-0">
+            <div class="timeline-content">
+              <strong>H2RES v1.0</strong>
+              <span>Initial version</span>
+            </div>
           </a>
-          <a class="goal-card" href="version.html?id=v1-2-myopic">
-            <strong>Need myopic planning behavior?</strong>
-            <span>Use v1.2 (Myopic) for staged decision pathways.</span>
+          <a class="timeline-item core" href="version.html?id=v1-1">
+            <div class="timeline-content">
+              <strong>H2RES v1.1</strong>
+              <span>Derived from v1.0</span>
+            </div>
           </a>
-          <a class="goal-card" href="version.html?id=v1-3-multizonal-myopic">
-            <strong>Need multi-zone myopic modeling?</strong>
-            <span>Use v1.3 (Multizonal Myopic) for coupled zonal pathway analysis.</span>
+          <a class="timeline-item core" href="version.html?id=v1-2-myopic">
+            <div class="timeline-content">
+              <strong>H2RES v1.2 (Myopic)</strong>
+              <span>Derived from v1.1</span>
+            </div>
           </a>
-          <a class="goal-card" href="version.html?id=v1-4-efuels">
-            <strong>Evaluating e-fuels pathways?</strong>
-            <span>Use v1.4 (efuels) for conversion-chain analysis.</span>
+          <a class="timeline-item core" href="version.html?id=v1-3-multizonal-myopic">
+            <div class="timeline-content">
+              <strong>H2RES v1.3 (Multizonal Myopic)</strong>
+              <span>Derived from v1.2</span>
+            </div>
           </a>
-          <a class="goal-card" href="version.html?id=v2-0">
-            <strong>Need major-version capabilities?</strong>
-            <span>Use v2.0 for next-generation architecture studies.</span>
+          <a class="timeline-item special" href="version.html?id=v1-4-efuels">
+            <div class="timeline-content">
+              <strong>H2RES v1.4 (efuels)</strong>
+              <span>Derived from v1.3</span>
+            </div>
           </a>
-          <a class="goal-card" href="#compareVersions">
-            <strong>Not sure between two versions?</strong>
-            <span>Use Compare Models to identify key differences.</span>
+          <a class="timeline-item next" href="version.html?id=v2-0">
+            <div class="timeline-content">
+              <strong>H2RES v2.0</strong>
+              <span>Derived from v1.2 (parallel major line)</span>
+            </div>
           </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="diagram-card" aria-label="H2RES model version diagram">
-      <div class="diagram-header">
-        <h2>Version Tree</h2>
-      </div>
+      <section class="grid" aria-label="Model version list">
+        <a class="version-card" href="version.html?id=v1-0">
+          <strong>H2RES v1.0</strong>
+          <span>Baseline integrated optimization model for hourly long-term energy planning and transition pathway analysis.</span>
+        </a>
+        <a class="version-card" href="version.html?id=v1-1">
+          <strong>H2RES v1.1</strong>
+          <span>Version upgrade with explicit unmet-service variables, scarcity penalties, and improved data-processing traceability.</span>
+        </a>
+        <a class="version-card" href="version.html?id=v1-2-myopic">
+          <strong>H2RES v1.2 (Myopic)</strong>
+          <span>Version focused on rolling-horizon planning behavior and phased transition analysis.</span>
+        </a>
+        <a class="version-card" href="version.html?id=v1-3-multizonal-myopic">
+          <strong>H2RES v1.3 (Multizonal Myopic)</strong>
+          <span>Advanced v1.x model combining multizonal structure, transfer decisions, and staged pathway analysis.</span>
+        </a>
+        <a class="version-card" href="version.html?id=v1-4-efuels">
+          <strong>H2RES v1.4 (efuels)</strong>
+          <span>Documentation in preparation for the downstream e-fuels branch.</span>
+        </a>
+        <a class="version-card" href="version.html?id=v2-0">
+          <strong>H2RES v2.0</strong>
+          <span>Documentation in preparation for the next-generation major version.</span>
+        </a>
+      </section>
 
-      <div class="desktop-diagram">
-        <svg class="diagram" viewBox="0 0 1220 620" role="img" aria-label="H2RES version tree diagram">
-          <defs>
-            <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-              <polygon points="0 0, 9 3, 0 6" fill="#475569"></polygon>
-            </marker>
-          </defs>
-
-          <rect class="dashed-panel" x="12" y="12" width="1196" height="316"></rect>
-          <text class="diagram-title" x="826" y="66">H2RES Version Tree</text>
-
-          <path class="arrow" d="M500 110 H150 V205"></path>
-          <path class="arrow" d="M250 242 H350"></path>
-          <path class="arrow" d="M560 242 H660"></path>
-          <path class="arrow" d="M870 242 H970"></path>
-          <path class="arrow" d="M610 328 V458"></path>
-
-          <a class="node-link" href="version.html?id=v1-0" data-version="v1-0">
-            <rect class="node-box node-root" x="500" y="68" width="200" height="84"></rect>
-            <text class="node-label" x="600" y="110">H2RES v1.0</text>
-          </a>
-
-          <a class="node-link" href="version.html?id=v1-1" data-version="v1-1">
-            <rect class="node-box node-core" x="50" y="200" width="200" height="84"></rect>
-            <text class="node-label" x="150" y="242">H2RES v1.1</text>
-          </a>
-
-          <a class="node-link" href="version.html?id=v1-2-myopic" data-version="v1-2-myopic">
-            <rect class="node-box node-core" x="350" y="200" width="210" height="84"></rect>
-            <text class="node-label" x="455" y="230">H2RES v1.2</text>
-            <text class="node-label" x="455" y="256">(Myopic)</text>
-          </a>
-
-          <a class="node-link" href="version.html?id=v1-3-multizonal-myopic" data-version="v1-3-multizonal-myopic">
-            <rect class="node-box node-core" x="660" y="200" width="210" height="84"></rect>
-            <text class="node-label" x="765" y="230">H2RES v1.3</text>
-            <text class="node-label" x="765" y="256">(Multizonal Myopic)</text>
-          </a>
-
-          <a class="node-link" href="version.html?id=v1-4-efuels" data-version="v1-4-efuels">
-            <rect class="node-box node-special" x="970" y="200" width="210" height="84"></rect>
-            <text class="node-label" x="1075" y="230">H2RES v1.4</text>
-            <text class="node-label" x="1075" y="256">(efuels)</text>
-          </a>
-
-          <a class="node-link" href="version.html?id=v2-0" data-version="v2-0">
-            <rect class="node-box node-next" x="500" y="458" width="200" height="84"></rect>
-            <text class="node-label" x="600" y="500">H2RES v2.0</text>
-          </a>
-        </svg>
-      </div>
-
-      <div class="preview-panel" aria-live="polite">
-        <div class="preview-text">
-          <small>Hover Preview</small>
-          <strong id="versionPreviewTitle">H2RES v1.0</strong>
-          <span id="versionPreviewText">Baseline model used as the starting reference for downstream comparisons.</span>
+      <section id="compareVersions" class="compare-card" aria-label="Compare models">
+        <div class="compare-header">
+          <h2>Compare Models</h2>
+          <p>Select two model versions to review key methodological and application differences.</p>
         </div>
-        <a id="versionPreviewLink" class="preview-link" href="version.html?id=v1-0">Open model page</a>
-      </div>
 
-      <div class="mobile-timeline" aria-label="H2RES model version timeline">
-        <a class="timeline-item root" href="version.html?id=v1-0">
-          <div class="timeline-content">
-            <strong>H2RES v1.0</strong>
-            <span>Initial version</span>
+        <div class="compare-controls">
+          <div class="compare-control">
+            <label for="compareVersionA">Model A</label>
+            <select id="compareVersionA"></select>
           </div>
-        </a>
-        <a class="timeline-item core" href="version.html?id=v1-1">
-          <div class="timeline-content">
-            <strong>H2RES v1.1</strong>
-            <span>Derived from v1.0</span>
+          <div class="compare-control">
+            <label for="compareVersionB">Model B</label>
+            <select id="compareVersionB"></select>
           </div>
-        </a>
-        <a class="timeline-item core" href="version.html?id=v1-2-myopic">
-          <div class="timeline-content">
-            <strong>H2RES v1.2 (Myopic)</strong>
-            <span>Derived from v1.1</span>
-          </div>
-        </a>
-        <a class="timeline-item core" href="version.html?id=v1-3-multizonal-myopic">
-          <div class="timeline-content">
-            <strong>H2RES v1.3 (Multizonal Myopic)</strong>
-            <span>Derived from v1.2</span>
-          </div>
-        </a>
-        <a class="timeline-item special" href="version.html?id=v1-4-efuels">
-          <div class="timeline-content">
-            <strong>H2RES v1.4 (efuels)</strong>
-            <span>Derived from v1.3</span>
-          </div>
-        </a>
-        <a class="timeline-item next" href="version.html?id=v2-0">
-          <div class="timeline-content">
-            <strong>H2RES v2.0</strong>
-            <span>Derived from v1.2 (parallel major line)</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="grid" aria-label="Model version list">
-      <a class="version-card" href="version.html?id=v1-0">
-        <strong>H2RES v1.0</strong>
-        <span>Baseline integrated optimization model for hourly long-term energy planning and transition pathway analysis.</span>
-      </a>
-      <a class="version-card" href="version.html?id=v1-1">
-        <strong>H2RES v1.1</strong>
-        <span>Early development version that transitions the model toward expanded v1.x capabilities.</span>
-      </a>
-      <a class="version-card" href="version.html?id=v1-2-myopic">
-        <strong>H2RES v1.2 (Myopic)</strong>
-        <span>Version focused on myopic planning behavior and staged transition analysis.</span>
-      </a>
-      <a class="version-card" href="version.html?id=v1-3-multizonal-myopic">
-        <strong>H2RES v1.3 (Multizonal Myopic)</strong>
-        <span>Advanced v1.x model combining multizonal structure with myopic pathway analysis.</span>
-      </a>
-      <a class="version-card" href="version.html?id=v1-4-efuels">
-        <strong>H2RES v1.4 (efuels)</strong>
-        <span>Model version for e-fuels pathway exploration and cross-sector integration studies.</span>
-      </a>
-      <a class="version-card" href="version.html?id=v2-0">
-        <strong>H2RES v2.0</strong>
-        <span>Major model version for methodological and structural upgrades.</span>
-      </a>
-    </section>
-
-    <section id="compareVersions" class="compare-card" aria-label="Compare models">
-      <div class="compare-header">
-        <h2>Compare Models</h2>
-        <p>Select two model versions to review key methodological and application differences.</p>
-      </div>
-
-      <div class="compare-controls">
-        <div class="compare-control">
-          <label for="compareVersionA">Model A</label>
-          <select id="compareVersionA"></select>
         </div>
-        <div class="compare-control">
-          <label for="compareVersionB">Model B</label>
-          <select id="compareVersionB"></select>
+
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th id="compareHeadA">Model A</th>
+                <th id="compareHeadB">Model B</th>
+              </tr>
+            </thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+        </div>
+
+        <div class="compare-links">
+          <a id="compareLinkA" href="version.html?id=v1-2-myopic">Open Model A</a>
+          <a id="compareLinkB" href="version.html?id=v2-0">Open Model B</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a class="logo" href="../index.html#home">
+              <img src="../assets/h2res-logo.png" alt="H2RES logo">
+            </a>
+            <p>Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.</p>
+          </div>
+
+          <div class="footer-links-grid">
+            <div class="footer-links-group">
+              <h4>Quick Links</h4>
+              <a href="../index.html#about">About H2RES</a>
+              <a href="../index.html#publications">Publications</a>
+              <a href="index.html">Model Versions</a>
+              <a href="../index.html#team">Team</a>
+            </div>
+            <div class="footer-links-group">
+              <h4>Resources</h4>
+              <a href="../index.html#get-started">Get Started</a>
+              <a href="../index.html#documentation">Documentation</a>
+              <a href="../index.html#tutorials">Tutorials</a>
+              <a href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+            </div>
+            <div class="footer-links-group">
+              <h4>Community</h4>
+              <a href="../index.html#community">How to Cite</a>
+              <a href="https://www.youtube.com/@H2REScommunity" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
+              <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer">Summer School</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <div>Ivana Lučića 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.</div>
+          <div>© 2026 H2RES Team.</div>
         </div>
       </div>
-
-      <div class="compare-table-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th id="compareHeadA">Model A</th>
-              <th id="compareHeadB">Model B</th>
-            </tr>
-          </thead>
-          <tbody id="compareBody"></tbody>
-        </table>
-      </div>
-
-      <div class="compare-links">
-        <a id="compareLinkA" href="version.html?id=v1-2-myopic">Open Model A</a>
-        <a id="compareLinkB" href="version.html?id=v2-0">Open Model B</a>
-      </div>
-    </section>
-  </div>
+    </div>
+  </footer>
 
   <script>
     const VERSION_DATA = {
@@ -1012,6 +1292,21 @@
 
     setupDiagramPreview();
     setupCompare();
+
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileCloseBtn = document.getElementById("mobileCloseBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    if (mobileMenuBtn && mobileCloseBtn && mobileNav) {
+      mobileMenuBtn.addEventListener("click", () => mobileNav.classList.add("open"));
+      mobileCloseBtn.addEventListener("click", () => mobileNav.classList.remove("open"));
+      mobileNav.addEventListener("click", (event) => {
+        if (event.target === mobileNav) mobileNav.classList.remove("open");
+      });
+      document.querySelectorAll(".mobile-nav-links a").forEach((link) => {
+        link.addEventListener("click", () => mobileNav.classList.remove("open"));
+      });
+    }
   </script>
 </body>
 </html>
