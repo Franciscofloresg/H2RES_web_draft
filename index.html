@@ -157,6 +157,11 @@
       color: var(--text-primary);
     }
 
+    .nav a.active {
+      color: var(--accent-teal);
+      font-weight: 600;
+    }
+
     .nav a.has-arrow::after {
       content: ' ↗';
       font-size: 12px;
@@ -2125,6 +2130,11 @@
       color: var(--accent-teal);
     }
 
+    .mobile-nav-links a.active {
+      color: var(--accent-teal);
+      font-weight: 600;
+    }
+
     /* Mobile Nav Footer - Theme Toggle Bottom Left */
     .mobile-nav-footer {
       position: absolute;
@@ -3979,6 +3989,39 @@
         }
       });
     });
+
+    // Active section highlight for desktop and mobile navigation
+    const navSectionLinks = Array.from(document.querySelectorAll('.nav a[href^="#"], .mobile-nav-links a[href^="#"]'));
+    const navSections = navSectionLinks
+      .map(link => {
+        const href = link.getAttribute('href');
+        return href && href !== '#' ? document.querySelector(href) : null;
+      })
+      .filter(Boolean);
+
+    function setActiveSection(sectionId) {
+      navSectionLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        link.classList.toggle('active', isActive);
+      });
+    }
+
+    function updateActiveSection() {
+      const offset = 160;
+      let activeSection = 'home';
+
+      navSections.forEach(section => {
+        if (window.scrollY + offset >= section.offsetTop) {
+          activeSection = section.id;
+        }
+      });
+
+      setActiveSection(activeSection);
+    }
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('hashchange', updateActiveSection);
 
     // Header scroll effect
     const header = document.querySelector('.header');
