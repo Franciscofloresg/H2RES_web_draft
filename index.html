@@ -194,14 +194,19 @@
       transform: scaleX(1);
     }
 
-    .nav a.has-arrow::after {
-      content: ' ↗';
-      position: static;
-      transform: none;
-      height: auto;
-      background: none;
-      opacity: 1;
+    .nav a.has-arrow {
+      padding-right: 16px;
+    }
+
+    .nav a.has-arrow::before {
+      content: '↗';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-52%);
       font-size: 12px;
+      line-height: 1;
+      opacity: 0.85;
     }
 
     .header-actions {
@@ -2704,13 +2709,13 @@
 
         <nav class="nav">
           <a href="#about">About</a>
-          <a href="#get-started">Get Started</a>
-          <a href="versions/index.html">Model Versions</a>
-          <a href="#documentation" class="has-arrow">Documentation</a>
           <a href="#tutorials">Tutorials</a>
           <a href="#publications">Publications</a>
           <a href="#team">Team</a>
           <a href="#community">Community</a>
+          <a href="#get-started">Get Started</a>
+          <a href="#documentation" class="has-arrow">Documentation</a>
+          <a href="versions/index.html">Model Versions</a>
         </nav>
 
         <div class="header-actions">
@@ -2767,13 +2772,13 @@
     <div class="mobile-nav-content">
       <div class="mobile-nav-links">
         <a href="#about">About</a>
-        <a href="#get-started">Get Started</a>
-        <a href="versions/index.html">Model Versions</a>
-        <a href="#documentation">Documentation ↗</a>
         <a href="#tutorials">Tutorials</a>
         <a href="#publications">Publications</a>
         <a href="#team">Team</a>
         <a href="#community">Community</a>
+        <a href="#get-started">Get Started</a>
+        <a href="#documentation">Documentation ↗</a>
+        <a href="versions/index.html">Model Versions</a>
       </div>
     </div>
 
@@ -4604,17 +4609,45 @@
 
     activateClickableTeamMembers();
 
+    function headerOffset() {
+      const headerElement = document.querySelector('.header');
+      return headerElement ? headerElement.offsetHeight + 20 : 100;
+    }
+
+    function scrollToSectionById(sectionId, updateHash = true) {
+      if (!sectionId) {
+        return;
+      }
+
+      const target = document.getElementById(sectionId);
+      if (!target) {
+        return;
+      }
+
+      const top = Math.max(0, target.offsetTop - headerOffset());
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      if (updateHash) {
+        history.pushState(null, '', `#${sectionId}`);
+      }
+    }
+
     // Smooth scroll for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        if (href && href !== '#') {
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+        if (!href || href === '#') {
+          return;
         }
+
+        const sectionId = href.slice(1);
+        const target = document.getElementById(sectionId);
+        if (!target) {
+          return;
+        }
+
+        e.preventDefault();
+        scrollToSectionById(sectionId);
       });
     });
 
@@ -4623,9 +4656,11 @@
     const navSections = navSectionLinks
       .map(link => {
         const href = link.getAttribute('href');
-        return href && href !== '#' ? document.querySelector(href) : null;
+        const section = href && href !== '#' ? document.querySelector(href) : null;
+        return section ? { id: section.id, element: section } : null;
       })
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.element.offsetTop - b.element.offsetTop);
 
     function setActiveSection(sectionId) {
       navSectionLinks.forEach(link => {
@@ -4635,11 +4670,11 @@
     }
 
     function updateActiveSection() {
-      const offset = 160;
+      const offset = headerOffset();
       let activeSection = 'home';
 
       navSections.forEach(section => {
-        if (window.scrollY + offset >= section.offsetTop) {
+        if (window.scrollY + offset >= section.element.offsetTop) {
           activeSection = section.id;
         }
       });
@@ -4650,6 +4685,18 @@
     updateActiveSection();
     window.addEventListener('scroll', updateActiveSection, { passive: true });
     window.addEventListener('hashchange', updateActiveSection);
+    window.addEventListener('load', () => {
+      if (window.location.hash) {
+        const sectionId = window.location.hash.slice(1);
+        const target = document.getElementById(sectionId);
+        if (target) {
+          window.setTimeout(() => {
+            scrollToSectionById(sectionId, false);
+            updateActiveSection();
+          }, 0);
+        }
+      }
+    });
 
     // Header scroll effect
     const header = document.querySelector('.header');
