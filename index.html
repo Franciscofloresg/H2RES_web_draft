@@ -442,6 +442,89 @@
       transition: background 0.3s ease;
     }
 
+    .hero-ticker {
+      position: relative;
+      margin-bottom: 24px;
+      border: 1px solid rgba(21, 147, 137, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-ticker::before,
+    .hero-ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-ticker::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .hero-ticker::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .hero-ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 20s linear infinite;
+    }
+
+    .hero-ticker:hover .hero-ticker-track {
+      animation-play-state: paused;
+    }
+
+    .hero-ticker-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      flex-shrink: 0;
+    }
+
+    .hero-ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 4px;
+      white-space: nowrap;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .hero-ticker-item strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-ticker-item:hover strong {
+      color: var(--accent-teal);
+    }
+
+    .hero-ticker-sep {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(21, 147, 137, 0.4);
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -2586,6 +2669,24 @@
     }
 
     @media (max-width: 480px) {
+      .hero-ticker {
+        margin-bottom: 18px;
+        border-radius: 22px;
+      }
+
+      .hero-ticker::before,
+      .hero-ticker::after {
+        width: 28px;
+      }
+
+      .hero-ticker-group {
+        padding: 10px 0;
+      }
+
+      .hero-ticker-item {
+        font-size: 12px;
+      }
+
       .hero-buttons {
         flex-direction: column;
         align-items: stretch;
@@ -2714,6 +2815,13 @@
   <!-- ========== 1. HOME / HERO ========== -->
   <section id="home" class="hero">
     <div class="container">
+      <div class="hero-ticker" aria-label="H2RES updates">
+        <div class="hero-ticker-track">
+          <div class="hero-ticker-group" id="heroTickerPrimary" aria-hidden="false"></div>
+          <div class="hero-ticker-group" id="heroTickerSecondary" aria-hidden="true"></div>
+        </div>
+      </div>
+
       <div class="hero-grid">
         <!-- Left side: Main content -->
         <div class="hero-content">
@@ -3685,10 +3793,26 @@
 }`;
     const H2RES_ACKNOWLEDGEMENT_TEXT = 'This work uses the open-source H2RES modeling framework. Please cite Feijoo, F., Pfeifer, A., Herc, L., Groppi, D., and Duic, N. (2022), A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies, Renewable and Sustainable Energy Reviews, 167, 112781. https://doi.org/10.1016/j.rser.2022.112781';
     const H2RES_WEBSITE_CITATION_TEXT = 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://franciscofloresg.github.io/H2RES_web_draft/';
+    const HERO_TICKER_FIXED_ITEMS = [
+      {
+        label: 'Summer School 2026',
+        title: 'Energy Planning of 100% Renewable Energy Systems',
+        url: 'https://www.sdewes.org/summerschool/2026/'
+      }
+    ];
+    const HERO_TICKER_FEATURED_KEYS = [
+      'BELJAN2026125674',
+      'CALISE2026100234',
+      'VILLANI2026117662',
+      'HERC2025101067',
+      'PASTORE2025136384'
+    ];
     const pubGrid = document.getElementById('pubGrid');
     const pubTabs = document.querySelectorAll('.pub-tab');
     const pubYearFilter = document.getElementById('pubYearFilter');
     const pubShowMoreButton = document.getElementById('pubShowMore');
+    const heroTickerPrimary = document.getElementById('heroTickerPrimary');
+    const heroTickerSecondary = document.getElementById('heroTickerSecondary');
     const PUB_PAGE_SIZE = 4;
     let activePubFilter = 'articles';
     let activePubYear = 'all';
@@ -3930,6 +4054,62 @@
         return `${shortNames[0]} et al.`;
       }
       return shortNames.join(', ');
+    }
+
+    function resolveBibLink(fields) {
+      const doi = normalizeBibValue(fields.doi || fields.DOI || '');
+      const rawUrl = normalizeBibValue(fields.url || fields.URL || '');
+      if (rawUrl) {
+        return rawUrl;
+      }
+      if (doi) {
+        return doi.startsWith('http') ? doi : `https://doi.org/${doi}`;
+      }
+      return '#publications';
+    }
+
+    function shortenTickerTitle(title) {
+      const clean = normalizeBibValue(title);
+      if (clean.length <= 96) {
+        return clean;
+      }
+      return `${clean.slice(0, 93).trimEnd()}...`;
+    }
+
+    function buildHeroTickerMarkup(items) {
+      return items.map(item => `
+        <a class="hero-ticker-item" href="${escapeHtml(item.url)}" ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+          <strong>${escapeHtml(item.label)}:</strong> ${escapeHtml(item.title)}
+        </a>
+        <span class="hero-ticker-sep"></span>
+      `).join('');
+    }
+
+    function renderHeroTicker(entries) {
+      if (!heroTickerPrimary || !heroTickerSecondary) {
+        return;
+      }
+
+      const fixedItems = HERO_TICKER_FIXED_ITEMS.map(item => ({
+        ...item,
+        external: true
+      }));
+
+      const entryMap = new Map(entries.map(entry => [entry.citationKey, entry]));
+      const publicationItems = HERO_TICKER_FEATURED_KEYS
+        .map(key => entryMap.get(key))
+        .filter(Boolean)
+        .map(entry => ({
+          label: `${entry.fields.year || 'Article'} Article`,
+          title: shortenTickerTitle(entry.fields.title || entry.citationKey),
+          url: resolveBibLink(entry.fields),
+          external: true
+        }));
+
+      const tickerItems = [...fixedItems, ...publicationItems];
+      const markup = buildHeroTickerMarkup(tickerItems);
+      heroTickerPrimary.innerHTML = markup;
+      heroTickerSecondary.innerHTML = markup;
     }
 
     function resolveCategory(entryType, fields) {
@@ -4404,9 +4584,11 @@
             return a.citationKey.localeCompare(b.citationKey);
           });
 
+        renderHeroTicker(publicationEntries);
         updatePublicationYearOptions(true);
         renderPublicationGrid();
       } catch (error) {
+        renderHeroTicker([]);
         const protocolHint = window.location.protocol === 'file:'
           ? ' Open this page through a local web server to allow loading external files.'
           : '';
