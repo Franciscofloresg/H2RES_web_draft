@@ -1,371 +1,119 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>H2RES Project</title>
-  <style>
-    :root[data-theme="dark"] {
-      --bg-dark: #0a0a0f;
-      --bg-darker: #050508;
-      --bg-card: #111118;
-      --bg-card-hover: #1a1a24;
-      --text-primary: #ffffff;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      --accent-teal: #14b8a6;
-      --accent-green: #10b981;
-      --border-color: #1f2937;
-      --border-hover: #374151;
-    }
-
-    :root[data-theme="light"] {
-      --bg-dark: #ffffff;
-      --bg-darker: #f9fafb;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f3f4f6;
-      --text-primary: #111827;
-      --text-secondary: #4b5563;
-      --text-muted: #6b7280;
-      --accent-teal: #0d9488;
-      --accent-green: #059669;
-      --border-color: #e5e7eb;
-      --border-hover: #d1d5db;
-    }
-
-    :root {
-      --max-width: 1040px;
-      --radius: 12px;
-      --radius-lg: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg-darker);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .topbar {
-      padding: 22px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .site-logo {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .site-logo-image {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
-
-    .back-link {
-      color: var(--accent-teal);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .theme-btn {
-      border: 1px solid var(--border-color);
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .theme-btn:hover {
-      color: var(--text-primary);
-      border-color: var(--border-hover);
-    }
-
-    .theme-btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.45;
-      color: var(--text-muted);
-    }
-
-    .theme-btn-icon {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .theme-btn-icon svg {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .theme-btn-icon .sun-icon {
-      opacity: 0;
-      transform: rotate(-90deg);
-    }
-
-    .theme-btn-icon .moon-icon {
-      opacity: 1;
-      transform: rotate(0deg);
-    }
-
-    [data-theme="light"] .theme-btn-icon .sun-icon {
-      opacity: 1;
-      transform: rotate(0deg);
-    }
-
-    [data-theme="light"] .theme-btn-icon .moon-icon {
-      opacity: 0;
-      transform: rotate(90deg);
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 24px;
-    }
-
-    .project-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(20, 184, 166, 0.12);
-      color: var(--accent-teal);
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .project-title {
-      font-size: 30px;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .project-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .project-meta-item {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 8px;
-      text-align: left;
-      width: 100%;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .project-meta-label {
-      min-width: 88px;
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    .project-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .project-links a,
-    .project-links button {
-      border: none;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-      text-decoration: none;
-      color: var(--accent-teal);
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .project-links a:hover,
-    .project-links button:hover {
-      text-decoration: underline;
-    }
-
-    .section-title {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .section-block + .section-block {
-      margin-top: 18px;
-    }
-
-    .section-text {
-      color: var(--text-secondary);
-      font-size: 15px;
-    }
-
-    .keywords {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .keyword-chip {
-      border: 1px solid var(--border-color);
-      background: var(--bg-card-hover);
-      color: var(--text-secondary);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .funding-block {
-      margin-top: 20px;
-    }
-
-    .funding-card {
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      background: #ffffff;
-      padding: 14px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .funding-logo {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-      background: #ffffff;
-    }
-
-    .funding-logo-anid {
-      width: 64%;
-      margin: 0 auto;
-    }
-
-    .funding-kicker {
-      font-size: 12px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--accent-teal);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .funding-text {
-      color: #374151;
-      font-size: 14px;
-    }
-
-    .status-box {
-      border: 1px dashed var(--border-color);
-      border-radius: var(--radius);
-      padding: 14px;
-      color: var(--text-secondary);
-      background: var(--bg-card-hover);
-      font-size: 14px;
-    }
-
-    @media (max-width: 760px) {
-      .project-title {
-        font-size: 24px;
-      }
-
-      .funding-card {
-        grid-template-columns: 1fr;
-      }
-
-      .funding-logo {
-        max-width: 260px;
-      }
-
-      .funding-logo-anid {
-        max-width: 160px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link rel="stylesheet" href="../assets/css/project-detail.css">
 </head>
-<body>
-  <div class="container">
-    <div class="topbar">
-      <div class="topbar-left">
+<body class="h2res-shell project-detail-page">
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-nav-pill">
         <a class="site-logo" href="../index.html#home" aria-label="H2RES Home">
-          <img src="../assets/h2res-logo.png" alt="H2RES" class="site-logo-image">
+          <img src="../assets/h2res-logo.png" alt="H2RES logo">
         </a>
-        <a class="back-link" href="../index.html#publications">&larr; Back to Publications</a>
+        <nav class="site-nav">
+          <a href="../index.html#start-here">Start Here</a>
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#tutorials">Tutorials</a>
+          <a href="../index.html#publications" class="active">Publications</a>
+          <a href="../index.html#team">Team</a>
+          <a href="../index.html#community">Community</a>
+          <a href="../model/index.html">Model</a>
+        </nav>
+        <div class="site-header-actions">
+          <a class="icon-btn" href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
+            </svg>
+          </a>
+          <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
-      <button class="theme-btn" id="themeToggleBtn" type="button" disabled title="Theme toggle temporarily disabled" aria-label="Theme toggle disabled">
-        <span class="theme-btn-icon" aria-hidden="true">
-          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </span>
-      </button>
     </div>
+  </header>
 
-    <section class="project-card" id="projectRoot">
-      <div class="status-box">Loading project from <code>h2res_research_outputs.bib</code>...</div>
-    </section>
-  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-panel">
+      <div class="mobile-nav-top">
+        <a class="site-logo" href="../index.html#home" aria-label="H2RES Home">
+          <img src="../assets/h2res-logo.png" alt="H2RES logo">
+        </a>
+        <button class="icon-btn" id="mobileCloseBtn" aria-label="Close menu" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="../index.html#start-here">Start Here</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#tutorials">Tutorials</a>
+        <a href="../index.html#publications" class="active">Publications</a>
+        <a href="../index.html#team">Team</a>
+        <a href="../index.html#community">Community</a>
+        <a href="../model/index.html">Model</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <div class="container">
+      <div class="crumb"><a href="../index.html#publications">&larr; Back to Publications</a></div>
+      <section class="project-card" id="projectRoot">
+        <div class="status-box">Loading project from <code>h2res_research_outputs.bib</code>...</div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer-card">
+        <div class="site-footer-main">
+          <div class="site-footer-brand">
+            <a class="site-logo" href="../index.html#home"><img src="../assets/h2res-logo.png" alt="H2RES logo"></a>
+            <p>Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.</p>
+          </div>
+          <div class="site-footer-links-grid">
+            <div class="site-footer-links-group">
+              <h4>Quick Links</h4>
+              <a href="../index.html#about">About H2RES</a>
+              <a href="../index.html#publications">Publications</a>
+              <a href="../model/index.html">Model</a>
+              <a href="../index.html#team">Team</a>
+            </div>
+            <div class="site-footer-links-group">
+              <h4>Resources</h4>
+              <a href="../index.html#start-here">Start Here</a>
+              <a href="../model/index.html#model-resources">Model Resources</a>
+              <a href="../index.html#tutorials">Tutorials</a>
+              <a href="https://github.com/H2RES-model" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+            </div>
+            <div class="site-footer-links-group">
+              <h4>Community</h4>
+              <a href="../index.html#community">How to Cite</a>
+              <a href="https://www.youtube.com/@H2REScommunity" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
+              <a href="https://www.sdewes.org/summerschool/2026/" target="_blank" rel="noopener noreferrer">Summer School</a>
+            </div>
+          </div>
+        </div>
+        <div class="site-footer-divider"></div>
+        <div class="site-footer-bottom">
+          <div>Ivana Lucica 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.</div>
+          <div>&copy; 2026 H2RES Team.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     const BIB_SOURCE = '../h2res_research_outputs.bib';
@@ -778,32 +526,8 @@
         root.innerHTML = `<div class="status-box">Could not load <code>${escapeHtml(BIB_SOURCE)}</code>.${protocolHint}</div>`;
       }
     }
-
-    function setupTheme() {
-      const html = document.documentElement;
-      const THEME_TOGGLE_ENABLED = false;
-      html.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-
-      const button = document.getElementById('themeToggleBtn');
-      if (!button) {
-        return;
-      }
-      button.disabled = !THEME_TOGGLE_ENABLED;
-      if (!THEME_TOGGLE_ENABLED) {
-        return;
-      }
-
-      button.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      });
-    }
-
-    setupTheme();
     bootstrap();
   </script>
+  <script src="../assets/js/site-shell.js"></script>
 </body>
 </html>

@@ -1,0 +1,191 @@
+.project-detail-page .page-shell {
+  padding-bottom: 56px;
+}
+
+.project-detail-page .crumb {
+  margin-bottom: 20px;
+}
+
+.project-detail-page .crumb a:hover {
+  color: var(--accent);
+}
+
+.project-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.94));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(21, 147, 137, 0.12);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.project-title {
+  margin: 0 0 12px;
+  font-size: 42px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.project-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.project-meta-label {
+  min-width: 88px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.project-links a,
+.project-links button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.project-links a:hover,
+.project-links button:hover {
+  text-decoration: underline;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.section-block + .section-block {
+  margin-top: 18px;
+}
+
+.section-text {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.keywords {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.keyword-chip {
+  border: 1px solid var(--line);
+  background: #f4f8fc;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.funding-block {
+  margin-top: 20px;
+}
+
+.funding-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.funding-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.funding-logo-anid {
+  width: 64%;
+  margin: 0 auto;
+}
+
+.funding-kicker {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.funding-text {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.status-box {
+  border: 1px dashed var(--line-strong);
+  border-radius: 16px;
+  padding: 14px;
+  color: var(--muted);
+  background: #f8fbff;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .project-card {
+    padding: 22px;
+  }
+
+  .project-title {
+    font-size: 28px;
+  }
+
+  .funding-card {
+    grid-template-columns: 1fr;
+  }
+
+  .funding-logo {
+    max-width: 260px;
+  }
+
+  .funding-logo-anid {
+    max-width: 160px;
+  }
+}
