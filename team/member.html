@@ -1016,7 +1016,8 @@
         photo: "../assets/team/francesco-calise.jpg",
         bio: "Prof. Francesco Calise is a Full Professor at the Department of Industrial Engineering, University of Naples Federico II. His work focuses on energy systems, energy efficiency, renewable energy integration, and sustainable energy transition analysis.",
         topics: ["Energy systems", "Energy efficiency", "Renewable energy integration", "Sustainable energy transition"],
-        aliases: ["francesco calise", "calise"]
+        aliases: ["francesco calise", "calise"],
+        hidden: true
       },
       "lorenzo-pastore": {
         name: "Lorenzo Pastore",
@@ -1725,7 +1726,7 @@
       const id = params.get("id");
       const person = PEOPLE[id];
 
-      if (!person) {
+      if (!person || person.hidden) {
         document.getElementById("memberName").textContent = "Member not found";
         document.getElementById("memberRole").textContent = "";
         document.getElementById("memberOrg").textContent = "";
