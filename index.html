@@ -880,6 +880,8 @@
     }
 
     .orientation-card {
+      display: flex;
+      flex-direction: column;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
@@ -923,6 +925,10 @@
       display: grid;
       gap: 9px;
       margin-bottom: 18px;
+    }
+
+    .orientation-card .docs-link {
+      margin-top: auto;
     }
 
     .orientation-list li {
@@ -1321,6 +1327,8 @@
     }
 
     .docs-card {
+      display: flex;
+      flex-direction: column;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
@@ -1357,6 +1365,7 @@
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 16px;
+      flex: 1 1 auto;
     }
 
     .docs-link {
@@ -2198,7 +2207,7 @@
     }
 
     .footer-logo-image {
-      height: 40px;
+      height: 130px;
       width: auto;
       display: block;
     }
@@ -2853,8 +2862,8 @@
     <div class="container">
       <div class="section-header">
         <div class="section-badge">Start Here</div>
-        <h2 class="section-title">Choose Your Entry Path into H2RES</h2>
-        <p class="section-subtitle">The platform is easier to use once the user separates three needs: first setup, version selection, and general model orientation.</p>
+        <h2 class="section-title">Choose Your Starting Point in H2RES</h2>
+        <p class="section-subtitle">A clearer first experience begins by identifying what you need most: to set up the model, to select the right version for your study, or to understand the overall structure and resources of the framework.</p>
       </div>
       <div class="section-divider"></div>
 
@@ -3282,11 +3291,11 @@
   <!-- ========== 7. COMMUNITY ========== -->
   <section id="community" class="section community-section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Community</div>
-        <h2 class="section-title">Cite, Learn, and Connect</h2>
-        <p class="section-subtitle">This section gathers citation material, outreach activities, and community-facing opportunities once the model pathway and documentation route are already clear.</p>
-      </div>
+        <div class="section-header">
+          <div class="section-badge">Community</div>
+          <h2 class="section-title">Academic and Community Engagement</h2>
+        <p class="section-subtitle">This section brings together the broader academic and community context of H2RES, including citation guidance, learning opportunities, collaborative activities, and ways to stay connected with ongoing developments around the model.</p>
+        </div>
       <div class="section-divider"></div>
 
       <div class="community-grid">

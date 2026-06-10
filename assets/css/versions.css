@@ -2,7 +2,7 @@
   margin-top: 22px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
   padding: 18px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .version-index .goal-card:hover {
-  border-color: #99f6e4;
+  border-color: rgba(21, 147, 137, 0.26);
   transform: translateY(-1px);
 }
 
@@ -131,7 +131,7 @@
 }
 
 .version-index .preview-link:hover {
-  border-color: #99f6e4;
+  border-color: rgba(21, 147, 137, 0.26);
   color: var(--accent);
 }
 
@@ -139,9 +139,9 @@
   display: block;
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #f8fafc;
-  padding: 6px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);
+  padding: 10px;
 }
 
 .version-index .diagram {
@@ -152,37 +152,40 @@
 }
 
 .version-index .dashed-panel {
-  fill: rgba(100, 116, 139, 0.11);
-  stroke: #1e293b;
-  stroke-width: 2;
-  stroke-dasharray: 5 8;
+  fill: rgba(241, 245, 249, 0.85);
+  stroke: #94a3b8;
+  stroke-width: 1.6;
+  stroke-dasharray: 4 8;
   rx: 16;
   ry: 16;
 }
 
 .version-index .arrow {
   fill: none;
-  stroke: #475569;
-  stroke-width: 2.2;
+  stroke: #64748b;
+  stroke-width: 2;
   marker-end: url(#arrowhead);
 }
 
 .version-index .node-box {
-  stroke: #1f2937;
-  stroke-width: 1.8;
-  rx: 12;
-  ry: 12;
-  transition: stroke 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  fill: #ffffff;
+  stroke: #334155;
+  stroke-width: 1.5;
+  rx: 14;
+  ry: 14;
+  transition: stroke 0.2s ease, transform 0.2s ease, filter 0.2s ease, fill 0.2s ease;
 }
 
-.version-index .node-root { fill: #ccfbf1; }
-.version-index .node-core { fill: #ccfbf1; }
-.version-index .node-special { fill: #ccfbf1; }
-.version-index .node-next { fill: #d1fae5; }
+.version-index .node-root,
+.version-index .node-core,
+.version-index .node-special,
+.version-index .node-next {
+  fill: #ffffff;
+}
 
 .version-index .node-label {
   fill: #111827;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   text-anchor: middle;
   dominant-baseline: middle;
@@ -193,7 +196,8 @@
 .version-index .node-link:focus .node-box {
   stroke: var(--accent);
   transform: translateY(-1px);
-  filter: drop-shadow(0 8px 10px rgba(15, 23, 42, 0.18));
+  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.12));
+  fill: #fcfeff;
 }
 
 .version-index .node-link:focus {
@@ -202,7 +206,7 @@
 
 .version-index .diagram-title {
   fill: #0f172a;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
 }
 
@@ -212,7 +216,7 @@
   padding: 8px 0 8px 24px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #f8fafc;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);
 }
 
 .version-index .mobile-timeline::before {
@@ -247,13 +251,13 @@
   border-radius: 50%;
   border: 2px solid #ffffff;
   box-shadow: 0 0 0 1px #94a3b8;
-  background: var(--accent);
+  background: #64748b;
 }
 
 .version-index .timeline-item.root::before,
 .version-index .timeline-item.core::before,
-.version-index .timeline-item.special::before { background: #0d9488; }
-.version-index .timeline-item.next::before { background: #16a34a; }
+.version-index .timeline-item.special::before,
+.version-index .timeline-item.next::before { background: #64748b; }
 
 .version-index .timeline-content {
   background: #ffffff;
@@ -263,7 +267,7 @@
 }
 
 .version-index .timeline-item:hover .timeline-content {
-  border-color: #99f6e4;
+  border-color: rgba(21, 147, 137, 0.26);
 }
 
 .version-index .timeline-content strong {
@@ -296,7 +300,7 @@
 }
 
 .version-index .version-card:hover {
-  border-color: #99f6e4;
+  border-color: rgba(21, 147, 137, 0.26);
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
 }
@@ -409,7 +413,7 @@
 }
 
 .version-index .compare-diff {
-  background: #ecfeff;
+  background: #f5fafc;
 }
 
 .version-index .compare-links {
@@ -431,7 +435,7 @@
 }
 
 .version-index .compare-links a:hover {
-  border-color: #99f6e4;
+  border-color: rgba(21, 147, 137, 0.26);
   color: var(--accent);
 }
 

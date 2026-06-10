@@ -353,6 +353,10 @@ body.h2res-shell.mobile-nav-open {
   gap: 28px;
 }
 
+.site-footer-brand .site-logo img {
+  height: 130px;
+}
+
 .site-footer-brand p {
   margin: 12px 0 0;
   color: var(--muted);
@@ -446,6 +450,10 @@ body.h2res-shell.mobile-nav-open {
 
   .site-logo img {
     height: 32px;
+  }
+
+  .site-footer-brand .site-logo img {
+    height: 80px;
   }
 
   .site-footer-card {
