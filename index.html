@@ -1151,212 +1151,6 @@
     }
 
     /* ==================== */
-    /* 3. GET STARTED */
-    /* ==================== */
-    .getstarted-section {
-      background: var(--bg-dark);
-    }
-
-    .accordion-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .accordion {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .accordion:hover {
-      border-color: var(--border-hover);
-    }
-
-    .accordion.open {
-      border-color: var(--accent-teal);
-      box-shadow: 0 4px 20px rgba(21, 147, 137, 0.12);
-    }
-
-    .accordion-header {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .accordion-header:hover {
-      background: var(--bg-card-hover);
-    }
-
-    .accordion-header h3 {
-      font-size: 16px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .accordion-header h3 svg {
-      flex-shrink: 0;
-      color: var(--text-secondary);
-    }
-
-    .accordion-toggle {
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-card-hover);
-      border-radius: 6px;
-      color: var(--text-muted);
-      font-size: 18px;
-      transition: all 0.2s;
-    }
-
-    .accordion.open .accordion-toggle {
-      background: var(--accent-teal);
-      color: white;
-      transform: rotate(45deg);
-    }
-
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .accordion.open .accordion-content {
-      max-height: 500px;
-    }
-
-    .accordion-inner {
-      padding: 0 24px 24px;
-      border-top: 1px solid var(--border-color);
-      padding-top: 20px;
-    }
-
-    .accordion-inner ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .accordion-inner li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .accordion-inner li::before {
-      content: '→';
-      color: var(--accent-green);
-      flex-shrink: 0;
-    }
-
-    .start-guidance {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    .start-summary,
-    .version-guide {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .start-summary h3,
-    .version-guide h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .start-summary p,
-    .version-guide p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .start-summary-list {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-    }
-
-    .start-summary-list li {
-      position: relative;
-      padding-left: 16px;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .start-summary-list li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--accent-green);
-      font-weight: 700;
-    }
-
-    .version-guide-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .version-guide-item {
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px 16px;
-      background: var(--bg-darker);
-    }
-
-    .version-guide-item strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .version-guide-item p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .code-block {
-      background: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 16px 20px;
-      font-family: 'Monaco', 'Menlo', monospace;
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 12px;
-    }
-
-    .code-block .prompt {
-      color: var(--accent-green);
-    }
-
-    .code-block .command {
-      color: var(--text-primary);
-    }
-
-    /* ==================== */
     /* 4. DOCUMENTATION */
     /* ==================== */
     .docs-section {
@@ -2400,8 +2194,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .audience-strip-header,
-      .docs-intro-panel,
-      .start-guidance {
+      .docs-intro-panel {
         display: grid;
         grid-template-columns: 1fr;
       }
@@ -2708,14 +2501,13 @@
         </a>
 
         <nav class="nav">
+          <a href="#start-here">Start Here</a>
           <a href="#about">About</a>
           <a href="#tutorials">Tutorials</a>
           <a href="#publications">Publications</a>
           <a href="#team">Team</a>
           <a href="#community">Community</a>
-          <a href="#get-started">Get Started</a>
-          <a href="#documentation" class="has-arrow">Documentation</a>
-          <a href="versions/index.html">Model Versions</a>
+          <a href="model/index.html">Model</a>
         </nav>
 
         <div class="header-actions">
@@ -2771,14 +2563,13 @@
     <!-- Centered navigation links -->
     <div class="mobile-nav-content">
       <div class="mobile-nav-links">
+        <a href="#start-here">Start Here</a>
         <a href="#about">About</a>
         <a href="#tutorials">Tutorials</a>
         <a href="#publications">Publications</a>
         <a href="#team">Team</a>
         <a href="#community">Community</a>
-        <a href="#get-started">Get Started</a>
-        <a href="#documentation">Documentation ↗</a>
-        <a href="versions/index.html">Model Versions</a>
+        <a href="model/index.html">Model</a>
       </div>
     </div>
 
@@ -2828,9 +2619,9 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="#get-started" class="btn btn-primary">Get Started</a>
-            <a href="versions/index.html" class="btn btn-secondary">Model Versions</a>
-            <a href="#documentation" class="btn btn-outline">Documentation</a>
+            <a href="tutorials/index.html" class="btn btn-primary">Get Started</a>
+            <a href="model/index.html" class="btn btn-secondary">Model</a>
+            <a href="model/index.html#model-resources" class="btn btn-outline">Resources</a>
             <a href="https://github.com/H2RES-model" class="btn btn-ghost">GitHub →</a>
           </div>
         </div>
@@ -2867,8 +2658,8 @@
               </div>
             </div>
             <div class="hero-sidebar-actions">
-              <a href="versions/index.html" class="btn btn-secondary btn-sm">Choose a Version</a>
-              <a href="#documentation" class="btn btn-outline btn-sm">Read Documentation</a>
+              <a href="model/index.html#version-guidance" class="btn btn-secondary btn-sm">Choose a Version</a>
+              <a href="model/index.html#model-resources" class="btn btn-outline btn-sm">Open Resources</a>
             </div>
           </div>
         </div>
@@ -2957,7 +2748,7 @@
     </div>
   </section>
 
-  <section class="section orientation-section">
+  <section id="start-here" class="section orientation-section">
     <div class="container">
       <div class="section-header">
         <div class="section-badge">Get Started with H2RES</div>
@@ -2970,19 +2761,19 @@
         <div class="orientation-card">
           <div class="orientation-label">New Users</div>
           <h3>Start with a first working setup</h3>
-          <a href="#get-started" class="docs-link">Get Started →</a>
+          <a href="tutorials/index.html" class="docs-link">Get Started →</a>
         </div>
 
         <div class="orientation-card">
           <div class="orientation-label">Model Users</div>
           <h3>Select the version that fits the problem</h3>
-          <a href="versions/index.html" class="docs-link">Explore Model Versions →</a>
+          <a href="model/index.html#version-guidance" class="docs-link">Open Model →</a>
         </div>
 
         <div class="orientation-card">
           <div class="orientation-label">Researchers</div>
           <h3>Understand the model and its resources</h3>
-          <a href="#documentation" class="docs-link">Open Documentation →</a>
+          <a href="model/index.html#model-resources" class="docs-link">Open Model Resources →</a>
         </div>
       </div>
 
@@ -3455,151 +3246,24 @@
     </div>
   </section>
 
-  <!-- ========== 9. GET STARTED ========== -->
-  <section id="get-started" class="section getstarted-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Get Started</div>
-        <h2 class="section-title">Set Up H2RES for Your First Run</h2>
-      </div>
-      <div class="section-divider"></div>
-
-      <div class="start-guidance">
-        <div class="start-summary">
-          <h3>Recommended first sequence</h3>
-          <p>For a robust first experience, treat H2RES as a versioned model family: identify the branch that fits the study, review its resources, and only then proceed to setup and scenario adaptation.</p>
-          <ul class="start-summary-list">
-            <li>Select a branch based on the scope and structure of the study</li>
-            <li>Read the online guidance before opening the version-specific PDFs</li>
-            <li>Run a baseline case before modifying datasets, technologies, or constraints</li>
-          </ul>
-        </div>
-
-        <div class="version-guide">
-          <h3>Quick version guide</h3>
-          <p>Use this shortlist as a first filter before opening the full version tree.</p>
-          <div class="version-guide-grid">
-            <div class="version-guide-item">
-              <strong>v1.0 to v1.1</strong>
-              <p>Best for baseline structure, first setup, and initial orientation within the documented core workflow.</p>
-            </div>
-            <div class="version-guide-item">
-              <strong>v1.2 to v1.3</strong>
-              <p>Best for users requiring multizonal and myopic developments within the v1.x model family.</p>
-            </div>
-            <div class="version-guide-item">
-              <strong>v1.4 and v2.0</strong>
-              <p>Best for following ongoing development while branch-level documentation and descriptions are still being completed.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-list">
-        <!-- Requirements -->
-        <div class="accordion open">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Requirements and Environment
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li>Install Python in a local or Anaconda environment.</li>
-                <li>Install Gurobi and activate a valid license.</li>
-                <li>Use Spyder, VS Code, or another Python editor to run the model.</li>
-              </ul>
-              <div class="code-block">
-                <span class="prompt">$</span> <span class="command">python --version</span><br>
-                <span class="prompt">$</span> <span class="command">gurobi_cl --version</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dependencies -->
-        <div class="accordion">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Install Dependencies and Activate Gurobi
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li>Install the required Python dependencies.</li>
-                <li>Request a Gurobi license if you do not already have one.</li>
-                <li>Academic users can typically use the named-user academic license.</li>
-              </ul>
-              <div class="code-block">
-                <span class="prompt">$</span> <span class="command">pip install gurobipy pandas numpy matplotlib</span>
-              </div>
-              <div style="margin-top: 16px;">
-                <a href="https://portal.gurobi.com/iam/register" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Register for Gurobi</a>
-                <a href="https://h2res.org/how-to-install-h2res/" class="btn btn-outline btn-sm" style="margin-left: 8px;" target="_blank" rel="noopener noreferrer">Official Install Guide</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- First Run -->
-        <div class="accordion">
-          <div class="accordion-header">
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              Download the Model and Run a Baseline Case
-            </h3>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-content">
-            <div class="accordion-inner">
-              <ul>
-                <li>Download the model files and extract them into a working directory.</li>
-                <li>Open <code>main.py</code> and start from the baseline configuration.</li>
-                <li>Review the version resources before adapting the model to a new case study.</li>
-              </ul>
-              <div class="code-block">
-                <span class="prompt">$</span> <span class="command">python main.py</span>
-              </div>
-              <div style="margin-top: 16px;">
-                <a href="versions/version.html?id=v1-0" class="btn btn-primary btn-sm">Open v1.0 Resources</a>
-                <a href="https://github.com/Franciscofloresg/H2RES_web_draft" class="btn btn-outline btn-sm" style="margin-left: 8px;" target="_blank" rel="noopener noreferrer">Project Repository</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="versions/index.html" class="btn btn-secondary btn-sm">Browse Model Versions</a>
-        <a href="#documentation" class="btn btn-outline btn-sm">Go to Documentation</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 10. DOCUMENTATION ========== -->
+  <!-- ========== 9. DOCUMENTATION ========== -->
   <section id="documentation" class="section docs-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-badge">Documentation</div>
-        <h2 class="section-title">General Guidance and Version-Specific Resources</h2>
+        <div class="section-badge">Model Resources</div>
+        <h2 class="section-title">Model Guidance Lives in One Dedicated Page</h2>
       </div>
       <div class="section-divider"></div>
 
       <div class="docs-intro-panel">
         <div>
-          <h3>Use the online documentation for orientation, then move to the resources attached to each release.</h3>
-          <p>The documentation layer should help users answer four practical questions quickly: what H2RES is, which model version fits the study, how to run a first case, and where to find the supporting resources for that release.</p>
+          <h3>Use the Model page when you need versions, documentation, and release-specific resources.</h3>
+          <p>To keep the landing page focused, detailed model guidance now sits in a single external page where users can choose a version, review documentation, compare releases, and open version-specific manuals or formulations.</p>
         </div>
         <div class="docs-intro-actions">
-          <a href="#get-started" class="btn btn-primary btn-sm">Start with Setup</a>
-          <a href="versions/index.html" class="btn btn-secondary btn-sm">Choose a Version</a>
-          <a href="tutorials/index.html" class="btn btn-outline btn-sm">Open Tutorials</a>
+          <a href="tutorials/index.html" class="btn btn-primary btn-sm">Start with Setup</a>
+          <a href="model/index.html#version-guidance" class="btn btn-secondary btn-sm">Open Model</a>
+          <a href="model/index.html#model-resources" class="btn btn-outline btn-sm">Browse Resources</a>
         </div>
       </div>
 
@@ -3608,36 +3272,18 @@
           <div class="docs-card-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
-          <h3>Overview and Scope</h3>
-          <p>H2RES is an open-source framework for integrated energy system planning, designed to support the study of long-term transitions across interconnected parts of the energy system.</p>
-          <a href="versions/version.html?id=v1-0" class="docs-link">Open baseline version resources →</a>
+          <h3>Version Selection</h3>
+          <p>Open the version tree and release guidance to identify the model configuration that matches your study structure and planning question.</p>
+          <a href="model/index.html#version-guidance" class="docs-link">Review version guidance →</a>
         </div>
 
         <div class="docs-card">
           <div class="docs-card-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
           </div>
-          <h3>Workflow</h3>
-          <p>The general workflow covers data preparation, scenario definition, model execution, and interpretation of results. The baseline setup begins from <code>main.py</code> and can then be adapted to new studies, assumptions, and case-specific datasets.</p>
-          <a href="#get-started" class="docs-link">Review setup workflow →</a>
-        </div>
-
-        <div class="docs-card">
-          <div class="docs-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </div>
-          <h3>Inputs and Outputs</h3>
-          <p>Core inputs include demand, technology, policy, economic, and resource data. Core outputs include dispatch, investment decisions, system costs, and indicators used for scenario comparison and planning assessment.</p>
-          <a href="versions/version.html?id=v1-0" class="docs-link">See baseline model details →</a>
-        </div>
-
-        <div class="docs-card">
-          <div class="docs-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10l6 6v10a2 2 0 0 1-2 2z"/></svg>
-          </div>
-          <h3>Version-Specific Resources</h3>
-          <p>General guidance is maintained online, while version-specific detail remains attached to each model release through dedicated PDFs. Use the Model Versions section to access the relevant user manual and supporting documentation for each release.</p>
-          <a href="versions/index.html" class="docs-link">Browse model versions →</a>
+          <h3>Documentation and PDFs</h3>
+          <p>Move from general orientation into version-specific manuals and mathematical formulations without switching between separate parts of the site.</p>
+          <a href="model/index.html#model-resources" class="docs-link">Open model resources →</a>
         </div>
       </div>
 
@@ -3675,9 +3321,9 @@
               <h4>Quick Links</h4>
               <a href="#about">About H2RES</a>
               <a href="#publications">Publications</a>
-              <a href="versions/index.html">Model Versions</a>
+              <a href="model/index.html">Model</a>
               <a href="#team">Team</a>
-              <a href="#documentation">Documentation</a>
+              <a href="model/index.html#model-resources">Model Resources</a>
             </div>
 
             <div class="footer-links-group">
@@ -3732,24 +3378,6 @@
         localStorage.setItem('theme', newTheme);
       });
     }
-
-    // Accordion functionality
-    document.querySelectorAll('.accordion-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const accordion = header.parentElement;
-        const isOpen = accordion.classList.contains('open');
-
-        // Close all accordions in same section
-        accordion.parentElement.querySelectorAll('.accordion').forEach(acc => {
-          acc.classList.remove('open');
-        });
-
-        // Toggle current
-        if (!isOpen) {
-          accordion.classList.add('open');
-        }
-      });
-    });
 
     // Publications from BibTeX
     const PUB_BIB_SOURCE = 'h2res_research_outputs.bib';
@@ -4758,3 +4386,4 @@
   </script>
 </body>
 </html>
+

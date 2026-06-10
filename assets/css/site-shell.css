@@ -127,6 +127,21 @@ body.h2res-shell.mobile-nav-open {
   transform: scaleX(1);
 }
 
+.site-nav a.has-arrow {
+  padding-right: 16px;
+}
+
+.site-nav a.has-arrow::before {
+  content: "↗";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-52%);
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
 .site-header-actions {
   display: flex;
   align-items: center;

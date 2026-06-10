@@ -1,6 +1,6 @@
 (function () {
   const VERSIONS = window.H2RES_VERSION_DATA || {};
-  const DEFAULT_RESOURCE_FALLBACK = "../index.html#documentation";
+  const DEFAULT_RESOURCE_FALLBACK = "../model/index.html#model-resources";
   const params = new URLSearchParams(window.location.search);
   const versionId = params.get("id");
   const version = VERSIONS[versionId];

@@ -1,7 +1,7 @@
 window.H2RES_VERSION_DATA = {
   "v1-0": {
     name: "H2RES v1.0",
-    link: "version.html?id=v1-0",
+    link: "../versions/version.html?id=v1-0",
     treeLabel: "H2RES v1.0",
     timelineNote: "Initial version",
     cardSummary: "Baseline integrated optimization model for hourly long-term energy planning and transition pathway analysis.",
@@ -49,7 +49,7 @@ window.H2RES_VERSION_DATA = {
   },
   "v1-1": {
     name: "H2RES v1.1",
-    link: "version.html?id=v1-1",
+    link: "../versions/version.html?id=v1-1",
     treeLabel: "H2RES v1.1",
     timelineNote: "Derived from v1.0",
     cardSummary: "Version upgrade with explicit unmet-service variables, scarcity penalties, and improved data-processing traceability.",
@@ -99,7 +99,7 @@ window.H2RES_VERSION_DATA = {
   },
   "v1-2-myopic": {
     name: "H2RES v1.2 (Myopic)",
-    link: "version.html?id=v1-2-myopic",
+    link: "../versions/version.html?id=v1-2-myopic",
     treeLabel: "H2RES v1.2 (Myopic)",
     timelineNote: "Derived from v1.1",
     cardSummary: "Version focused on rolling-horizon planning behavior and phased transition analysis.",
@@ -150,7 +150,7 @@ window.H2RES_VERSION_DATA = {
   },
   "v1-3-multizonal-myopic": {
     name: "H2RES v1.3 (Multizonal Myopic)",
-    link: "version.html?id=v1-3-multizonal-myopic",
+    link: "../versions/version.html?id=v1-3-multizonal-myopic",
     treeLabel: "H2RES v1.3 (Multizonal Myopic)",
     timelineNote: "Derived from v1.2",
     cardSummary: "Advanced v1.x model combining multizonal structure, transfer decisions, and staged pathway analysis.",
@@ -200,7 +200,7 @@ window.H2RES_VERSION_DATA = {
   },
   "v1-4-efuels": {
     name: "H2RES v1.4 (efuels)",
-    link: "version.html?id=v1-4-efuels",
+    link: "../versions/version.html?id=v1-4-efuels",
     treeLabel: "H2RES v1.4 (efuels)",
     timelineNote: "Derived from v1.3",
     cardSummary: "Documentation in preparation for the downstream e-fuels branch.",
@@ -248,7 +248,7 @@ window.H2RES_VERSION_DATA = {
   },
   "v2-0": {
     name: "H2RES v2.0",
-    link: "version.html?id=v2-0",
+    link: "../versions/version.html?id=v2-0",
     treeLabel: "H2RES v2.0",
     timelineNote: "Derived from v1.2 (parallel major line)",
     cardSummary: "Documentation in preparation for the next-generation major version.",
