@@ -6,9 +6,11 @@
   <title>Redirecting...</title>
   <script>
     const query = window.location.search || "";
-    window.location.replace("../versions/version.html" + query);
+    const hash = window.location.hash || "";
+    window.location.replace("../versions/version.html" + query + hash);
   </script>
 </head>
 <body>
+  <p>Redirecting to the version page. If nothing happens, <a href="../model/index.html">open the Model page</a>.</p>
 </body>
 </html>
