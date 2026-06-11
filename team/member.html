@@ -382,10 +382,10 @@
       const url = entry.fields.url || "";
 
       if (doiUrl) {
-        links.push(`<a href="${escapeHtml(doiUrl)}" target="_blank" rel="noopener noreferrer">DOI â†—</a>`);
+        links.push(`<a href="${escapeHtml(doiUrl)}" target="_blank" rel="noopener noreferrer">DOI &#8599;</a>`);
       }
       if (url) {
-        links.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">URL â†—</a>`);
+        links.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">URL &#8599;</a>`);
       }
       links.push(`<button type="button" class="bibtex-copy" data-key="${escapeHtml(entry.citationKey)}">BibTeX</button>`);
       return links.join("");
