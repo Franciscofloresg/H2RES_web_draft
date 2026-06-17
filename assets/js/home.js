@@ -830,27 +830,22 @@
       setNewsletterStatus('Submitting...');
 
       try {
-        const response = await fetch(endpoint, {
+        await fetch(endpoint, {
           method: 'POST',
-          mode: 'cors',
+          mode: 'no-cors',
           headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
           },
-          body: JSON.stringify({
+          body: new URLSearchParams({
             email,
             source: 'H2RES website',
             page: window.location.href,
             submittedAt: new Date().toISOString()
-          })
+          }).toString()
         });
 
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || result.result === 'error') {
-          throw new Error(result.message || 'Unable to save the email address.');
-        }
-
         newsletterForm.reset();
-        setNewsletterStatus('Subscription saved successfully.', 'success');
+        setNewsletterStatus('Subscription sent. If the Google Apps Script is deployed correctly, the email should appear in the sheet shortly.', 'success');
       } catch (error) {
         setNewsletterStatus(error.message || 'Unable to submit the form right now.', 'error');
       } finally {
