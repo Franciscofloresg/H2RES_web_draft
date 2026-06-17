@@ -809,48 +809,42 @@
       }
     }
 
-    async function submitNewsletterEmail(event) {
-      event.preventDefault();
+    function submitNewsletterEmail(event) {
       if (!newsletterForm || !newsletterEmail || !newsletterSubmit) return;
 
       const endpoint = (newsletterForm.dataset.endpoint || '').trim();
       const email = newsletterEmail.value.trim();
+      const newsletterPage = document.getElementById('newsletterPage');
+      const newsletterSubmittedAt = document.getElementById('newsletterSubmittedAt');
 
       if (!email) {
+        event.preventDefault();
         setNewsletterStatus('Please enter an email address.', 'error');
         return;
       }
 
       if (!endpoint) {
+        event.preventDefault();
         setNewsletterStatus('Newsletter endpoint not configured yet. Add the Google Apps Script web app URL first.', 'error');
         return;
+      }
+
+      newsletterForm.action = endpoint;
+      if (newsletterPage) {
+        newsletterPage.value = window.location.href;
+      }
+      if (newsletterSubmittedAt) {
+        newsletterSubmittedAt.value = new Date().toISOString();
       }
 
       newsletterSubmit.disabled = true;
       setNewsletterStatus('Submitting...');
 
-      try {
-        await fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          },
-          body: new URLSearchParams({
-            email,
-            source: 'H2RES website',
-            page: window.location.href,
-            submittedAt: new Date().toISOString()
-          }).toString()
-        });
-
+      window.setTimeout(() => {
         newsletterForm.reset();
         setNewsletterStatus('Subscription sent. If the Google Apps Script is deployed correctly, the email should appear in the sheet shortly.', 'success');
-      } catch (error) {
-        setNewsletterStatus(error.message || 'Unable to submit the form right now.', 'error');
-      } finally {
         newsletterSubmit.disabled = false;
-      }
+      }, 900);
     }
 
     if (newsletterForm) {

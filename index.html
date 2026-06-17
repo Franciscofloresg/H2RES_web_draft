@@ -768,10 +768,14 @@
             Mailing List / Newsletter
           </h3>
           <p>Subscribe if you want updates on releases, publications, events, and training opportunities without following repository activity directly.</p>
-          <form class="newsletter-form" id="newsletterForm" data-endpoint="https://script.google.com/macros/s/AKfycbzz4bM_VxVidmXDmoDX-NVra4Ei7wjXFUmyOf3wdF0ef5dKP3EfMpJ_PalOP1alLd6ceg/exec">
-            <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Enter your email address" autocomplete="email" required>
+          <form class="newsletter-form" id="newsletterForm" data-endpoint="https://script.google.com/macros/s/AKfycbzz4bM_VxVidmXDmoDX-NVra4Ei7wjXFUmyOf3wdF0ef5dKP3EfMpJ_PalOP1alLd6ceg/exec" method="post" target="newsletterTarget">
+            <input type="email" class="newsletter-input" id="newsletterEmail" name="email" placeholder="Enter your email address" autocomplete="email" required>
+            <input type="hidden" id="newsletterSource" name="source" value="H2RES website">
+            <input type="hidden" id="newsletterPage" name="page" value="">
+            <input type="hidden" id="newsletterSubmittedAt" name="submittedAt" value="">
             <button class="btn btn-primary" id="newsletterSubmit" type="submit">Subscribe</button>
           </form>
+          <iframe name="newsletterTarget" id="newsletterTarget" class="newsletter-target" title="Newsletter submission target"></iframe>
           <p class="newsletter-note">The subscription form can be connected to a Google Sheet through a Google Apps Script web app.</p>
           <p class="newsletter-status" id="newsletterStatus" aria-live="polite"></p>
         </div>
