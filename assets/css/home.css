@@ -1846,6 +1846,27 @@
       border-color: var(--accent-green);
     }
 
+    .newsletter-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .newsletter-status {
+      margin-top: 10px;
+      min-height: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .newsletter-status.is-success {
+      color: var(--accent-green);
+    }
+
+    .newsletter-status.is-error {
+      color: var(--accent-orange);
+    }
+
     .summer-school-image {
       width: 100%;
       max-width: 500px;

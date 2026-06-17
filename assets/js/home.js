@@ -791,6 +791,77 @@
         }
       }
     });
+
+    // Newsletter subscription via Google Apps Script web app.
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    const newsletterSubmit = document.getElementById('newsletterSubmit');
+    const newsletterStatus = document.getElementById('newsletterStatus');
+
+    function setNewsletterStatus(message, tone = '') {
+      if (!newsletterStatus) return;
+      newsletterStatus.textContent = message;
+      newsletterStatus.classList.remove('is-success', 'is-error');
+      if (tone === 'success') {
+        newsletterStatus.classList.add('is-success');
+      } else if (tone === 'error') {
+        newsletterStatus.classList.add('is-error');
+      }
+    }
+
+    async function submitNewsletterEmail(event) {
+      event.preventDefault();
+      if (!newsletterForm || !newsletterEmail || !newsletterSubmit) return;
+
+      const endpoint = (newsletterForm.dataset.endpoint || '').trim();
+      const email = newsletterEmail.value.trim();
+
+      if (!email) {
+        setNewsletterStatus('Please enter an email address.', 'error');
+        return;
+      }
+
+      if (!endpoint) {
+        setNewsletterStatus('Newsletter endpoint not configured yet. Add the Google Apps Script web app URL first.', 'error');
+        return;
+      }
+
+      newsletterSubmit.disabled = true;
+      setNewsletterStatus('Submitting...');
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            email,
+            source: 'H2RES website',
+            page: window.location.href,
+            submittedAt: new Date().toISOString()
+          })
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.result === 'error') {
+          throw new Error(result.message || 'Unable to save the email address.');
+        }
+
+        newsletterForm.reset();
+        setNewsletterStatus('Subscription saved successfully.', 'success');
+      } catch (error) {
+        setNewsletterStatus(error.message || 'Unable to submit the form right now.', 'error');
+      } finally {
+        newsletterSubmit.disabled = false;
+      }
+    }
+
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', submitNewsletterEmail);
+    }
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileNav = document.getElementById('mobileNav');

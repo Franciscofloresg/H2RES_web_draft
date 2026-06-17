@@ -768,10 +768,12 @@
             Mailing List / Newsletter
           </h3>
           <p>Subscribe if you want updates on releases, publications, events, and training opportunities without following repository activity directly.</p>
-          <div class="newsletter-form">
-            <input type="email" class="newsletter-input" placeholder="Enter your email address">
-            <button class="btn btn-primary">Subscribe</button>
-          </div>
+          <form class="newsletter-form" id="newsletterForm" data-endpoint="https://script.google.com/macros/s/AKfycbzz4bM_VxVidmXDmoDX-NVra4Ei7wjXFUmyOf3wdF0ef5dKP3EfMpJ_PalOP1alLd6ceg/exec">
+            <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Enter your email address" autocomplete="email" required>
+            <button class="btn btn-primary" id="newsletterSubmit" type="submit">Subscribe</button>
+          </form>
+          <p class="newsletter-note">The subscription form can be connected to a Google Sheet through a Google Apps Script web app.</p>
+          <p class="newsletter-status" id="newsletterStatus" aria-live="polite"></p>
         </div>
       </div>
     </div>
