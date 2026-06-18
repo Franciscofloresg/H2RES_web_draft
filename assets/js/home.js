@@ -762,7 +762,7 @@
     activateClickableTeamMembers();
 
     function headerOffset() {
-      const headerElement = document.querySelector('.site-header, .header');
+      const headerElement = document.querySelector('.site-header');
       return headerElement ? headerElement.offsetHeight + 20 : 100;
     }
 
@@ -785,7 +785,7 @@
     }
 
     // Smooth scroll only for in-page navigation links that target sections.
-    const sectionAnchorLinks = document.querySelectorAll('.site-nav a[href^="#"], .nav a[href^="#"], .mobile-nav-links a[href^="#"], .scroll-link[href^="#"]');
+    const sectionAnchorLinks = document.querySelectorAll('.site-nav a[href^="#"], .mobile-nav-links a[href^="#"], .scroll-link[href^="#"]');
     sectionAnchorLinks.forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -805,7 +805,7 @@
     });
 
     // Active section highlight for desktop and mobile navigation
-    const navSectionLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"], .nav a[href^="#"], .mobile-nav-links a[href^="#"]'));
+    const navSectionLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"], .mobile-nav-links a[href^="#"]'));
     const navSections = navSectionLinks
       .map(link => {
         const href = link.getAttribute('href');
@@ -815,7 +815,7 @@
       .filter(Boolean)
       .sort((a, b) => a.element.offsetTop - b.element.offsetTop);
 
-    const header = document.querySelector('.site-header, .header');
+    const header = document.querySelector('.site-header');
 
     function setActiveSection(sectionId) {
       navSectionLinks.forEach(link => {
