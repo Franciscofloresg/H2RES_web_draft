@@ -19,6 +19,7 @@
     const body = document.body;
     const root = normalizeRoot(body.dataset.shellRoot || "../");
     const active = body.dataset.shellActive || "";
+    const isHome = body.dataset.shellHome === "true";
     const modelHref = body.dataset.shellModelHref || `${root}model/index.html`;
     const modelResourcesHref = body.dataset.shellModelResourcesHref || `${root}model/index.html#model-resources`;
     const siteConfig = window.H2RES_SITE_CONFIG || {};
@@ -33,15 +34,16 @@
       uiText,
       root,
       active,
+      isHome,
       modelHref,
       modelResourcesHref,
-      homeHref: `${root}index.html#home`,
-      startHereHref: `${root}index.html#start-here`,
-      aboutHref: `${root}index.html#about`,
-      tutorialsHref: `${root}index.html#tutorials`,
-      publicationsHref: `${root}index.html#publications`,
-      teamHref: `${root}index.html#team`,
-      communityHref: `${root}index.html#community`
+      homeHref: isHome ? "#home" : `${root}index.html#home`,
+      startHereHref: isHome ? "#start-here" : `${root}index.html#start-here`,
+      aboutHref: isHome ? "#about" : `${root}index.html#about`,
+      tutorialsHref: isHome ? "#tutorials" : `${root}index.html#tutorials`,
+      publicationsHref: isHome ? "#publications" : `${root}index.html#publications`,
+      teamHref: isHome ? "#team" : `${root}index.html#team`,
+      communityHref: isHome ? "#community" : `${root}index.html#community`
     };
   }
 

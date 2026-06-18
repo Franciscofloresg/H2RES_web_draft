@@ -50,6 +50,11 @@ body.h2res-shell.mobile-nav-open {
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
 }
 
+.site-header.scrolled {
+  border-bottom-color: rgba(148, 163, 184, 0.24);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
 .site-header-inner {
   max-width: 1240px;
   margin: 0 auto;
@@ -68,6 +73,10 @@ body.h2res-shell.mobile-nav-open {
   background: transparent;
   backdrop-filter: none;
   box-shadow: none;
+}
+
+.site-header.scrolled .site-nav-pill {
+  border-bottom-color: rgba(148, 163, 184, 0.34);
 }
 
 .site-logo {
