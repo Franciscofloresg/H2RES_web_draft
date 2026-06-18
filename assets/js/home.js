@@ -1,3 +1,7 @@
+    if (typeof window.H2RES_applySiteConfig === 'function') {
+      window.H2RES_applySiteConfig(document);
+    }
+
     // Theme Toggle Functionality (temporarily disabled)
     const THEME_TOGGLE_ENABLED = false;
     const themeToggle = document.getElementById('themeToggle');
@@ -21,6 +25,10 @@
     }
 
     // Publications from BibTeX
+    const siteConfig = window.H2RES_SITE_CONFIG || {};
+    const siteLinks = siteConfig.links || {};
+    const siteCitations = siteConfig.citations || {};
+    const siteLabels = siteConfig.labels || {};
     const PUB_BIB_SOURCE = 'h2res_research_outputs.bib';
     const H2RES_CITATION_BIBTEX = `@article{FEIJOO2022112781,
   title = {A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies},
@@ -33,12 +41,12 @@
   url = {https://www.sciencedirect.com/science/article/pii/S1364032122006657}
 }`;
     const H2RES_ACKNOWLEDGEMENT_TEXT = 'This work uses the open-source H2RES modeling framework. Please cite Feijoo, F., Pfeifer, A., Herc, L., Groppi, D., and Duic, N. (2022), A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies, Renewable and Sustainable Energy Reviews, 167, 112781. https://doi.org/10.1016/j.rser.2022.112781';
-    const H2RES_WEBSITE_CITATION_TEXT = 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://h2res.org/';
+    const H2RES_WEBSITE_CITATION_TEXT = siteCitations.websiteText || 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://h2res.org/';
     const HERO_TICKER_FIXED_ITEMS = [
       {
         label: 'Summer School 2026',
         title: 'Energy Planning of 100% Renewable Energy Systems',
-        url: 'https://www.sdewes.org/summerschool/2026/'
+        url: siteLinks.summerSchool || 'https://www.sdewes.org/summerschool/2026/'
       }
     ];
     const HERO_TICKER_FEATURED_KEYS = [
@@ -925,7 +933,7 @@
     function submitNewsletterEmail(event) {
       if (!newsletterForm || !newsletterEmail || !newsletterSubmit) return;
 
-      const endpoint = (newsletterForm.dataset.endpoint || '').trim();
+      const endpoint = (newsletterForm.dataset.endpoint || siteLinks.newsletterEndpoint || '').trim();
       const email = newsletterEmail.value.trim();
       const newsletterPage = document.getElementById('newsletterPage');
       const newsletterSubmittedAt = document.getElementById('newsletterSubmittedAt');
@@ -994,7 +1002,7 @@
         return;
       }
 
-      const endpoint = (newsletterForm.dataset.endpoint || '').trim();
+      const endpoint = (newsletterForm.dataset.endpoint || siteLinks.newsletterEndpoint || '').trim();
       const allowedOrigins = newsletterAllowedOrigins(endpoint);
       if (!allowedOrigins.has(event.origin)) {
         return;

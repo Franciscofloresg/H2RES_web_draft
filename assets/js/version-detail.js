@@ -1,7 +1,7 @@
 (function () {
   const VERSIONS = window.H2RES_VERSION_DATA || {};
   const DEFAULT_RESOURCE_FALLBACK = "../model/index.html#model-resources";
-  const DEFAULT_GITHUB_FALLBACK = "https://github.com/H2RES-model";
+  const DEFAULT_GITHUB_FALLBACK = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links && window.H2RES_SITE_CONFIG.links.githubRepo) || "https://github.com/H2RES-model";
   const params = new URLSearchParams(window.location.search);
   const versionId = params.get("id");
   const version = VERSIONS[versionId];
