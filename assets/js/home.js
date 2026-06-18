@@ -33,7 +33,7 @@
   url = {https://www.sciencedirect.com/science/article/pii/S1364032122006657}
 }`;
     const H2RES_ACKNOWLEDGEMENT_TEXT = 'This work uses the open-source H2RES modeling framework. Please cite Feijoo, F., Pfeifer, A., Herc, L., Groppi, D., and Duic, N. (2022), A long-term capacity investment and operational energy planning model with power-to-X and flexibility technologies, Renewable and Sustainable Energy Reviews, 167, 112781. https://doi.org/10.1016/j.rser.2022.112781';
-    const H2RES_WEBSITE_CITATION_TEXT = 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://franciscofloresg.github.io/H2RES_web_draft/';
+    const H2RES_WEBSITE_CITATION_TEXT = 'Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://h2res.org/';
     const HERO_TICKER_FIXED_ITEMS = [
       {
         label: 'Summer School 2026',
