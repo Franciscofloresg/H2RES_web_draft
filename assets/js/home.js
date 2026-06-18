@@ -60,6 +60,8 @@
     let visiblePubCount = PUB_PAGE_SIZE;
     let publicationEntries = [];
     const { normalizeBibValue, parseBibTeX } = window.H2resBibUtils;
+    const teamData = window.H2RES_TEAM_DATA || {};
+    const teamHome = window.H2RES_TEAM_HOME || {};
 
     function escapeHtml(text) {
       return String(text || '')
@@ -645,6 +647,80 @@
     activatePublicationShowMore();
     loadPublicationsFromBib();
 
+    function normalizeTeamPhotoPath(photo) {
+      if (!photo) {
+        return '';
+      }
+      if (/^https?:\/\//i.test(photo)) {
+        return photo;
+      }
+      return photo.replace(/^\.\.\//, '');
+    }
+
+    function buildTeamAvatar(person, cardName) {
+      const photo = normalizeTeamPhotoPath(person.photo || '');
+      if (!photo) {
+        return '<div class="team-avatar"></div>';
+      }
+      return `<div class="team-avatar"><img src="${escapeHtml(photo)}" alt="${escapeHtml(cardName)}"></div>`;
+    }
+
+    function buildTeamCard(config) {
+      const person = teamData[config.id];
+      if (!person) {
+        return '';
+      }
+
+      const profileUrl = `team/member.html?id=${encodeURIComponent(config.id)}`;
+      const cardName = config.cardName || person.name;
+      const cardSubtitle = config.cardSubtitle || person.institution || '';
+      const avatar = buildTeamAvatar(person, cardName);
+
+      if (config.scopusUrl) {
+        return `
+          <div class="team-member team-member-clickable" data-profile-url="${escapeHtml(profileUrl)}" role="link" tabindex="0">
+            ${avatar}
+            <div class="team-info">
+              <h4>${escapeHtml(cardName)}</h4>
+              <p>${escapeHtml(cardSubtitle)}</p>
+              <div class="team-member-meta">
+                <a class="scopus-link" href="${escapeHtml(config.scopusUrl)}" target="_blank" rel="noopener noreferrer">
+                  <span class="scopus-logo">S</span> Scopus
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <a class="team-member" href="${escapeHtml(profileUrl)}">
+          ${avatar}
+          <div class="team-info">
+            <h4>${escapeHtml(cardName)}</h4>
+            <p>${escapeHtml(cardSubtitle)}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderTeamGroup(containerId, members) {
+      const container = document.getElementById(containerId);
+      if (!container) {
+        return;
+      }
+      container.innerHTML = (members || [])
+        .map(buildTeamCard)
+        .filter(Boolean)
+        .join('');
+    }
+
+    function renderTeamSection() {
+      renderTeamGroup('teamCoreMembers', teamHome.core);
+      renderTeamGroup('teamContributorMembers', teamHome.contributors);
+      renderTeamGroup('teamAdvisoryMembers', teamHome.advisory);
+    }
+
     function activateClickableTeamMembers() {
       document.querySelectorAll('.team-member-clickable').forEach(member => {
         const profileUrl = member.getAttribute('data-profile-url');
@@ -672,6 +748,7 @@
       });
     }
 
+    renderTeamSection();
     activateClickableTeamMembers();
 
     function headerOffset() {
