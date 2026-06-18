@@ -23,10 +23,14 @@
     const modelResourcesHref = body.dataset.shellModelResourcesHref || `${root}model/index.html#model-resources`;
     const siteConfig = window.H2RES_SITE_CONFIG || {};
     const links = siteConfig.links || {};
+    const navLabels = siteConfig.navLabels || {};
+    const uiText = siteConfig.uiText || {};
 
     return {
       siteConfig,
       links,
+      navLabels,
+      uiText,
       root,
       active,
       modelHref,
@@ -43,14 +47,14 @@
 
   function navItems(config) {
     return [
-      { key: "start-here", label: "Start Here", href: config.startHereHref },
-      { key: "about", label: "About", href: config.aboutHref },
-      { key: "tutorials", label: "Tutorials", href: config.tutorialsHref },
-      { key: "publications", label: "Publications", href: config.publicationsHref },
-      { key: "team", label: "Team", href: config.teamHref },
-      { key: "community", label: "Community", href: config.communityHref },
-      { key: "model-resources", label: "Model Resources", href: config.modelResourcesHref },
-      { key: "model", label: "Model", href: config.modelHref }
+      { key: "start-here", label: config.navLabels.startHere || "Start Here", href: config.startHereHref },
+      { key: "about", label: config.navLabels.about || "About", href: config.aboutHref },
+      { key: "tutorials", label: config.navLabels.tutorials || "Tutorials", href: config.tutorialsHref },
+      { key: "publications", label: config.navLabels.publications || "Publications", href: config.publicationsHref },
+      { key: "team", label: config.navLabels.team || "Team", href: config.teamHref },
+      { key: "community", label: config.navLabels.community || "Community", href: config.communityHref },
+      { key: "model-resources", label: config.navLabels.modelResources || "Model Resources", href: config.modelResourcesHref },
+      { key: "model", label: config.navLabels.model || "Model", href: config.modelHref }
     ];
   }
 
@@ -118,35 +122,35 @@ ${renderNavLinks(config, true)}
         <div class="site-footer-main">
           <div class="site-footer-brand">
             <a class="site-logo" href="${escapeHtml(config.homeHref)}"><img src="${escapeHtml(config.root)}assets/h2res-logo.png" alt="H2RES logo"></a>
-            <p>Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.</p>
+            <p>${escapeHtml(config.uiText.footerTagline || "Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.")}</p>
           </div>
           <div class="site-footer-links-grid">
             <div class="site-footer-links-group">
               <h4>Quick Links</h4>
               <a href="${escapeHtml(config.aboutHref)}">About H2RES</a>
               <a href="${escapeHtml(config.publicationsHref)}">Publications</a>
-              <a href="${escapeHtml(config.modelHref)}">Model</a>
-              <a href="${escapeHtml(config.teamHref)}">Team</a>
+              <a href="${escapeHtml(config.modelHref)}">${escapeHtml(config.navLabels.model || "Model")}</a>
+              <a href="${escapeHtml(config.teamHref)}">${escapeHtml(config.navLabels.team || "Team")}</a>
             </div>
             <div class="site-footer-links-group">
               <h4>Resources</h4>
-              <a href="${escapeHtml(config.startHereHref)}">Start Here</a>
-              <a href="${escapeHtml(config.modelResourcesHref)}">Model Resources</a>
-              <a href="${escapeHtml(config.tutorialsHref)}">Tutorials</a>
-              <a href="${escapeHtml(config.links.githubRepo || "#")}" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+              <a href="${escapeHtml(config.startHereHref)}">${escapeHtml(config.navLabels.startHere || "Start Here")}</a>
+              <a href="${escapeHtml(config.modelResourcesHref)}">${escapeHtml(config.navLabels.modelResources || "Model Resources")}</a>
+              <a href="${escapeHtml(config.tutorialsHref)}">${escapeHtml(config.navLabels.tutorials || "Tutorials")}</a>
+              <a href="${escapeHtml(config.links.githubRepo || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(config.uiText.githubRepository || "GitHub Repository")}</a>
             </div>
             <div class="site-footer-links-group">
               <h4>Community</h4>
-              <a href="${escapeHtml(config.communityHref)}">How to Cite</a>
-              <a href="${escapeHtml(config.links.youtube || "#")}" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
-              <a href="${escapeHtml(config.links.summerSchool || "#")}" target="_blank" rel="noopener noreferrer">Summer School</a>
+              <a href="${escapeHtml(config.communityHref)}">${escapeHtml(config.uiText.howToCite || "How to Cite")}</a>
+              <a href="${escapeHtml(config.links.youtube || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(config.uiText.youtubeChannel || "YouTube Channel")}</a>
+              <a href="${escapeHtml(config.links.summerSchool || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(config.uiText.summerSchool || "Summer School")}</a>
             </div>
           </div>
         </div>
         <div class="site-footer-divider"></div>
         <div class="site-footer-bottom">
-          <div>Ivana Lucica 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.</div>
-          <div>&copy; 2026 H2RES Team.</div>
+          <div>${escapeHtml(config.uiText.footerAddress || "Ivana Lucica 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.")}</div>
+          <div>${escapeHtml(config.uiText.footerCopyright || "© 2026 H2RES Team.")}</div>
         </div>
       </div>
     </div>

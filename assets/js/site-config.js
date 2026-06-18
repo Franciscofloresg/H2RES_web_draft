@@ -7,8 +7,29 @@
       youtube: "https://www.youtube.com/@H2REScommunity",
       newsletterEndpoint: "https://script.google.com/macros/s/AKfycbxKY_VFE4v7mEZt7niy7p6fSgOcruP2uVHFx-fpRmxr-V0GaigjUc5URzUiWrRyjsYxGA/exec"
     },
+    navLabels: {
+      startHere: "Start Here",
+      about: "About",
+      tutorials: "Tutorials",
+      publications: "Publications",
+      team: "Team",
+      community: "Community",
+      modelResources: "Model Resources",
+      model: "Model"
+    },
     labels: {
       newsletterSource: "H2RES website"
+    },
+    uiText: {
+      footerTagline: "Open-source framework for integrated energy system planning, optimization, and decarbonization pathway analysis.",
+      footerAddress: "Ivana Lucica 5, Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, Croatia.",
+      footerCopyright: "© 2026 H2RES Team.",
+      githubRepository: "GitHub Repository",
+      youtubeChannel: "YouTube Channel",
+      summerSchool: "Summer School",
+      howToCite: "How to Cite",
+      openModel: "Open Model",
+      openModelResources: "Open Model Resources"
     },
     citations: {
       websiteText: "Duic, N., et al. (2026). H2RES Web Platform. Retrieved May 25, 2026, from https://h2res.org/",
