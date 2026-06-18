@@ -71,21 +71,12 @@
     }
   }
 
-  async function fileExists(url) {
-    try {
-      const response = await fetch(url, { method: "GET", cache: "no-store" });
-      return response.ok;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  async function setVersionResources(versionKey) {
-    const base = `../assets/version-resources/${versionKey}`;
-    const formulationUrl = `${base}/model-formulation.pdf`;
-    const manualUrl = `${base}/user-manual.pdf`;
-    const formulationExists = await fileExists(formulationUrl);
-    const manualExists = await fileExists(manualUrl);
+  function setVersionResources(versionData) {
+    const resources = versionData.resources || {};
+    const formulationExists = Boolean(resources.hasFormulation);
+    const manualExists = Boolean(resources.hasManual);
+    const formulationUrl = resources.formulationUrl || DEFAULT_RESOURCE_FALLBACK;
+    const manualUrl = resources.manualUrl || DEFAULT_RESOURCE_FALLBACK;
 
     setResourceLink("versionFormulationLink", formulationExists ? formulationUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
     setResourceLink("versionManualLink", manualExists ? manualUrl : DEFAULT_RESOURCE_FALLBACK, DEFAULT_RESOURCE_FALLBACK);
@@ -99,7 +90,7 @@
       : "User manual PDF not added yet. The link currently falls back to the general documentation page.";
   }
 
-  async function renderVersionPage() {
+  function renderVersionPage() {
     if (!version) {
       renderMissingVersionState();
       return;
@@ -129,7 +120,7 @@
     renderList("versionUseIf", version.useIf);
     renderList("versionAvoidIf", version.avoidIf);
     setVersionAccessLinks(version);
-    await setVersionResources(versionId);
+    setVersionResources(version);
 
     const navWrap = document.getElementById("versionNav");
     version.links.forEach((item) => {

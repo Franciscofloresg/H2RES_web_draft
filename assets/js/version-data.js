@@ -20,6 +20,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page to understand the scope of H2RES v1.0 and open GitHub for the implementation, source files, and release-level code associated with this baseline version.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v1-0/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v1-0/user-manual.pdf",
+      hasFormulation: true,
+      hasManual: true
+    },
     keywords: ["Baseline", "Core structure", "Model root"],
     whatChanged: [
       "Establishes the baseline optimization structure used in later H2RES versions.",
@@ -72,6 +78,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page to review the methodological updates in H2RES v1.1 and open GitHub for the implementation and source files associated with this release line.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v1-1/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v1-1/user-manual.pdf",
+      hasFormulation: true,
+      hasManual: true
+    },
     keywords: ["v1.1", "Adequacy relaxation", "Unmet-service variables", "Data preprocessing"],
     whatChanged: [
       "Introduced explicit unmet-service variables for electricity, district heating, and general or industrial heat instead of relying only on the legacy aggregate slack representation.",
@@ -126,6 +138,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page to understand the rolling-horizon logic of H2RES v1.2 and open GitHub for the implementation and source files associated with this version.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v1-2-myopic/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v1-2-myopic/user-manual.pdf",
+      hasFormulation: true,
+      hasManual: true
+    },
     keywords: ["Myopic", "Rolling horizon", "Investment carryover", "v1.2"],
     whatChanged: [
       "Added a rolling-horizon implementation alongside the full-horizon model so the same system can be solved through linked subproblems.",
@@ -181,6 +199,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page to review the multizonal-myopic scope of H2RES v1.3 and open GitHub for the implementation and source files associated with this regional release line.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v1-3-multizonal-myopic/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v1-3-multizonal-myopic/user-manual.pdf",
+      hasFormulation: true,
+      hasManual: true
+    },
     keywords: ["Multizonal", "Rolling horizon", "Transfer investment", "v1.3"],
     whatChanged: [
       "Restructured most operational and investment variables so they carry a leading system index and are evaluated region by region.",
@@ -235,6 +259,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page for version guidance and open GitHub for the implementation space associated with the v1.4 e-fuels branch as documentation is completed.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v1-4-efuels/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v1-4-efuels/user-manual.pdf",
+      hasFormulation: false,
+      hasManual: false
+    },
     keywords: ["E-fuels", "v1.4", "Documentation in preparation"],
     whatChanged: [
       "The detailed formulation changes for v1.4 are currently being documented.",
@@ -287,6 +317,12 @@ window.H2RES_VERSION_DATA = {
     downloadUrl: "",
     githubLabel: "Code access currently routes through the H2RES GitHub space.",
     githubDescription: "Use this page for version guidance and open GitHub for the implementation space associated with the next-generation v2.0 line.",
+    resources: {
+      formulationUrl: "../assets/version-resources/v2-0/model-formulation.pdf",
+      manualUrl: "../assets/version-resources/v2-0/user-manual.pdf",
+      hasFormulation: false,
+      hasManual: false
+    },
     keywords: ["v2.0", "Next generation", "Documentation in preparation"],
     whatChanged: [
       "The major-version changes for v2.0 are currently being compiled and documented.",
