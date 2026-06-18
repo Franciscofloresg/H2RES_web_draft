@@ -553,6 +553,55 @@
   margin-top: 16px;
 }
 
+.version-detail .access-card {
+  overflow: hidden;
+}
+
+.version-detail .access-card-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbff 55%, #eff8f6 100%);
+  padding: 18px;
+}
+
+.version-detail .access-copy h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.version-detail .access-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.version-detail .access-copy .access-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.version-detail .access-actions {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.version-detail .access-btn {
+  justify-content: center;
+  text-align: center;
+}
+
 .version-detail .chip {
   border: 1px solid var(--line);
   background: #f8fafc;
@@ -671,6 +720,7 @@
 }
 
 @media (max-width: 760px) {
+  .version-detail .access-card-inner,
   .version-detail .meta,
   .version-detail .details-grid,
   .version-detail .decision-grid,

@@ -1,6 +1,7 @@
 (function () {
   const VERSIONS = window.H2RES_VERSION_DATA || {};
   const DEFAULT_RESOURCE_FALLBACK = "../model/index.html#model-resources";
+  const DEFAULT_GITHUB_FALLBACK = "https://github.com/H2RES-model";
   const params = new URLSearchParams(window.location.search);
   const versionId = params.get("id");
   const version = VERSIONS[versionId];
@@ -39,6 +40,35 @@
   function setResourceLink(anchorId, href, fallbackHref) {
     const link = document.getElementById(anchorId);
     if (link) link.href = href || fallbackHref;
+  }
+
+  function setVersionAccessLinks(versionData) {
+    const githubLink = document.getElementById("versionGithubLink");
+    const downloadLink = document.getElementById("versionDownloadLink");
+    const accessDescription = document.getElementById("versionAccessDescription");
+    const accessMeta = document.getElementById("versionAccessMeta");
+
+    if (githubLink) {
+      githubLink.href = versionData.githubUrl || DEFAULT_GITHUB_FALLBACK;
+    }
+
+    if (downloadLink) {
+      if (versionData.downloadUrl) {
+        downloadLink.href = versionData.downloadUrl;
+        downloadLink.hidden = false;
+      } else {
+        downloadLink.hidden = true;
+      }
+    }
+
+    if (accessDescription) {
+      accessDescription.textContent = versionData.githubDescription
+        || "Open GitHub to access the implementation, source files, and release-level code associated with this version.";
+    }
+
+    if (accessMeta) {
+      accessMeta.textContent = versionData.githubLabel || "GitHub source link configured for this version.";
+    }
   }
 
   async function fileExists(url) {
@@ -98,6 +128,7 @@
     renderList("versionKeyIO", version.keyIO);
     renderList("versionUseIf", version.useIf);
     renderList("versionAvoidIf", version.avoidIf);
+    setVersionAccessLinks(version);
     await setVersionResources(versionId);
 
     const navWrap = document.getElementById("versionNav");
