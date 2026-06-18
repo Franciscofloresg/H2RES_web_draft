@@ -550,8 +550,7 @@
     function renderPublicationGrid() {
       const filtered = filteredPublicationEntries();
       if (filtered.length === 0) {
-        const yearHint = activePubYear === 'all' ? '' : ` for year <code>${escapeHtml(activePubYear)}</code>`;
-        pubGrid.innerHTML = `<div class="pub-status">No records found for this category${yearHint} in <code>h2res_research_outputs.bib</code>.</div>`;
+        pubGrid.innerHTML = '';
         if (pubShowMoreButton) {
           pubShowMoreButton.setAttribute('hidden', '');
         }
