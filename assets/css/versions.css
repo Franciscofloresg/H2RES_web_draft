@@ -602,6 +602,24 @@
   text-align: center;
 }
 
+.version-detail .access-resource-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.version-detail .access-resource-notes p {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .version-detail .chip {
   border: 1px solid var(--line);
   background: #f8fafc;
@@ -721,6 +739,7 @@
 
 @media (max-width: 760px) {
   .version-detail .access-card-inner,
+  .version-detail .access-resource-notes,
   .version-detail .meta,
   .version-detail .details-grid,
   .version-detail .decision-grid,
