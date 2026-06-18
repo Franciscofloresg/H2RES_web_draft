@@ -796,6 +796,10 @@
     const newsletterEmail = document.getElementById('newsletterEmail');
     const newsletterSubmit = document.getElementById('newsletterSubmit');
     const newsletterStatus = document.getElementById('newsletterStatus');
+    const newsletterTarget = document.getElementById('newsletterTarget');
+    let newsletterPending = false;
+    let newsletterPendingEmail = '';
+    let newsletterTimeoutId = null;
 
     function setNewsletterStatus(message, tone = '') {
       if (!newsletterStatus) return;
@@ -806,6 +810,34 @@
       } else if (tone === 'error') {
         newsletterStatus.classList.add('is-error');
       }
+    }
+
+    function resetNewsletterPendingState() {
+      newsletterPending = false;
+      newsletterPendingEmail = '';
+      if (newsletterTimeoutId) {
+        window.clearTimeout(newsletterTimeoutId);
+        newsletterTimeoutId = null;
+      }
+      if (newsletterSubmit) {
+        newsletterSubmit.disabled = false;
+      }
+    }
+
+    function newsletterAllowedOrigins(endpoint) {
+      const origins = new Set([window.location.origin]);
+      if (!endpoint) {
+        return origins;
+      }
+      try {
+        const endpointUrl = new URL(endpoint, window.location.href);
+        origins.add(endpointUrl.origin);
+      } catch (error) {
+        // Ignore malformed endpoint here; submit validation handles missing endpoint.
+      }
+      origins.add('https://script.google.com');
+      origins.add('https://script.googleusercontent.com');
+      return origins;
     }
 
     function submitNewsletterEmail(event) {
@@ -836,19 +868,53 @@
         newsletterSubmittedAt.value = new Date().toISOString();
       }
 
+      newsletterPending = true;
+      newsletterPendingEmail = email;
       newsletterSubmit.disabled = true;
       setNewsletterStatus('Submitting...');
-
-      window.setTimeout(() => {
-        newsletterForm.reset();
-        setNewsletterStatus('Subscription sent successfully.', 'success');
-        newsletterSubmit.disabled = false;
-      }, 900);
+      newsletterTimeoutId = window.setTimeout(() => {
+        if (!newsletterPending) {
+          return;
+        }
+        resetNewsletterPendingState();
+        setNewsletterStatus('Submission could not be confirmed. Please try again.', 'error');
+      }, 15000);
     }
 
     if (newsletterForm) {
       newsletterForm.addEventListener('submit', submitNewsletterEmail);
     }
+
+    window.addEventListener('message', event => {
+      if (!newsletterPending || !newsletterForm || !newsletterTarget) {
+        return;
+      }
+
+      const endpoint = (newsletterForm.dataset.endpoint || '').trim();
+      const allowedOrigins = newsletterAllowedOrigins(endpoint);
+      if (!allowedOrigins.has(event.origin)) {
+        return;
+      }
+
+      const payload = event.data;
+      if (!payload || payload.type !== 'newsletter-result') {
+        return;
+      }
+
+      if (payload.email && newsletterPendingEmail && payload.email !== newsletterPendingEmail) {
+        return;
+      }
+
+      resetNewsletterPendingState();
+
+      if (payload.status === 'success') {
+        newsletterForm.reset();
+        setNewsletterStatus('Subscription sent successfully.', 'success');
+        return;
+      }
+
+      setNewsletterStatus(payload.message || 'Submission failed. Please try again.', 'error');
+    });
 
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
