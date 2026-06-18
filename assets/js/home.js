@@ -877,6 +877,7 @@
     let newsletterPending = false;
     let newsletterPendingEmail = '';
     let newsletterTimeoutId = null;
+    let newsletterFallbackSuccessId = null;
 
     function setNewsletterStatus(message, tone = '') {
       if (!newsletterStatus) return;
@@ -895,6 +896,10 @@
       if (newsletterTimeoutId) {
         window.clearTimeout(newsletterTimeoutId);
         newsletterTimeoutId = null;
+      }
+      if (newsletterFallbackSuccessId) {
+        window.clearTimeout(newsletterFallbackSuccessId);
+        newsletterFallbackSuccessId = null;
       }
       if (newsletterSubmit) {
         newsletterSubmit.disabled = false;
@@ -960,6 +965,28 @@
 
     if (newsletterForm) {
       newsletterForm.addEventListener('submit', submitNewsletterEmail);
+    }
+
+    if (newsletterTarget) {
+      newsletterTarget.addEventListener('load', () => {
+        if (!newsletterPending) {
+          return;
+        }
+
+        // Some Apps Script deployments complete the POST in the iframe
+        // without sending a postMessage confirmation back to the parent page.
+        // In that case, the successful iframe load is the only reliable signal.
+        newsletterFallbackSuccessId = window.setTimeout(() => {
+          if (!newsletterPending) {
+            return;
+          }
+          resetNewsletterPendingState();
+          if (newsletterForm) {
+            newsletterForm.reset();
+          }
+          setNewsletterStatus('Subscription sent successfully.', 'success');
+        }, 500);
+      });
     }
 
     window.addEventListener('message', event => {
