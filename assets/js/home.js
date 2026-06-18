@@ -842,7 +842,7 @@
 
       window.setTimeout(() => {
         newsletterForm.reset();
-        setNewsletterStatus('Subscription sent. If the Google Apps Script is deployed correctly, the email should appear in the sheet shortly.', 'success');
+        setNewsletterStatus('Subscription sent successfully.', 'success');
         newsletterSubmit.disabled = false;
       }, 900);
     }
