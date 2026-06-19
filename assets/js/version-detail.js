@@ -46,7 +46,6 @@
   function setVersionAccessLinks(versionData) {
     const githubLink = document.getElementById("versionGithubLink");
     const releaseIndexLink = document.getElementById("versionReleaseIndexLink");
-    const downloadLink = document.getElementById("versionDownloadLink");
     const accessDescription = document.getElementById("versionAccessDescription");
     const accessMeta = document.getElementById("versionAccessMeta");
 
@@ -57,15 +56,6 @@
 
     if (releaseIndexLink) {
       releaseIndexLink.href = versionData.releaseIndexUrl || DEFAULT_GITHUB_FALLBACK;
-    }
-
-    if (downloadLink) {
-      if (versionData.downloadUrl) {
-        downloadLink.href = versionData.downloadUrl;
-        downloadLink.hidden = false;
-      } else {
-        downloadLink.hidden = true;
-      }
     }
 
     if (accessDescription) {
