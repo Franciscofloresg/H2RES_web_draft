@@ -231,6 +231,12 @@
   pointer-events: none;
 }
 
+.version-index .node-label-sub {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--accent);
+}
+
 .version-index .node-link:hover .node-box,
 .version-index .node-link:focus .node-box {
   stroke: var(--accent);
@@ -349,6 +355,16 @@
   margin-bottom: 4px;
   font-size: 15px;
   letter-spacing: -0.01em;
+}
+
+.version-index .version-card .version-card-tag {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .version-index .version-card span {
@@ -551,6 +567,15 @@
   gap: 8px;
   flex-wrap: wrap;
   margin-top: 16px;
+}
+
+.version-detail .version-tag {
+  margin: 2px 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .version-detail .access-card {

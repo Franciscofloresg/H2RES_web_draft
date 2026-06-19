@@ -96,6 +96,7 @@
     setSectionVisibility(true);
     document.title = version.name + " - H2RES Model";
     document.getElementById("crumbVersionName").textContent = version.name;
+    document.getElementById("versionTag").textContent = version.versionTag || "H2RES version";
     document.getElementById("versionName").textContent = version.name;
     document.getElementById("versionSubtitle").textContent = version.subtitle;
     document.getElementById("versionDescription").textContent = version.description;

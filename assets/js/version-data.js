@@ -3,9 +3,10 @@ const DEFAULT_VERSION_GITHUB_URL = SITE_LINKS.coreReleases || SITE_LINKS.githubR
 
 window.H2RES_VERSION_DATA = {
   "v1-0": {
-    name: "H2RES v1.0",
+    versionTag: "H2RES v1.0",
+    name: "Baseline Core Model",
     link: "../versions/version.html?id=v1-0",
-    treeLabel: "H2RES v1.0",
+    treeLabel: "Baseline Core",
     timelineNote: "Initial version",
     cardSummary: "Baseline integrated optimization model for hourly long-term energy planning and transition pathway analysis.",
     preview: "Baseline open-source model for hourly long-term energy planning with capacity expansion, system operation, sector coupling, storage, hydrogen, and power-to-X.",
@@ -59,13 +60,14 @@ window.H2RES_VERSION_DATA = {
       "You are specifically looking for a more advanced version tailored to myopic or multizonal-myopic analysis."
     ],
     links: [
-      { id: "v1-1", label: "H2RES v1.1", note: "Next model in the diagram" }
+      { id: "v1-1", label: "Adequacy and Preprocessing Update", note: "Next model in the diagram" }
     ]
   },
   "v1-1": {
-    name: "H2RES v1.1",
+    versionTag: "H2RES v1.1",
+    name: "Adequacy and Preprocessing Update",
     link: "../versions/version.html?id=v1-1",
-    treeLabel: "H2RES v1.1",
+    treeLabel: "Adequacy Update",
     timelineNote: "Derived from v1.0",
     cardSummary: "Version upgrade with explicit unmet-service variables, scarcity penalties, and improved data-processing traceability.",
     preview: "v1.1 extends the baseline model with explicit unmet-service variables, transparent scarcity penalties, new scenario controls, and updated preprocessing for active data packages.",
@@ -120,14 +122,15 @@ window.H2RES_VERSION_DATA = {
       "You need a full-horizon implementation that does not rely on the reduced time-horizon setting currently present in the v1.1 code."
     ],
     links: [
-      { id: "v1-0", label: "H2RES v1.0", note: "Previous model" },
-      { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Next model" }
+      { id: "v1-0", label: "Baseline Core Model", note: "Previous model" },
+      { id: "v1-2-myopic", label: "Myopic Planning Extension", note: "Next model" }
     ]
   },
   "v1-2-myopic": {
-    name: "H2RES v1.2 (Myopic)",
+    versionTag: "H2RES v1.2",
+    name: "Myopic Planning Extension",
     link: "../versions/version.html?id=v1-2-myopic",
-    treeLabel: "H2RES v1.2 (Myopic)",
+    treeLabel: "Myopic Planning",
     timelineNote: "Derived from v1.1",
     cardSummary: "Version focused on rolling-horizon planning behavior and phased transition analysis.",
     preview: "v1.2 introduces a rolling-horizon counterpart to the core model, explicit horizon controls, investment carryover between windows, overflow investment penalties, and monetized hydro spill handling.",
@@ -182,15 +185,16 @@ window.H2RES_VERSION_DATA = {
       "You require spatial detail across multiple zones rather than a single-system myopic formulation."
     ],
     links: [
-      { id: "v1-1", label: "H2RES v1.1", note: "Previous model" },
-      { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Forward model" },
-      { id: "v2-0", label: "H2RES v2.0", note: "Downstream model" }
+      { id: "v1-1", label: "Adequacy and Preprocessing Update", note: "Previous model" },
+      { id: "v1-3-multizonal-myopic", label: "Multizonal Myopic Extension", note: "Forward model" },
+      { id: "v2-0", label: "Next-Generation Model", note: "Downstream model" }
     ]
   },
   "v1-3-multizonal-myopic": {
-    name: "H2RES v1.3 (Multizonal Myopic)",
+    versionTag: "H2RES v1.3",
+    name: "Multizonal Myopic Extension",
     link: "../versions/version.html?id=v1-3-multizonal-myopic",
-    treeLabel: "H2RES v1.3 (Multizonal Myopic)",
+    treeLabel: "Multizonal Myopic",
     timelineNote: "Derived from v1.2",
     cardSummary: "Advanced v1.x model combining multizonal structure, transfer decisions, and staged pathway analysis.",
     preview: "v1.3 restructures the model around an explicit multizone architecture with regional variables, bilateral electricity transfers, endogenous transfer investment, national policy layers, and rolling-horizon sequencing managed through the workflow wrapper.",
@@ -245,14 +249,15 @@ window.H2RES_VERSION_DATA = {
       "You need a more specialized downstream model focused specifically on e-fuels rather than general regional coupling."
     ],
     links: [
-      { id: "v1-2-myopic", label: "H2RES v1.2 (Myopic)", note: "Previous model" },
-      { id: "v1-4-efuels", label: "H2RES v1.4 (efuels)", note: "Next model" }
+      { id: "v1-2-myopic", label: "Myopic Planning Extension", note: "Previous model" },
+      { id: "v1-4-efuels", label: "E-fuels Extension", note: "Next model" }
     ]
   },
   "v1-4-efuels": {
-    name: "H2RES v1.4 (efuels)",
+    versionTag: "H2RES v1.4",
+    name: "E-fuels Extension",
     link: "../versions/version.html?id=v1-4-efuels",
-    treeLabel: "H2RES v1.4 (efuels)",
+    treeLabel: "E-fuels Extension",
     timelineNote: "Derived from v1.3",
     cardSummary: "Documentation in preparation for the downstream e-fuels branch.",
     preview: "Documentation for v1.4 is currently in preparation. This version is expected to extend the v1.3 regional line with e-fuels-specific modeling and sector-coupling details.",
@@ -306,13 +311,14 @@ window.H2RES_VERSION_DATA = {
       "You need version-specific implementation details that have not yet been published."
     ],
     links: [
-      { id: "v1-3-multizonal-myopic", label: "H2RES v1.3 (Multizonal Myopic)", note: "Previous model" }
+      { id: "v1-3-multizonal-myopic", label: "Multizonal Myopic Extension", note: "Previous model" }
     ]
   },
   "v2-0": {
-    name: "H2RES v2.0",
+    versionTag: "H2RES v2.0",
+    name: "Next-Generation Model",
     link: "../versions/version.html?id=v2-0",
-    treeLabel: "H2RES v2.0",
+    treeLabel: "Next-Generation",
     timelineNote: "Derived from v1.2 (parallel major line)",
     cardSummary: "Documentation in preparation for the next-generation major version.",
     preview: "Documentation for v2.0 is currently under development. This version is shown as the next major downstream line, but its full methodological description is still being assembled.",

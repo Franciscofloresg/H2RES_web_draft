@@ -17,7 +17,7 @@
       const card = document.createElement("a");
       card.className = "version-card";
       card.href = version.link;
-      card.innerHTML = "<strong>" + version.name + "</strong><span>" + (version.cardSummary || version.preview || "") + "</span>";
+      card.innerHTML = `<strong>${version.name}</strong><span class="version-card-tag">${version.versionTag || ""}</span><span>${version.cardSummary || version.preview || ""}</span>`;
       grid.appendChild(card);
     });
   }
@@ -87,15 +87,15 @@
     const selectA = document.getElementById("compareVersionA");
     const selectB = document.getElementById("compareVersionB");
     if (!selectA || !selectB) return;
-    const options = Object.entries(VERSION_DATA).map(([id, version]) => ({ id, name: version.name }));
+    const options = Object.entries(VERSION_DATA).map(([id, version]) => ({ id, name: version.name, tag: version.versionTag || "" }));
     options.forEach((option) => {
       const optionA = document.createElement("option");
       optionA.value = option.id;
-      optionA.textContent = option.name;
+      optionA.textContent = option.tag ? `${option.name} (${option.tag})` : option.name;
       selectA.appendChild(optionA);
       const optionB = document.createElement("option");
       optionB.value = option.id;
-      optionB.textContent = option.name;
+      optionB.textContent = option.tag ? `${option.name} (${option.tag})` : option.name;
       selectB.appendChild(optionB);
     });
     selectA.value = "v1-2-myopic";
