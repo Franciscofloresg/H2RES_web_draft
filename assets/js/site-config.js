@@ -2,6 +2,7 @@
   const siteConfig = {
     links: {
       githubRepo: "https://github.com/H2RES-model",
+      coreReleases: "https://github.com/H2RES-model/H2RES-core/releases",
       website: "https://h2res.org/",
       summerSchool: "https://www.sdewes.org/summerschool/2026/",
       youtube: "https://www.youtube.com/@H2REScommunity",

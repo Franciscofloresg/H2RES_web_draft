@@ -1,4 +1,5 @@
-﻿const DEFAULT_VERSION_GITHUB_URL = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links && window.H2RES_SITE_CONFIG.links.githubRepo) || "https://github.com/H2RES-model";
+﻿const SITE_LINKS = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links) || {};
+const DEFAULT_VERSION_GITHUB_URL = SITE_LINKS.coreReleases || SITE_LINKS.githubRepo || "https://github.com/H2RES-model/H2RES-core/releases";
 
 window.H2RES_VERSION_DATA = {
   "v1-0": {
@@ -18,10 +19,12 @@ window.H2RES_VERSION_DATA = {
     description: "H2RES v1.0 is the baseline open-source model version for long-term energy planning at hourly resolution. It is designed to evaluate transition pathways in integrated energy systems by combining capacity expansion, technology retirement, system operation, sector coupling, storage, hydrogen, and power-to-X options within a single optimization framework.",
     lineage: "Root of this model tree",
     status: "Reference version",
-    githubUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubUrl: "https://github.com/H2RES-model/H2RES-core/releases/tag/v1.0",
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page to understand the scope of H2RES v1.0 and open GitHub for the implementation, source files, and release-level code associated with this baseline version.",
+    githubButtonText: "Open GitHub Release",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "Release page configured for H2RES v1.0.",
+    githubDescription: "Use this page to understand the scope of H2RES v1.0, then open the GitHub release page associated with this baseline version.",
     resources: {
       formulationUrl: "../assets/version-resources/v1-0/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v1-0/user-manual.pdf",
@@ -76,10 +79,12 @@ window.H2RES_VERSION_DATA = {
     description: "H2RES v1.1 builds directly on the v1.0 baseline while introducing a clearer implementation of adequacy relaxation, unmet-service accounting, and active data preprocessing. It keeps the integrated long-term optimization structure, but adds explicit unmet-service variables for electricity and heat services, monetized scarcity terms in the objective, scenario controls affecting CEEP and fossil dispatch, and an updated CSV/XLSX preprocessing workflow for active data packages and technology-specific CAPEX trajectories.",
     lineage: "Derived from H2RES v1.0",
     status: "Reference upgrade within v1.x",
-    githubUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubUrl: "https://github.com/H2RES-model/H2RES-core/releases/tag/v1.1",
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page to review the methodological updates in H2RES v1.1 and open GitHub for the implementation and source files associated with this release line.",
+    githubButtonText: "Open GitHub Release",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "Release page configured for H2RES v1.1.",
+    githubDescription: "Use this page to review the methodological updates in H2RES v1.1, then open the GitHub release page associated with this release line.",
     resources: {
       formulationUrl: "../assets/version-resources/v1-1/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v1-1/user-manual.pdf",
@@ -136,10 +141,12 @@ window.H2RES_VERSION_DATA = {
     description: "H2RES v1.2 extends the v1.1 structure by adding a rolling-horizon counterpart to the core optimization model while preserving the integrated system representation. It introduces explicit horizon controls for periods, years, and windows, investment carryover logic between linked subproblems, overflow investment variables with penalty costs, and monetized hydro spillage. The result is a version suited to phased or myopic pathway analysis while remaining directly comparable with full-horizon studies.",
     lineage: "Derived from H2RES v1.1",
     status: "Major transition-planning upgrade",
-    githubUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubUrl: "https://github.com/H2RES-model/H2RES-core/releases/tag/v1.2",
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page to understand the rolling-horizon logic of H2RES v1.2 and open GitHub for the implementation and source files associated with this version.",
+    githubButtonText: "Open GitHub Release",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "Release page configured for H2RES v1.2.",
+    githubDescription: "Use this page to understand the rolling-horizon logic of H2RES v1.2, then open the GitHub release page associated with this version.",
     resources: {
       formulationUrl: "../assets/version-resources/v1-2-myopic/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v1-2-myopic/user-manual.pdf",
@@ -197,10 +204,12 @@ window.H2RES_VERSION_DATA = {
     description: "H2RES v1.3 preserves the sector-coupled logic of earlier releases but restructures the implementation around an explicit multizone architecture. Core operational, investment, storage, heat, hydrogen, import, and emissions variables are instantiated by system and linked through bilateral inter-system electricity flows, endogenous transfer-capacity investments, and national policy layers. Rolling-horizon execution is embedded procedurally through the workflow wrapper rather than a separate builder, making this version appropriate for regional pathway studies with cross-zone interactions.",
     lineage: "Derived from H2RES v1.2 (Myopic)",
     status: "Advanced regional planning upgrade",
-    githubUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubUrl: "https://github.com/H2RES-model/H2RES-core/releases/tag/v1.3",
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page to review the multizonal-myopic scope of H2RES v1.3 and open GitHub for the implementation and source files associated with this regional release line.",
+    githubButtonText: "Open GitHub Release",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "Release page configured for H2RES v1.3.",
+    githubDescription: "Use this page to review the multizonal-myopic scope of H2RES v1.3, then open the GitHub release page associated with this regional release line.",
     resources: {
       formulationUrl: "../assets/version-resources/v1-3-multizonal-myopic/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v1-3-multizonal-myopic/user-manual.pdf",
@@ -259,8 +268,10 @@ window.H2RES_VERSION_DATA = {
     status: "Documentation in progress",
     githubUrl: DEFAULT_VERSION_GITHUB_URL,
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page for version guidance and open GitHub for the implementation space associated with the v1.4 e-fuels branch as documentation is completed.",
+    githubButtonText: "Open All Releases",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "General releases page configured while branch-specific release links are prepared.",
+    githubDescription: "Use this page for version guidance and open the general GitHub releases page while the branch-specific release entry for v1.4 is finalized.",
     resources: {
       formulationUrl: "../assets/version-resources/v1-4-efuels/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v1-4-efuels/user-manual.pdf",
@@ -317,8 +328,10 @@ window.H2RES_VERSION_DATA = {
     status: "Documentation in progress",
     githubUrl: DEFAULT_VERSION_GITHUB_URL,
     downloadUrl: "",
-    githubLabel: "Code access currently routes through the H2RES GitHub space.",
-    githubDescription: "Use this page for version guidance and open GitHub for the implementation space associated with the next-generation v2.0 line.",
+    githubButtonText: "Open All Releases",
+    releaseIndexUrl: DEFAULT_VERSION_GITHUB_URL,
+    githubLabel: "General releases page configured while v2.0 release material is prepared.",
+    githubDescription: "Use this page for version guidance and open the general GitHub releases page while the version-specific release entry for v2.0 is prepared.",
     resources: {
       formulationUrl: "../assets/version-resources/v2-0/model-formulation.pdf",
       manualUrl: "../assets/version-resources/v2-0/user-manual.pdf",

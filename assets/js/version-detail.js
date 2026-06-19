@@ -1,7 +1,8 @@
 (function () {
   const VERSIONS = window.H2RES_VERSION_DATA || {};
   const DEFAULT_RESOURCE_FALLBACK = "../model/index.html#model-resources";
-  const DEFAULT_GITHUB_FALLBACK = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links && window.H2RES_SITE_CONFIG.links.githubRepo) || "https://github.com/H2RES-model";
+  const SITE_LINKS = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links) || {};
+  const DEFAULT_GITHUB_FALLBACK = SITE_LINKS.coreReleases || SITE_LINKS.githubRepo || "https://github.com/H2RES-model/H2RES-core/releases";
   const params = new URLSearchParams(window.location.search);
   const versionId = params.get("id");
   const version = VERSIONS[versionId];
@@ -44,12 +45,18 @@
 
   function setVersionAccessLinks(versionData) {
     const githubLink = document.getElementById("versionGithubLink");
+    const releaseIndexLink = document.getElementById("versionReleaseIndexLink");
     const downloadLink = document.getElementById("versionDownloadLink");
     const accessDescription = document.getElementById("versionAccessDescription");
     const accessMeta = document.getElementById("versionAccessMeta");
 
     if (githubLink) {
       githubLink.href = versionData.githubUrl || DEFAULT_GITHUB_FALLBACK;
+      githubLink.textContent = versionData.githubButtonText || "View on GitHub";
+    }
+
+    if (releaseIndexLink) {
+      releaseIndexLink.href = versionData.releaseIndexUrl || DEFAULT_GITHUB_FALLBACK;
     }
 
     if (downloadLink) {
