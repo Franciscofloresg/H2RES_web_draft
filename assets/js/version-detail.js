@@ -124,13 +124,21 @@
     version.links.forEach((item) => {
       const link = document.createElement("a");
       link.className = "version-link";
-      link.href = "version.html?id=" + encodeURIComponent(item.id);
+      // If the target version points to a dedicated page (e.g. the H2RES 2.0
+      // model map), link there directly instead of through the version page.
+      const target = VERSIONS[item.id];
+      const direct = target && target.link && target.link.indexOf("version.html") === -1;
+      link.href = direct ? target.link : ("version.html?id=" + encodeURIComponent(item.id));
       link.innerHTML = "<strong>" + item.label + "</strong><span>" + item.note + "</span>";
       navWrap.appendChild(link);
     });
   }
 
-  if (document.readyState === "loading") {
+  if (version && version.redirectTo) {
+    // This version routes straight to a dedicated page (e.g. the interactive
+    // H2RES 2.0 model map) instead of the standard version profile.
+    window.location.replace(version.redirectTo);
+  } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", renderVersionPage);
   } else {
     renderVersionPage();

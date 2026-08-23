@@ -4,8 +4,14 @@
       githubRepo: "https://github.com/H2RES-model",
       coreReleases: "https://github.com/H2RES-model/H2RES-core/releases",
       website: "https://h2res.org/",
+      storemoreTool: "https://interreg-danube.eu/projects/storemore",
+      storemoreOnlineTool: "https://drstancin.taile0e096.ts.net",
+      storemoreManual: "../assets/storemore/StoreMore_User_Manual.pdf",
+      storemoreDescription: "../assets/storemore/StoreMore_model_description.pdf",
       summerSchool: "https://www.sdewes.org/summerschool/2026/",
       youtube: "https://www.youtube.com/@H2REScommunity",
+      linkedin: "https://www.linkedin.com/company/h2res-energy-system-model",
+      x: "https://x.com/H2RES_Official",
       newsletterEndpoint: "https://script.google.com/macros/s/AKfycbxKY_VFE4v7mEZt7niy7p6fSgOcruP2uVHFx-fpRmxr-V0GaigjUc5URzUiWrRyjsYxGA/exec"
     },
     navLabels: {
@@ -16,7 +22,8 @@
       team: "Team",
       community: "Community",
       modelResources: "Model Resources",
-      model: "Model"
+      model: "Model",
+      storemore: "StoreMore tool"
     },
     labels: {
       newsletterSource: "H2RES website"

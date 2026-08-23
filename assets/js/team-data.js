@@ -1,3 +1,7 @@
+// To show a member's photo: drop the image in assets/team/ and set its
+// `photo` path below, e.g. photo: "../assets/team/felipe-feijoo.jpg".
+// When `photo` is empty, an initials monogram is shown automatically
+// (and if a photo path is set but fails to load, it falls back to initials).
 window.H2RES_TEAM_DATA = {
       "felipe-feijoo": {
         name: "Felipe Feijoo",
@@ -89,15 +93,6 @@ window.H2RES_TEAM_DATA = {
         topics: ["Carbon capture technologies", "Renewable energy sources", "Industrial energy transition", "Energy systems modelling", "Decarbonization", "Energy management"],
         aliases: ["ana redep", "ana re\u0111ep", "ana", "redep", "re\u0111ep"]
       },
-      "katarina-misic": {
-        name: "Katarina Mi\u0161i\u0107",
-        role: "Research Contributor",
-        institution: "University of Zagreb",
-        photo: "",
-        bio: "Katarina Mi\u0161i\u0107 is a PhD student and University Research Assistant at the Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb, within the Department of Energy, Power and Environmental Engineering. Her doctoral research focuses on integration of high temperature thermal energy storage into intensive industrial processes.",
-        topics: ["High thermal energy storage", "Electrification", "Industry", "Energy planning"],
-        aliases: ["katarina misic", "katarina mi\u0161i\u0107", "katarina", "misic", "mi\u0161i\u0107"]
-      },
       "daniele-groppi": {
         name: "Daniele Groppi",
         role: "Scientific Advisory Board",
@@ -156,7 +151,7 @@ window.H2RES_TEAM_DATA = {
         name: "Henrik Lund",
         role: "Scientific Advisory Board",
         institution: "Aalborg University",
-        photo: "https://i.pravatar.cc/400?img=65",
+        photo: "",
         bio: "Advisor on smart energy systems and methodologies for integrating variable renewable resources.",
         topics: ["Smart energy systems", "Scenario methods", "Wind integration"],
         aliases: ["henrik lund", "lund"]
@@ -165,7 +160,7 @@ window.H2RES_TEAM_DATA = {
         name: "Maria da Graca Carvalho",
         role: "Scientific Advisory Board",
         institution: "University of Lisbon",
-        photo: "https://i.pravatar.cc/400?img=45",
+        photo: "",
         bio: "Advisor in policy-relevant energy modeling and sustainable transition pathways for integrated systems.",
         topics: ["Energy policy", "Sustainable transitions", "Integrated planning"],
         aliases: ["maria da graca carvalho", "carvalho", "maria carvalho"]
@@ -174,7 +169,7 @@ window.H2RES_TEAM_DATA = {
         name: "Goran Krajacic",
         role: "Scientific Advisory Board",
         institution: "University of Zagreb",
-        photo: "https://i.pravatar.cc/400?img=19",
+        photo: "",
         bio: "Advisor on system integration, sector coupling, and renewable technologies in long-term planning studies.",
         topics: ["Sector coupling", "Renewable technologies", "System integration"],
         aliases: ["goran krajacic", "krajacic", "goran kraja"]
@@ -184,7 +179,7 @@ window.H2RES_TEAM_DATA = {
 window.H2RES_TEAM_HOME = {
   core: [
     { id: 'felipe-feijoo', cardName: 'Prof. Felipe Feijoo', cardSubtitle: 'Pontificia Universidad Catolica de Valparaiso' },
-    { id: 'luka-herc', cardName: 'Dr(c). Luka Herc', cardSubtitle: 'University of Zagreb' },
+    { id: 'luka-herc', cardName: 'Luka Herc', cardSubtitle: 'University of Zagreb' },
     { id: 'vladimir-gjorgievski', cardName: 'Dr. Vladimir Z. Gjorgievski', cardSubtitle: 'Ss. Cyril and Methodius University in Skopje, North Macedonia' },
     { id: 'abhishake-kundu', cardName: 'Dr. Abhishake Kundu', cardSubtitle: 'Pontificia Universidad Catolica de Valparaiso' },
     { id: 'antun-pfeifer', cardName: 'Dr. Antun Pfeifer', cardSubtitle: 'University of Zagreb' },
@@ -195,12 +190,11 @@ window.H2RES_TEAM_HOME = {
     { id: 'doris-beljan', cardName: 'Doris Beljan', cardSubtitle: 'Research Contributor' },
     { id: 'marko-starcevic', cardName: 'Marko Starčević', cardSubtitle: 'Research Contributor' },
     { id: 'sebastian-gajardo', cardName: 'Sebastian Gajardo', cardSubtitle: 'Research Contributor' },
-    { id: 'ana-redep', cardName: 'Ana Ređep', cardSubtitle: 'Research Contributor' },
-    { id: 'katarina-misic', cardName: 'Katarina Mišić', cardSubtitle: 'Research Contributor' }
+    { id: 'ana-redep', cardName: 'Ana Ređep', cardSubtitle: 'Research Contributor' }
   ],
   advisory: [
-    { id: 'daniele-groppi', cardName: 'Assoc. Prof. Dr. Sc. Daniele Groppi', cardSubtitle: 'Sapienza Universita di Roma, Rome, Italy', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=57202131447' },
-    { id: 'henning-meschede', cardName: 'Prof. Dr. Sc. Henning Meschede', cardSubtitle: 'Paderborn University, Paderborn, Germany', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=57189089952' },
+    { id: 'daniele-groppi', cardName: 'Prof. Daniele Groppi', cardSubtitle: 'Sapienza Universita di Roma, Rome, Italy', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=57202131447' },
+    { id: 'henning-meschede', cardName: 'Prof. Henning Meschede', cardSubtitle: 'Paderborn University, Paderborn, Germany', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=57189089952' },
     { id: 'gregorio-iglesias', cardName: 'Prof. Gregorio Iglesias', cardSubtitle: 'University College Cork, Cork, Ireland', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=56261589800' },
     { id: 'francesco-calise', cardName: 'Prof. Francesco Calise', cardSubtitle: 'University of Naples Federico II, Naples, Italy', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=14010425600' },
     { id: 'lorenzo-pastore', cardName: 'Prof. Lorenzo Pastore', cardSubtitle: 'Sapienza Universita di Roma, Rome, Italy', scopusUrl: 'https://www.scopus.com/authid/detail.uri?authorId=57220190954' }

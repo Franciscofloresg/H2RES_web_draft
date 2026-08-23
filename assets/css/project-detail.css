@@ -189,3 +189,9 @@
     max-width: 160px;
   }
 }
+
+/* Dark theme */
+[data-theme="dark"] .project-card { background: linear-gradient(145deg, var(--card), #131b1f); }
+[data-theme="dark"] .keyword-chip,
+[data-theme="dark"] .status-box,
+[data-theme="dark"] .funding-card { background: #1a2329; }

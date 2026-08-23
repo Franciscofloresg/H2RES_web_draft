@@ -266,3 +266,16 @@
     font-size: 15px;
   }
 }
+
+/* Dark theme */
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .pub-section { background: linear-gradient(145deg, var(--card), #131b1f); }
+[data-theme="dark"] .profile-photo { background: #1a2329; }
+[data-theme="dark"] .topic-chip,
+[data-theme="dark"] .member-pub-tab,
+[data-theme="dark"] .pub-status,
+[data-theme="dark"] .empty-box,
+[data-theme="dark"] .pub-item { background: #1a2329; }
+[data-theme="dark"] .pub-item:hover { background: #202b31; }
+[data-theme="dark"] .pub-item.expanded { background: rgba(64,181,157,.10); box-shadow: 0 16px 28px rgba(0,0,0,.4); }
+[data-theme="dark"] .pub-meta { color: var(--muted); }

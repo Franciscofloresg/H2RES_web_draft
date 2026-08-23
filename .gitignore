@@ -1,0 +1,12 @@
+# --- H2RES website repo: keep it to the site, not the workspace ---
+
+# Retired/scratch files (safe to delete this folder entirely)
+_to_delete/
+.agents/
+
+# Session artifact (an audit written during editing; not part of the site)
+auditoria-h2res.md
+
+# Model release source (88 files). It is NOT currently in the repo.
+# Delete the next line if you DO want the model source in this repo.
+_model_src/

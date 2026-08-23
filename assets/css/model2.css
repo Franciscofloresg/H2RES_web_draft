@@ -1,0 +1,368 @@
+/* H2RES 2.0 interactive model map — hub diagram + module pages */
+
+:root {
+  --hub-power: #159389;
+  --hub-heat: #c56f43;
+  --hub-efuel: #4f83bf;
+  --hub-transport: #4f897d;
+  --hub-frame-bg: #ffffff;
+  --hub-frame-text: #475569;
+  --hub-edge: #94a3b8;
+  --hub-edge-hover: #159389;
+  --hub-node-text: #ffffff;
+}
+[data-theme="dark"] {
+  --hub-power: #2FA595;
+  --hub-heat: #C77E52;
+  --hub-efuel: #5E97CC;
+  --hub-transport: #6FA24A;
+  --hub-frame-bg: #1B242A;
+  --hub-frame-text: #A6B6BC;
+  --hub-edge: #55636B;
+  --hub-edge-hover: #40B59D;
+  --hub-node-text: #ffffff;
+}
+
+/* ---------- Hub diagram ---------- */
+.hub-card { padding: 20px 16px 14px; }
+
+.hub-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hub-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.hub-svg text {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+/* Nodes */
+.hub-node rect {
+  transition: transform 0.18s ease, filter 0.18s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hub-node:hover rect,
+.hub-node:focus-visible rect {
+  filter: brightness(1.06);
+  transform: scale(1.03);
+}
+.hub-node:focus-visible {
+  outline: none;
+}
+.hub-node:focus-visible rect {
+  stroke: var(--hub-edge-hover);
+  stroke-width: 3;
+}
+
+.hub-node text {
+  font-size: 25px;
+  font-weight: 700;
+  fill: var(--hub-node-text);
+}
+.hub-node .hub-power-label { font-size: 30px; letter-spacing: 0.04em; }
+.hub-node .hub-sub {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.hub-node--power rect { fill: var(--hub-power); }
+.hub-node--heat rect { fill: var(--hub-heat); }
+.hub-node--efuel rect { fill: var(--hub-efuel); }
+.hub-node--transport rect { fill: var(--hub-transport); }
+
+.hub-node--frame rect {
+  fill: var(--hub-frame-bg);
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+}
+.hub-node--frame text {
+  fill: var(--hub-frame-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+.hub-node--frame .hub-sub { font-size: 11px; font-weight: 500; }
+
+/* Edges */
+.hub-edge line,
+.hub-edge path {
+  stroke: var(--hub-edge);
+  stroke-width: 2.4;
+  fill: none;
+  marker-end: url(#arrow);
+  transition: stroke 0.18s ease, stroke-width 0.18s ease;
+  cursor: pointer;
+}
+.hub-edge--chp path {
+  stroke-dasharray: 6 5;
+  marker-start: url(#arrowStart);
+}
+.hub-edge:hover line,
+.hub-edge:hover path,
+.hub-edge:focus-visible line,
+.hub-edge:focus-visible path {
+  stroke: var(--hub-edge-hover);
+  stroke-width: 3.4;
+}
+#arrow path,
+#arrowStart path {
+  stroke: var(--hub-edge);
+}
+
+.hub-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 12px auto 2px;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+/* ---------- Module chips (map + fallback nav) ---------- */
+.module-chip-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.module-chip {
+  display: block;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-left: 4px solid var(--hub-edge);
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.module-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.module-chip strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 4px; }
+.module-chip span { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.module-chip--sector { border-left-color: var(--accent); }
+.module-chip--core { border-left-color: var(--hub-frame-text); }
+.module-chip--link { border-left-color: var(--hub-efuel); }
+
+/* ---------- Module page ---------- */
+.module-hero .module-tech { margin-top: 16px; }
+.module-tech, .assume-list { }
+
+.tech-chip {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.module-para {
+  color: var(--text);
+  line-height: 1.72;
+  font-size: 15.5px;
+  margin: 0 0 12px;
+}
+.module-para:last-child { margin-bottom: 0; }
+
+.eq-caption { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); }
+
+.equation {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.equation:first-child { border-top: none; padding-top: 4px; }
+.equation-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.equation-render {
+  color: var(--text);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 2px;
+}
+.equation-render .katex { color: var(--text); font-size: 1.12em; }
+.equation-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.68;
+  margin: 2px 0 14px;
+}
+
+.assume-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text);
+}
+.assume-list li { margin-bottom: 8px; line-height: 1.6; font-size: 15px; }
+
+.module-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.module-nav-link {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.module-nav-link:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 620px) {
+  .hub-node text { font-size: 22px; }
+  .hub-node .hub-power-label { font-size: 26px; }
+  .equation-render .katex { font-size: 1em; }
+}
+
+/* ============================================================
+   H2RES 2.0 — four-sector interactive System map
+   ============================================================ */
+:root {
+  --sm-power: #0e7a70;
+  --sm-heat: #7c3aed;
+  --sm-efuel: #2563eb;
+  --sm-transport: #15803d;
+}
+[data-theme="dark"] {
+  --sm-power: #12a394;
+  --sm-heat: #9366f0;
+  --sm-efuel: #4f83e6;
+  --sm-transport: #2fa85f;
+}
+
+.sm-title {
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  margin: 4px 0 20px;
+}
+
+.sm-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.sm-block {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--c);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.sm-block:hover,
+.sm-block:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  outline: none;
+}
+.sm-block:focus-visible { border-color: var(--c); }
+.sm-block:hover .sm-go { transform: translateX(3px); }
+
+.sm-head { display: flex; align-items: center; gap: 11px; padding: 13px 14px 10px; }
+.sm-badge {
+  width: 34px; height: 34px; border-radius: 9px; flex: 0 0 auto;
+  background: var(--c); color: #fff; font-weight: 800; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.sm-heti b { font-size: 16px; color: var(--text); letter-spacing: 0.01em; }
+.sm-heti small { display: block; color: var(--muted); font-size: 11.5px; margin-top: 1px; }
+.sm-go { margin-left: auto; color: var(--c); font-size: 18px; font-weight: 700; transition: transform 0.18s ease; }
+
+.sm-groups { padding: 0 12px 12px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.sm-gl { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 2px 0 6px; font-weight: 700; }
+.sm-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.sm-chip {
+  background: var(--c); color: #fff; border-radius: 8px; padding: 6px 9px;
+  font-size: 11px; font-weight: 800; line-height: 1.15; text-align: center;
+}
+.sm-chip small { display: block; font-weight: 500; opacity: 0.9; font-size: 9px; }
+
+.sm-demand {
+  margin: auto 12px 12px; border: 1.5px dashed var(--c);
+  color: var(--text); background: color-mix(in srgb, var(--c) 7%, var(--card));
+  border-radius: 11px; padding: 8px 10px; font-size: 11.5px; font-weight: 800; text-align: center;
+}
+.sm-demand small { display: block; font-weight: 500; color: var(--muted); font-size: 10px; }
+
+/* Electricity bus rail (coupling) */
+.sm-bus {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 16px; text-decoration: none;
+  background: linear-gradient(90deg, #0e7a70, #0b645c);
+  border-radius: 14px; padding: 13px 16px; color: #fff;
+  box-shadow: 0 12px 26px rgba(14, 122, 112, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.sm-bus:hover, .sm-bus:focus-visible { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(14,122,112,0.36); outline: none; }
+.sm-bus:hover .sm-go { transform: translateX(3px); }
+.sm-bus b { font-size: 14px; letter-spacing: 0.02em; }
+.sm-bus-tags { display: flex; gap: 9px; flex-wrap: wrap; }
+.sm-tag { background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 10px; font-size: 11.5px; font-weight: 700; }
+.sm-bus .sm-go { color: #fff; margin-left: auto; }
+
+.sm-h2note { text-align: center; color: var(--muted); font-size: 12.5px; margin: 10px auto 0; }
+.sm-h2note b { color: var(--sm-efuel); }
+.sm-chp { color: var(--sm-heat); font-weight: 800; }
+
+/* Policies bar */
+.sm-policies {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 14px; text-decoration: none;
+  border: 1px solid var(--line); background: var(--card);
+  border-radius: 13px; padding: 11px 14px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.sm-policies:hover, .sm-policies:focus-visible { border-color: var(--accent); box-shadow: var(--shadow); outline: none; }
+.sm-pol-lab { font-weight: 800; color: var(--text); font-size: 13px; }
+.sm-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.sm-pill { border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; background: color-mix(in srgb, var(--muted) 6%, var(--card)); font-weight: 600; color: var(--muted); font-size: 11.5px; }
+
+.sm-hint { text-align: center; color: var(--muted); font-size: 12.5px; margin: 16px auto 0; max-width: 720px; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .sm-cols { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .sm-cols { grid-template-columns: 1fr; }
+  .sm-title { font-size: 28px; }
+}
+
+.hero .sm-map { margin-top: 44px; }
+
+/* Module tab bar (sector navigation on the formulation pages) */
+.module-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 22px; }
+.module-tab { font-size: 13px; font-weight: 600; color: var(--muted); text-decoration: none; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); transition: color .15s, border-color .15s, background .15s; white-space: nowrap; }
+.module-tab:hover { color: var(--accent); border-color: var(--accent); }
+.module-tab.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+
+/* On narrow screens let the (now many) module tabs scroll horizontally
+   instead of wrapping into several rows. */
+@media (max-width: 640px) {
+  .module-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .module-tab { flex: 0 0 auto; }
+}

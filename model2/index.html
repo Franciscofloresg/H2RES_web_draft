@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H2RES 2.0 — System Structure</title>
+  <meta name="description" content="Interactive system-structure map of the H2RES 2.0 coupled energy-system model: generation and flexibility, secondary transformation (electricity, hydrogen, e-fuels, heat), and final demand — solved together. Click a block to open its sector page and equations.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://h2res.org/model2/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="H2RES 2.0 — System Structure">
+  <meta property="og:description" content="Interactive system-structure map of the H2RES 2.0 coupled energy-system model: generation and flexibility, secondary transformation, and final demand — solved together.">
+  <meta property="og:url" content="https://h2res.org/model2/">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="H2RES 2.0 — System Structure">
+  <meta name="twitter:description" content="Interactive system-structure map of the H2RES 2.0 coupled energy-system model, solved together as one linear program.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link rel="stylesheet" href="../assets/css/model2.css">
+  <link rel="stylesheet" href="../assets/css/diagram.css">
+</head>
+<body class="h2res-shell model2-page" data-shell-root="../" data-shell-active="model">
+  <div data-site-shell-header></div>
+
+  <main class="page-shell">
+    <div class="container">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../model/index.html">Model</a> / <span aria-current="page">H2RES 2.0</span></nav>
+      <h1 class="sm-title">H2RES 2.0</h1>
+
+      <div class="schematic diagram-v2">
+              <div class="schematic-inner">
+                <div class="schematic-headers">
+                  <div class="schematic-header-main">Generation and Flexibility options</div>
+                  <div class="schematic-header-secondary">Secondary transformation sectors</div>
+                  <div class="schematic-header-demand">End-use sectors</div>
+                </div>
+
+                <div class="schematic-content">
+                  <!-- ===== Band 1: generation & flexibility ===== -->
+                  <div class="schematic-generation">
+                    <div class="band-group g-nd">
+                      <a class="band-group-head" href="module.html?id=power"><span class="band-lab">Non-dispatchable</span><span class="band-go" aria-hidden="true">&rarr;</span></a>
+                      <div class="schematic-nodes">
+                        <a class="node node-teal" title="H2RES code: PHOT" href="module.html?id=power">Solar PV</a>
+                        <a class="node node-teal" title="H2RES code: WTON" href="module.html?id=power">Wind</a>
+                        <a class="node node-teal" title="H2RES code: HROR" href="module.html?id=power">Run-of-river</a>
+                      </div>
+                    </div>
+                    <div class="band-group g-disp">
+                      <a class="band-group-head" href="module.html?id=power"><span class="band-lab">Dispatchable &amp; storage</span><span class="band-go" aria-hidden="true">&rarr;</span></a>
+                      <div class="schematic-nodes">
+                        <a class="node node-orange" title="H2RES code: GTUR" href="module.html?id=power">Gas turbine</a>
+                        <a class="node node-orange" title="H2RES code: COMC" href="module.html?id=power">Combined cycle</a>
+                        <a class="node node-orange" title="H2RES code: HDAM" href="module.html?id=power">Hydro (dam)</a>
+                        <a class="node node-orange" title="H2RES code: HPHS" href="module.html?id=power">Pumped hydro</a>
+                        <a class="node node-white-dark" title="H2RES code: BESS" href="module.html?id=power">Battery</a>
+                      </div>
+                    </div>
+                    <div class="band-group g-heat">
+                      <a class="band-group-head" href="module.html?id=heat"><span class="band-lab">Heat generation</span><span class="band-go" aria-hidden="true">&rarr;</span></a>
+                      <div class="schematic-nodes">
+                        <a class="node node-white-dark" title="H2RES code: ATW_HP" href="module.html?id=heat">Heat pump</a>
+                        <a class="node node-white-dark" title="H2RES code: E_BOILER" href="module.html?id=heat">Electric boiler</a>
+                        <a class="node node-white-dark" title="H2RES code: BIO_BOILER" href="module.html?id=heat">Biomass boiler</a>
+                        <a class="node node-white-dark" title="H2RES code: H2_BOILER" href="module.html?id=heat">H₂ boiler</a>
+                        <a class="node node-white-dark" title="H2RES code: CHP" href="module.html?id=heat">CHP</a>
+                        <a class="node node-orange" title="H2RES code: TES" href="module.html?id=heat">Thermal storage</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ===== Band 2: secondary transformation (carriers) ===== -->
+                  <div class="schematic-transformation">
+                    <!-- E-fuels & feedstocks — exactly the carriers and processes
+                         documented in the H2RES 2.0 README (nothing beyond it). -->
+                    <div class="efuel-group efuel-group-big">
+                      <a class="efuel-group-label efuel-head" href="module.html?id=efuel">E-fuels &amp; feedstocks <span class="band-go" aria-hidden="true">&rarr;</span></a>
+                      <div class="efuel-carriers">
+                        <a class="node node-teal" title="Hydrogen" href="module.html?id=efuel">H₂</a>
+                        <a class="node node-efuel" title="Ammonia" href="module.html?id=efuel">NH₃</a>
+                        <a class="node node-efuel" title="Methanol" href="module.html?id=efuel">Methanol</a>
+                        <a class="node node-efuel" title="Methane" href="module.html?id=efuel">CH₄</a>
+                        <a class="node node-white-dark node-small" title="Carbon dioxide (feedstock)" href="module.html?id=efuel">CO₂</a>
+                        <a class="node node-white-dark node-small" title="Nitrogen (feedstock)" href="module.html?id=efuel">N₂</a>
+                      </div>
+                      <div class="efuel-sub">
+                        <span class="efuel-sub-lab">Conversion</span>
+                        <div class="schematic-row-center">
+                          <a class="node node-white-dark node-small" title="Power-to-hydrogen" href="module.html?id=efuel">Electrolysis</a>
+                          <a class="node node-white-dark node-small" title="Air separation → N₂" href="module.html?id=efuel">Air separation</a>
+                          <a class="node node-white-dark node-small" title="Direct air capture → CO₂" href="module.html?id=efuel">Direct air capture</a>
+                          <a class="node node-white-dark node-small" title="Ammonia / methanol synthesis" href="module.html?id=efuel">Synthesis</a>
+                          <a class="node node-white-dark node-small" title="Methanation → CH₄" href="module.html?id=efuel">Methanation</a>
+                        </div>
+                      </div>
+                      <div class="efuel-sub">
+                        <span class="efuel-sub-lab">Storage &amp; transport</span>
+                        <div class="schematic-row-center">
+                          <a class="node node-white-dark node-small" title="Carrier storage" href="module.html?id=efuel">Storage</a>
+                          <a class="node node-white-dark node-small" title="Pipelines (inter-zone & export)" href="module.html?id=efuel">Pipelines</a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="schematic-arrow" aria-hidden="true">&updownarrow;</div>
+
+                    <a class="node node-teal node-large" title="Central electricity bus" href="module.html?id=power">Electricity</a>
+                    <div class="schematic-row-center">
+                      <a class="node node-white-dark node-small" title="Air-to-water heat pump (ATW_HP)" href="module.html?id=heat">Heat pumps</a>
+                      <a class="node node-white-dark node-small" title="Smart charging V1G / V2G" href="module.html?id=transport">EV · V1G/V2G</a>
+                      <a class="node node-white-dark node-small" title="Battery storage (BESS)" href="module.html?id=power">BESS</a>
+                    </div>
+
+                    <div class="schematic-arrow" aria-hidden="true">&darr;</div>
+
+                    <div class="schematic-row-center">
+                      <a class="node node-purple node-small" title="District heat carrier" href="module.html?id=heat">District Heating</a>
+                      <a class="node node-purple node-small" title="Process / other heat carrier" href="module.html?id=heat">Other Heat</a>
+                    </div>
+                  </div>
+
+                  <!-- ===== Band 3: final demand ===== -->
+                  <div class="schematic-demand">
+                    <div class="band-group g-demand">
+                      <a class="band-group-head" href="module.html?id=demand"><span class="band-lab">Final demand</span><span class="band-go" aria-hidden="true">&rarr;</span></a>
+                      <div class="schematic-nodes">
+                        <a class="node node-green" title="Fleets & modes — charging none / dumb / V1G / V2G" href="module.html?id=transport">Transport</a>
+                        <a class="node node-green" href="module.html?id=demand">Buildings</a>
+                        <a class="node node-green" href="module.html?id=demand">Industry</a>
+                        <a class="node node-green" href="module.html?id=demand">Others</a>
+                      </div>
+                      <p class="demand-note">Industry also takes e-fuel feedstock and export.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coupling summary: shared electricity bus (reused from the model map) -->
+            <a class="sm-bus" href="module.html?id=coupling">
+              <b>⚡ Electricity bus — solved together</b>
+              <span class="sm-bus-tags">
+                <span class="sm-tag">Power → generates</span>
+                <span class="sm-tag">Heat ← HP / e-boiler</span>
+                <span class="sm-tag">E-fuels ← electrolysis · DAC</span>
+                <span class="sm-tag">Transport ⇄ charging · V2G</span>
+              </span>
+              <span class="sm-go" aria-hidden="true">→</span>
+            </a>
+            <p class="sm-h2note"><b>H₂ coupling</b> — E-fuels → Heat (H₂ boiler) · E-fuels → Transport (hydrogen fleets) &nbsp;·&nbsp; <span class="sm-chp">CHP</span> Power ↔ Heat</p>
+
+            <!-- Overlay 1: multi-system / multi-zone spine (fully generic) -->
+            <div class="spine">
+              <span class="spine-title">Systems or zones</span>
+              <div class="spine-row">
+                <a class="spine-zone" href="module.html?id=network">Zone A</a>
+                <span class="spine-link">═ transmission · H₂ pipeline ═</span>
+                <a class="spine-zone" href="module.html?id=network">Zone B</a>
+                <span class="spine-link">═ transmission · H₂ pipeline ═</span>
+                <a class="spine-zone" href="module.html?id=network">Zone …</a>
+                <span class="spine-trade">→ external trade</span>
+              </div>
+              <p class="spine-note">The structure above is solved for <b>each system or zone</b>; any number of zones can be linked by transmission lines and H₂ pipelines, with optional external trade at the boundary.</p>
+            </div>
+
+            <!-- Overlay 2: policies & investment (reused from the model map) -->
+            <a class="sm-policies" href="module.html?id=policies">
+              <span class="sm-pol-lab">Policies &amp; investment <span aria-hidden="true">→</span></span>
+              <span class="sm-pills">
+                <span class="sm-pill">CO₂ price</span><span class="sm-pill">CO₂ cap</span><span class="sm-pill">RES target</span><span class="sm-pill">Curtailment penalty</span><span class="sm-pill">DAC sequestration</span><span class="sm-pill">VOLL per bus</span><span class="sm-pill">CapexPaths / learning</span><span class="sm-pill">rolling horizon</span>
+              </span>
+            </a>
+
+      <p class="sm-hint">Hover a block for its model code; click to open its sector page. &nbsp;·&nbsp; <a href="module.html?id=limitations">Assumptions &amp; limitations &rarr;</a></p>
+    </div>
+  </main>
+
+  <div data-site-shell-footer></div>
+
+  <script src="../assets/js/site-config.js"></script>
+  <script src="../assets/js/site-shell.js"></script>
+</body>
+</html>

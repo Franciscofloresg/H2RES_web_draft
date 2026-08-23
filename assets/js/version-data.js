@@ -317,7 +317,8 @@ window.H2RES_VERSION_DATA = {
   "v2-0": {
     versionTag: "H2RES v2.0",
     name: "Next-Generation Model",
-    link: "../versions/version.html?id=v2-0",
+    link: "../model2/index.html",
+    redirectTo: "../model2/index.html",
     treeLabel: "Next-Generation",
     timelineNote: "Derived from v1.2 (parallel major line)",
     cardSummary: "Documentation in preparation for the next-generation major version.",

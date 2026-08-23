@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StoreMore is an online energy-storage optimization tool developed within the Interreg Danube Region programme, available through the H2RES platform.">
+  <link rel="canonical" href="https://h2res.org/storemore/">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="StoreMore Tool | H2RES">
+  <meta property="og:description" content="StoreMore is an online energy-storage optimization tool developed within the Interreg Danube Region programme, available through the H2RES platform.">
+  <meta property="og:url" content="https://h2res.org/storemore/">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StoreMore Tool | H2RES">
+  <meta name="twitter:description" content="StoreMore is an online energy-storage optimization tool developed within the Interreg Danube Region programme, available through the H2RES platform.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
+  <title>StoreMore Tool | H2RES</title>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link rel="stylesheet" href="../assets/css/storemore.css">
+</head>
+<body class="h2res-shell storemore-page" data-shell-root="../" data-shell-active="storemore" data-shell-model-href="../model/index.html" data-shell-model-resources-href="../model/index.html#model-resources">
+  <div data-site-shell-header></div>
+
+  <main class="storemore-main">
+    <section class="storemore-hero">
+      <div class="container">
+        <div class="storemore-card">
+          <div class="storemore-kicker"></div>
+          <h1>StoreMore tool</h1>
+          <p>
+            The <a href="#" data-config-link="links.storemoreTool">StoreMore</a> optimization tool is available online.
+          </p>
+          <p>
+            <a href="#" data-config-link="links.storemoreOnlineTool" target="_blank" rel="noopener noreferrer">Open StoreMore tool</a>
+          </p>
+          <p>
+            <a href="#" data-config-link="links.storemoreManual">User manual</a>
+          </p>
+          <p>
+            <a href="#" data-config-link="links.storemoreDescription">Tool description</a>
+          </p>
+
+          <div class="storemore-image-wrap">
+            <img src="../assets/funders/storemore.png" alt="StoreMore and Interreg Danube Region programme logos" class="storemore-image" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-shell-footer></div>
+
+  <script src="../assets/js/site-config.js"></script>
+  <script src="../assets/js/site-shell.js"></script>
+</body>
+</html>

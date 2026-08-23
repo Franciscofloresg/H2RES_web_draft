@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H2RES 2.0 — Module</title>
+  <meta name="description" content="H2RES 2.0 model module: what it represents, a curated selection of its equations, and how it couples with the other sectors.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link rel="stylesheet" href="../assets/css/model2.css">
+</head>
+<body class="h2res-shell model2-page" data-shell-root="../" data-shell-active="model">
+  <div data-site-shell-header></div>
+
+  <main class="page-shell">
+    <div class="container">
+      <div class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Model 2.0 map</a> / <span id="crumbName">Module</span></div>
+
+      <nav class="module-tabs" id="moduleTabs" aria-label="Model sectors and framework"></nav>
+
+      <section class="page-hero module-hero">
+        <div class="section-badge" id="moduleGroup">H2RES 2.0</div>
+        <h1 class="page-title" id="moduleTitle">Module</h1>
+        <p class="page-subtitle" id="moduleShort"></p>
+        <div class="module-tech" id="moduleTech" aria-label="Technologies in this module"></div>
+      </section>
+
+      <section class="page-card" id="blurbCard">
+        <p class="page-section-title">What this module represents</p>
+        <div id="moduleBlurb"></div>
+      </section>
+
+      <section class="page-card" id="eqCard">
+        <p class="page-section-title">Key equations <span class="eq-caption">— a curated selection, transcribed from <code>docs/MODEL.md</code></span></p>
+        <div id="moduleEquations"></div>
+      </section>
+
+      <section class="page-card" id="assumeCard">
+        <p class="page-section-title">Assumptions worth knowing</p>
+        <ul class="assume-list" id="moduleAssumptions"></ul>
+      </section>
+
+      <section class="page-card">
+        <p class="page-section-title">Navigation</p>
+        <div class="module-nav" id="moduleNav"></div>
+      </section>
+    </div>
+  </main>
+
+  <div data-site-shell-footer></div>
+
+  <script src="../assets/js/site-config.js"></script>
+  <script src="../assets/js/model2-map.js"></script>
+  <script src="../assets/js/site-shell.js"></script>
+  <script src="../assets/vendor/katex/katex.min.js"></script>
+  <script>
+    (function () {
+      const MODEL = window.H2RES_MODEL2 || { modules: {}, meta: {} };
+      const modules = MODEL.modules || {};
+
+      function escapeHtml(text) {
+        return String(text || "")
+          .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const mod = modules[id];
+
+      // Tab bar across all modules (Power first), current one active.
+      const tabOrder = ["power", "heat", "efuel", "transport", "demand", "coupling", "network", "policies", "core", "solve", "limitations"];
+      const tabsBox = document.getElementById("moduleTabs");
+      if (tabsBox) {
+        tabsBox.innerHTML = tabOrder
+          .filter(k => modules[k])
+          .map(k => `<a class="module-tab${k === id ? " active" : ""}" href="module.html?id=${encodeURIComponent(k)}"${k === id ? ' aria-current="page"' : ""}>${escapeHtml(modules[k].label)}</a>`)
+          .join("");
+      }
+
+      if (!mod) {
+        document.getElementById("moduleTitle").textContent = "Module not found";
+        document.getElementById("moduleShort").textContent = "Open a module from the H2RES 2.0 map.";
+        document.getElementById("blurbCard").hidden = true;
+        document.getElementById("eqCard").hidden = true;
+        document.getElementById("assumeCard").hidden = true;
+        document.getElementById("moduleNav").innerHTML = '<a class="btn btn-primary btn-sm" href="index.html">Open the model map</a>';
+        return;
+      }
+
+      document.title = `${mod.label} — H2RES 2.0`;
+      document.getElementById("crumbName").textContent = mod.label;
+      document.getElementById("moduleTitle").textContent = mod.label;
+      document.getElementById("moduleShort").textContent = mod.short || "";
+      const groupLabels = { core: "Framework", sector: "Sector", link: "Coupling" };
+      document.getElementById("moduleGroup").textContent = groupLabels[mod.group] || "H2RES 2.0";
+
+      const techBox = document.getElementById("moduleTech");
+      techBox.innerHTML = (mod.tech || []).map(t => `<span class="tech-chip">${escapeHtml(t)}</span>`).join("");
+
+      document.getElementById("moduleBlurb").innerHTML =
+        (mod.blurb || []).map(p => `<p class="module-para">${escapeHtml(p)}</p>`).join("");
+
+      const eqBox = document.getElementById("moduleEquations");
+      const equations = mod.equations || [];
+      if (equations.length === 0) {
+        document.getElementById("eqCard").hidden = true;
+      } else {
+        eqBox.innerHTML = equations.map((eq, i) => `
+          <div class="equation">
+            <div class="equation-name">${escapeHtml(eq.name)}</div>
+            ${eq.note ? `<p class="equation-desc">${escapeHtml(eq.note)}</p>` : ""}
+            <div class="equation-render" id="eq-${i}"></div>
+          </div>
+        `).join("");
+        equations.forEach((eq, i) => {
+          try {
+            katex.render(eq.tex, document.getElementById(`eq-${i}`), {
+              displayMode: true, throwOnError: false, fleqn: false
+            });
+          } catch (err) {
+            document.getElementById(`eq-${i}`).textContent = eq.tex;
+          }
+        });
+      }
+
+      const assume = mod.assumptions || [];
+      if (assume.length === 0) {
+        document.getElementById("assumeCard").hidden = true;
+      } else {
+        document.getElementById("moduleAssumptions").innerHTML =
+          assume.map(a => `<li>${escapeHtml(a)}</li>`).join("");
+      }
+
+      // Navigation: related modules + back to the map + docs.
+      const order = ["power", "heat", "efuel", "transport", "demand", "coupling", "network", "policies", "core", "solve", "limitations"];
+      const others = order.filter(k => k !== id && modules[k]);
+      const nav = [];
+      nav.push('<a class="btn btn-secondary btn-sm" href="index.html">&larr; Model map</a>');
+      others.forEach(k => {
+        nav.push(`<a class="module-nav-link" href="module.html?id=${encodeURIComponent(k)}">${escapeHtml(modules[k].label)}</a>`);
+      });
+      if (MODEL.meta && MODEL.meta.docsUrl) {
+        nav.push(`<a class="btn btn-outline btn-sm" href="${escapeHtml(MODEL.meta.docsUrl)}" target="_blank" rel="noopener noreferrer">Full formulation on GitHub &#8599;</a>`);
+      }
+      document.getElementById("moduleNav").innerHTML = nav.join("");
+    })();
+  </script>
+</body>
+</html>

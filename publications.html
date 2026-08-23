@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications — H2RES</title>
+  <meta name="description" content="H2RES research outputs: peer-reviewed articles, conference papers, technical reports, theses, project deliverables and curated databases, plus video summaries.">
+  <link rel="canonical" href="https://h2res.org/publications.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="Publications — H2RES">
+  <meta property="og:description" content="H2RES research outputs: peer-reviewed articles, conference papers, technical reports, theses, project deliverables and curated databases, plus video summaries.">
+  <meta property="og:url" content="https://h2res.org/publications.html">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Publications — H2RES">
+  <meta name="twitter:description" content="H2RES research outputs: peer-reviewed articles, conference papers, reports, theses, project deliverables and databases, plus video summaries.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    // Set the theme before stylesheets apply to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/css/site-shell.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body class="h2res-shell" data-shell-root="." data-shell-active="publications">
+  <div data-site-shell-header></div>
+
+  <main id="main" tabindex="-1">
+    <!-- ========== PUBLICATIONS ========== -->
+    <section id="publications" class="section publications-section">
+      <div class="container">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="index.html#home">Home</a> / <span aria-current="page">Publications</span></nav>
+        <div class="section-header">
+          <div class="section-badge">Publications</div>
+          <h1 class="section-title">Research Outputs</h1>
+          <p class="section-subtitle">Peer-reviewed articles, in-proceedings papers, technical reports, theses, project deliverables, and curated databases developed with H2RES.</p>
+        </div>
+        <div class="section-divider"></div>
+
+        <h2 class="sr-only">Publications list</h2>
+        <div class="pub-tabs" role="tablist" aria-label="Publication categories">
+          <button type="button" class="pub-tab active" data-filter="articles">Articles</button>
+          <button type="button" class="pub-tab" data-filter="conference">Conferences</button>
+          <button type="button" class="pub-tab" data-filter="report">Reports</button>
+          <button type="button" class="pub-tab" data-filter="thesis">Thesis</button>
+          <button type="button" class="pub-tab" data-filter="project">Projects</button>
+          <button type="button" class="pub-tab" data-filter="database">Databases</button>
+        </div>
+
+        <div class="pub-controls">
+          <div class="pub-search-wrap">
+            <label class="pub-search-label" for="pubSearch">Search</label>
+            <input type="search" id="pubSearch" class="pub-search" placeholder="Search title, author, keyword…" aria-label="Search publications" autocomplete="off">
+          </div>
+          <div class="pub-year-wrap">
+            <label class="pub-year-filter-label" for="pubYearFilter">Filter by year</label>
+            <select id="pubYearFilter" class="pub-year-filter" aria-label="Filter publications by year">
+              <option value="all">All years</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="pubGrid" class="pub-grid">
+          <div class="pub-status">Loading publications from <code>h2res_research_outputs.bib</code>...</div>
+        </div>
+        <div class="pub-more-actions">
+          <button type="button" id="pubShowMore" class="btn btn-outline btn-sm" hidden>Show more</button>
+        </div>
+
+        <!-- Video summaries: privacy-first click-to-load YouTube playlist.
+             Nothing loads from YouTube until the user presses play. -->
+        <div class="video-summaries">
+          <div class="video-summaries-head">
+            <h2 class="video-summaries-title">Watch: research article summaries</h2>
+            <p class="video-summaries-sub">Short video walkthroughs of our publications, from the H2RES YouTube channel. The playlist is updated as new summaries are released.</p>
+          </div>
+          <div class="video-embed" data-yt-playlist="PLUK9KB0f4aUB1vcRPRMVvmtD_-tlWneGX" data-yt-first="LHtpU55fYFQ" data-yt-title="H2RES Research Article Summaries">
+            <button type="button" class="video-facade" aria-label="Load and play the H2RES research article summaries playlist from YouTube">
+              <span class="video-facade-content">
+                <span class="video-play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" width="72" height="51"><path class="video-play-shape" d="M66.5 7.7c-.8-2.9-2.5-5.2-5.4-6C55.8.1 34 0 34 0S12.2.1 6.9 1.7C4 2.5 2.3 4.8 1.5 7.7.1 13 0 24 0 24s.1 11 1.5 16.3c.8 2.9 2.5 5.2 5.4 6C12.2 47.9 34 48 34 48s21.8-.1 27.1-1.7c2.9-.8 4.6-3.1 5.4-6C67.9 35 68 24 68 24s-.1-11-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+                </span>
+                <span class="video-facade-text">
+                  <strong>H2RES Research Article Summaries</strong>
+                  <span>Video playlist · plays here via YouTube</span>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-shell-footer></div>
+  <script src="assets/js/bibtex-utils.js"></script>
+  <script src="assets/js/cite-formats.js"></script>
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/site-shell.js"></script>
+  <script src="assets/js/team-data.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

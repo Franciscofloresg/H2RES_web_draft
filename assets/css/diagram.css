@@ -1,0 +1,290 @@
+/* ============================================================
+   diagram.css — shared styles for the H2RES 2.0 reference-energy-system
+   diagram. Self-contained: defines the variables it needs so it also works
+   on pages that do not load home.css (e.g. model2/index.html).
+   ============================================================ */
+:root, :root[data-theme="light"], :root:not([data-theme="dark"]) {
+  --border-color: #e5e7eb; --border-hover: #d1d5db;
+  --text-primary: #111827; --text-secondary: #4b5563; --text-muted: #6b7280;
+  --bg-card: #ffffff; --bg-card-hover: #f3f4f6;
+  --accent-teal: #159389; --accent-blue: #4f83bf; --accent-yellow: #c79a3d; --accent-green-light: #78afa3;
+  --schematic-bg: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+}
+:root[data-theme="dark"] {
+  --border-color: #26323A; --border-hover: #33424B;
+  --text-primary: #E8EDEF; --text-secondary: #A6B6BC; --text-muted: #7E8D93;
+  --bg-card: #171F23; --bg-card-hover: #1E282D;
+  --accent-teal: #40B59D; --accent-blue: #6FA8DC; --accent-yellow: #E0C066; --accent-green-light: #B6DA6E;
+  --schematic-bg: linear-gradient(180deg, #141C20 0%, #0E1417 100%);
+}
+
+.schematic {
+  margin-top: 50px;
+  background: var(--schematic-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+[data-theme="light"] .schematic {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+.schematic-inner {
+  padding: 24px 28px 28px;
+}
+.schematic-headers {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.5fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+.schematic-header-main {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-yellow);
+  padding: 10px 16px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+.schematic-header-secondary {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a78bfa;
+  padding: 10px 16px;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+.schematic-header-demand {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-green-light);
+  padding: 10px 16px;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+.schematic-content {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.5fr;
+  gap: 24px;
+  align-items: start;
+}
+.schematic-generation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.schematic-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.schematic-label-side {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.schematic-label-side.green {
+  background: rgba(95, 141, 116, 0.16);
+  color: #88b29c;
+  border: 1px solid rgba(95, 141, 116, 0.28);
+}
+.schematic-label-side.blue {
+  background: rgba(21, 147, 137, 0.14);
+  color: #43afa6;
+  border: 1px solid rgba(21, 147, 137, 0.26);
+}
+.schematic-label-side.red {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.schematic-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1;
+}
+.node {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+.node:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.node-teal {
+  background: linear-gradient(135deg, #43afa6 0%, #159389 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(21, 147, 137, 0.28);
+}
+.node-orange {
+  background: linear-gradient(135deg, #cf8458 0%, #c56f43 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(197, 111, 67, 0.28);
+}
+.node-white-dark {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f2937;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .node-white-dark {
+  background: #e5e7eb;
+  color: #1f2937;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.node-blue {
+  background: linear-gradient(135deg, #43afa6 0%, #159389 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(21, 147, 137, 0.3);
+}
+.node-purple {
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+.node-green {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+  width: 100%;
+  margin-bottom: 10px;
+}
+.node-large {
+  padding: 16px 28px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.node-small {
+  padding: 8px 12px;
+  font-size: 10px;
+}
+.schematic-transformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+}
+.schematic-arrow {
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+}
+.schematic-row-center {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.schematic-demand {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .schematic-content { grid-template-columns: 1fr; gap: 32px; }
+  .schematic-headers { grid-template-columns: 1fr; gap: 10px; }
+  .schematic-transformation { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .schematic-arrow { display: none; }
+}
+
+
+/* ---- interactive nodes & enlarged E-fuels box (v2.0 diagram) ---- */
+a.node { text-decoration: none; cursor: pointer; display: inline-block; }
+a.node[title] { cursor: help; }
+a.node:focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 2px; }
+
+.diagram-v2 .schematic-headers,
+.diagram-v2 .schematic-content { grid-template-columns: 1fr 1.35fr 0.5fr; }
+
+.node-efuel { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #fff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+
+.efuel-group { border: 1px dashed color-mix(in srgb, #2563eb 45%, transparent); border-radius: 10px; padding: 8px 10px 10px; margin: 2px 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.efuel-group-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-blue); }
+.efuel-group-big { width: 100%; align-self: stretch; padding: 12px 14px 14px; gap: 12px; background: color-mix(in srgb, #2563eb 5%, transparent); }
+.efuel-carriers { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+.efuel-sub { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
+.efuel-sub-lab { font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); }
+.efuel-group-big .schematic-row-center { flex-wrap: wrap; }
+
+.demand-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+
+/* ---- multi-system / multi-zone spine (dense view) ---- */
+.spine { margin-top: 20px; border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 18px; background: var(--bg-card); }
+.spine-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-teal); }
+.spine-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.spine-zone { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; color: #fff; background: linear-gradient(135deg, #43afa6 0%, #159389 100%); padding: 8px 16px; border-radius: 8px; text-decoration: none; }
+.spine-zone:focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 2px; }
+.spine-link { font-size: 11.5px; color: var(--text-muted); white-space: nowrap; }
+.spine-trade { font-size: 11.5px; color: var(--accent-blue); margin-left: 4px; }
+.spine-note { font-size: 12px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
+
+/* ---- simplified systems/zones band (light home view) ---- */
+.core-zones { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; padding: 11px 16px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); }
+.core-zones-lab { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent-teal); }
+.core-zones-viz { display: inline-flex; align-items: center; gap: 6px; }
+.core-zone { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; color: #fff; background: linear-gradient(135deg,#43afa6,#159389); padding: 5px 12px; border-radius: 7px; }
+.core-zone-link { color: var(--text-muted); font-weight: 700; }
+.core-zones-note { font-size: 12px; color: var(--text-muted); }
+
+@media (max-width: 720px) {
+  .diagram-v2 .schematic-headers,
+  .diagram-v2 .schematic-content { grid-template-columns: 1fr; }
+}
+
+/* ---- band-1 grouped boxes (Non-dispatchable / Dispatchable & storage /
+   Heat generation), styled like the E-fuels box, with a clickable header ---- */
+.schematic-generation { gap: 12px; }
+.band-group { border: 1px dashed var(--border-color); border-radius: 10px; padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 9px; }
+.band-group-head { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; width: fit-content; }
+.band-lab { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.band-go { font-weight: 700; font-size: 12px; opacity: 0.85; }
+.band-group-head:hover .band-lab, .band-group-head:focus-visible .band-lab { text-decoration: underline; }
+.band-group.g-nd { border-color: color-mix(in srgb, #2f9e73 75%, transparent); background: color-mix(in srgb, #2f9e73 7%, transparent); }
+.band-group.g-nd .band-lab, .band-group.g-nd .band-go { color: #2f9e73; }
+.band-group.g-disp { border-color: color-mix(in srgb, #c56f43 75%, transparent); background: color-mix(in srgb, #c56f43 7%, transparent); }
+.band-group.g-disp .band-lab, .band-group.g-disp .band-go { color: #c56f43; }
+.band-group.g-heat { border-color: color-mix(in srgb, #d1706e 75%, transparent); background: color-mix(in srgb, #d1706e 7%, transparent); }
+.band-group.g-heat .band-lab, .band-group.g-heat .band-go { color: #d1706e; }
+/* Final-demand box: clickable green header, same format as the bands above */
+.band-group.g-demand { border-color: color-mix(in srgb, #16a34a 75%, transparent); background: color-mix(in srgb, #16a34a 7%, transparent); }
+.band-group.g-demand .band-lab, .band-group.g-demand .band-go { color: #16a34a; }
+.band-group.g-demand .node-green { margin-bottom: 0; }
+
+/* Center the final-demand column vertically against the tall middle band */
+.schematic-demand { align-self: stretch; justify-content: center; }
+
+/* Clickable E-fuels box header (→ efuel sector) */
+.efuel-head { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none; }
+.efuel-head, .efuel-head .band-go { color: var(--accent-blue); }
+.efuel-head:hover, .efuel-head:focus-visible { text-decoration: underline; }
+
+/* AA-contrast demand note in light mode; dark keeps the lighter muted. */
+.demand-note { color: #636c78; }
+[data-theme="dark"] .demand-note { color: var(--text-muted); }

@@ -3,6 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare H2RES scenarios using planning assumptions, cost indicators and system-level outcome metrics.">
+  <link rel="canonical" href="https://h2res.org/tutorials/analyze-compare-results.html">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="Analyze &amp; Compare Results | H2RES">
+  <meta property="og:description" content="Compare H2RES scenarios using planning assumptions, cost indicators and system-level outcome metrics.">
+  <meta property="og:url" content="https://h2res.org/tutorials/analyze-compare-results.html">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Analyze &amp; Compare Results | H2RES">
+  <meta name="twitter:description" content="Compare H2RES scenarios using planning assumptions, cost indicators and system-level outcome metrics.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
   <title>Analyze and Compare Results | H2RES</title>
   <link rel="stylesheet" href="../assets/css/site-shell.css">
   <link rel="stylesheet" href="../assets/css/tutorials.css">
@@ -14,12 +42,22 @@
     <div class="container">
       <div class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Learning Hub</a> / Analyze and Compare Results</div>
       <section class="page-hero">
-        <div class="section-badge">Tutorial 03</div>
-        <h1 class="page-title">This tutorial is in preparation</h1>
-        <p class="page-subtitle">The result analysis and comparison guide is currently being assembled. We are preparing a structured explanation of outputs, indicators, and comparison logic for H2RES studies.</p>
+        <div class="section-badge">Coming soon &middot; Tutorial 3</div>
+        <h1 class="page-title">Analyze &amp; Compare Results</h1>
+        <p class="page-subtitle">A guide to reviewing outputs and comparing scenarios consistently is on the way. Until it lands, the resources below cover the essentials.</p>
         <div class="callout-box">This page will explain how to review key outputs, compare scenarios consistently, and connect interpretation back to the relevant model version.</div>
+
+        <div class="meanwhile">
+          <p class="meanwhile-title">In the meantime</p>
+          <div class="meanwhile-grid">
+            <a class="meanwhile-card" href="../model/index.html#compareVersions"><strong>Compare versions &rarr;</strong><span>Contrast two model releases side by side.</span></a>
+            <a class="meanwhile-card" href="../model/index.html#model-resources"><strong>Docs &amp; manuals &rarr;</strong><span>User manuals and formulations, per model version.</span></a>
+            <a class="meanwhile-card" href="#" data-config-link="links.youtube" target="_blank" rel="noopener noreferrer"><strong>Video walkthroughs &rarr;</strong><span>Model summaries on our YouTube channel.</span></a>
+            <a class="meanwhile-card" href="../index.html#community"><strong>Get notified &rarr;</strong><span>We announce new tutorials in the newsletter.</span></a>
+          </div>
+        </div>
+
         <div class="page-actions">
-          <a class="btn btn-primary" href="../model/index.html" data-config-text="uiText.openModel">Open Model</a>
           <a class="btn btn-secondary" href="index.html">Back to Learning Hub</a>
         </div>
       </section>

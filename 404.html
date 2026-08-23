@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found — H2RES</title>
+  <meta name="description" content="The page you were looking for could not be found on the H2RES website.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    // Set the theme before stylesheets apply to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/site-shell.css">
+  <style>
+    .err-shell { display: flex; align-items: center; justify-content: center; min-height: 60vh; padding: 48px 24px; }
+    .err-card { text-align: center; max-width: 560px; }
+    .err-code {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-weight: 700; font-size: clamp(72px, 16vw, 132px); line-height: 1;
+      letter-spacing: -.02em; color: var(--accent); margin: 0;
+    }
+    .err-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-weight: 600; font-size: clamp(22px, 4vw, 30px); margin: 8px 0 12px; color: var(--text);
+    }
+    .err-text { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0 auto 28px; max-width: 44ch; }
+    .err-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  </style>
+</head>
+<body class="h2res-shell" data-shell-root="/">
+  <div data-site-shell-header></div>
+
+  <main id="main" tabindex="-1">
+    <div class="err-shell">
+      <div class="err-card">
+        <p class="err-code">404</p>
+        <h1 class="err-title">This page could not be found</h1>
+        <p class="err-text">The link may be outdated or the address mistyped. Here are a few good places to pick up from.</p>
+        <div class="err-actions">
+          <a class="btn btn-primary" href="/index.html">Home</a>
+          <a class="btn btn-secondary" href="/model/index.html">Model</a>
+          <a class="btn btn-secondary" href="/tutorials/index.html">Tutorials</a>
+          <a class="btn btn-secondary" href="/publications.html">Publications</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div data-site-shell-footer></div>
+  <script src="/assets/js/site-config.js"></script>
+  <script src="/assets/js/site-shell.js"></script>
+</body>
+</html>

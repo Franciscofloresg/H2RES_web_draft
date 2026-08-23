@@ -3,6 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tutorials and training materials for installing H2RES, running a first baseline case, building scenarios and interpreting results.">
+  <link rel="canonical" href="https://h2res.org/tutorials/">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="H2RES Learning Hub">
+  <meta property="og:description" content="Tutorials and training materials for installing H2RES, running a first baseline case, building scenarios and interpreting results.">
+  <meta property="og:url" content="https://h2res.org/tutorials/">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="H2RES Learning Hub">
+  <meta name="twitter:description" content="Tutorials and training materials for installing H2RES, running a first baseline case, building scenarios and interpreting results.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
   <title>H2RES Learning Hub</title>
   <link rel="stylesheet" href="../assets/css/site-shell.css">
   <link rel="stylesheet" href="../assets/css/tutorials.css">
@@ -14,13 +42,24 @@
     <div class="container">
       <div class="crumb"><a href="../index.html">Home</a> / Learning Hub</div>
       <section class="page-hero">
-        <div class="section-badge">Guided Learning Path</div>
-        <h1 class="page-title">Learning materials are being prepared</h1>
-        <p class="page-subtitle">This section is currently under development. We are organizing tutorials, walkthroughs, and supporting materials for new and advanced H2RES users.</p>
-        <div class="callout-box">Planned content includes installation guidance, first model execution, scenario-building workflows, and result interpretation support. Version-specific methodological details will continue to be available through the unified Model page.</div>
+        <div class="section-badge">Coming soon</div>
+        <h1 class="page-title">Guided tutorials are on the way</h1>
+        <p class="page-subtitle">Step-by-step tutorials for installing H2RES, running a baseline case, building scenarios and interpreting results are being prepared. Until they land, start from the resources below.</p>
+        <div class="callout-box">Planned content includes installation guidance, first model execution, scenario-building workflows, and result interpretation support. Version-specific methodological details are already available through the unified Model page.</div>
+
+        <div class="meanwhile">
+          <p class="meanwhile-title">In the meantime</p>
+          <div class="meanwhile-grid">
+            <a class="meanwhile-card" href="#" data-config-link="links.githubRepo" target="_blank" rel="noopener noreferrer"><strong>Code &amp; README &rarr;</strong><span>Clone H2RES and follow the repository setup notes.</span></a>
+            <a class="meanwhile-card" href="../model/index.html#model-resources"><strong>Docs &amp; manuals &rarr;</strong><span>User manuals and formulations, per model version.</span></a>
+            <a class="meanwhile-card" href="#" data-config-link="links.youtube" target="_blank" rel="noopener noreferrer"><strong>Video walkthroughs &rarr;</strong><span>Model summaries on our YouTube channel.</span></a>
+            <a class="meanwhile-card" href="../index.html#community"><strong>Get notified &rarr;</strong><span>We announce new tutorials in the newsletter.</span></a>
+          </div>
+        </div>
+
         <div class="page-actions">
           <a class="btn btn-primary" href="../model/index.html" data-config-text="uiText.openModel">Open Model</a>
-          <a class="btn btn-secondary" href="../index.html#tutorials">Back to Guided Learning Path</a>
+          <a class="btn btn-secondary" href="../index.html#home">Back to Home</a>
         </div>
       </section>
     </div>

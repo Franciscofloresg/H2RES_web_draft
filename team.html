@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team — H2RES</title>
+  <meta name="description" content="The research team behind H2RES: core developers, contributors and alumni, and the scientific advisory board.">
+  <link rel="canonical" href="https://h2res.org/team.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="Team — H2RES">
+  <meta property="og:description" content="The research team behind H2RES: core developers, contributors and alumni, and the scientific advisory board.">
+  <meta property="og:url" content="https://h2res.org/team.html">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Team — H2RES">
+  <meta name="twitter:description" content="The research team behind H2RES: core developers, contributors and alumni, and the scientific advisory board.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    // Set the theme before stylesheets apply to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/css/site-shell.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body class="h2res-shell" data-shell-root="." data-shell-active="team">
+  <div data-site-shell-header></div>
+
+  <main id="main" tabindex="-1">
+    <!-- ========== TEAM ========== -->
+    <section id="team" class="section team-section">
+      <div class="container">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="index.html#home">Home</a> / <span aria-current="page">Team</span></nav>
+        <div class="section-header">
+          <div class="section-badge">Team</div>
+          <h1 class="section-title">The research team behind H2RES</h1>
+          <p class="section-subtitle">The people who build, maintain and advise the H2RES modelling framework, across core development, past and present contributors, and the scientific advisory board.</p>
+        </div>
+        <div class="section-divider"></div>
+
+        <div class="team-grid">
+          <!-- Core developers -->
+          <div class="team-category">
+            <div class="team-category-header">
+              <div class="team-category-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+              </div>
+              <h2 class="team-category-title">Core Developers</h2>
+            </div>
+            <div class="team-members" id="teamCoreMembers"></div>
+          </div>
+
+          <!-- Contributors & alumni -->
+          <div class="team-category team-category-contributors">
+            <div class="team-category-header">
+              <div class="team-category-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h2 class="team-category-title">Contributors &#038; Alumni</h2>
+            </div>
+            <div class="team-members" id="teamContributorMembers"></div>
+          </div>
+
+          <!-- Scientific Advisory Board -->
+          <div class="team-category team-category-wide">
+            <div class="team-category-header">
+              <div class="team-category-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <h2 class="team-category-title">Scientific Advisory Board</h2>
+            </div>
+            <div class="team-members team-members-advisory" id="teamAdvisoryMembers"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-shell-footer></div>
+  <script src="assets/js/bibtex-utils.js"></script>
+  <script src="assets/js/cite-formats.js"></script>
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/site-shell.js"></script>
+  <script src="assets/js/team-data.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

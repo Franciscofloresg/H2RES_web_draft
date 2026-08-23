@@ -3,6 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the H2RES model: version tree, release guidance, mathematical formulations and user manuals for integrated energy system planning.">
+  <link rel="canonical" href="https://h2res.org/model/">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="H2RES Model — Versions, Documentation &amp; Resources">
+  <meta property="og:description" content="Explore the H2RES model: version tree, release guidance, mathematical formulations and user manuals for integrated energy system planning.">
+  <meta property="og:url" content="https://h2res.org/model/">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="H2RES Model — Versions, Documentation &amp; Resources">
+  <meta name="twitter:description" content="Explore the H2RES model: version tree, release guidance, mathematical formulations and user manuals for integrated energy system planning.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
   <title>H2RES Model</title>
   <link rel="stylesheet" href="../assets/css/site-shell.css">
   <link rel="stylesheet" href="../assets/css/versions.css">
@@ -50,7 +78,7 @@
               <strong>Evaluating e-fuels pathways?</strong>
               <span>Use v1.4 (efuels) for conversion-chain analysis.</span>
             </a>
-            <a class="goal-card" href="../versions/version.html?id=v2-0">
+            <a class="goal-card" href="../model2/index.html">
               <strong>Need major-version capabilities?</strong>
               <span>Use v2.0 for next-generation architecture studies.</span>
             </a>
@@ -132,7 +160,7 @@
               <text class="node-label node-label-sub" x="1075" y="250">H2RES v1.4</text>
             </a>
 
-            <a class="node-link" href="../versions/version.html?id=v2-0" data-version="v2-0">
+            <a class="node-link" href="../model2/index.html" data-version="v2-0">
               <rect class="node-box node-next" x="500" y="458" width="200" height="84"></rect>
               <text class="node-label" x="600" y="492">Next-Generation</text>
               <text class="node-label node-label-sub" x="600" y="516">H2RES v2.0</text>
@@ -180,7 +208,7 @@
               <span>Derived from v1.3</span>
             </div>
           </a>
-          <a class="timeline-item next" href="../versions/version.html?id=v2-0">
+          <a class="timeline-item next" href="../model2/index.html">
             <div class="timeline-content">
               <strong>Next-Generation Model</strong>
               <span>Derived from v1.2 (parallel major line)</span>
@@ -211,6 +239,11 @@
             <h3>Compare Releases</h3>
             <p>If you are unsure between two releases, use the comparison block below before deciding which version page to adopt as your working reference.</p>
             <a class="model-resource-link" href="#compareVersions">Compare models</a>
+          </article>
+          <article class="model-resource-card">
+            <h3>Assumptions &amp; Limitations</h3>
+            <p>The structural and per-sector simplifications behind every result — what the model claims and where its boundaries lie, transcribed from the model documentation.</p>
+            <a class="model-resource-link" href="../model2/module.html?id=limitations">Open assumptions &amp; limitations</a>
           </article>
         </div>
       </section>
@@ -254,7 +287,7 @@
 
         <div class="compare-links">
           <a id="compareLinkA" href="../versions/version.html?id=v1-2-myopic">Open Version A</a>
-          <a id="compareLinkB" href="../versions/version.html?id=v2-0">Open Version B</a>
+          <a id="compareLinkB" href="../model2/index.html">Open Version B</a>
         </div>
       </section>
     </div>

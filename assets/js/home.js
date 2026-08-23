@@ -4,27 +4,8 @@
       window.H2RES_applySiteConfig(document);
     }
 
-    // Theme Toggle Functionality (temporarily disabled)
-    const THEME_TOGGLE_ENABLED = false;
-    const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-
-    // Keep a fixed light theme while toggle is disabled.
-    html.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-    if (themeToggle) {
-      themeToggle.disabled = !THEME_TOGGLE_ENABLED;
-    }
-
-    if (THEME_TOGGLE_ENABLED && themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-    }
+    // Theme handling (init, system-preference sync, and the header toggle) now
+    // lives in site-shell.js so it works on every page — nothing to do here.
 
     // Publications from BibTeX
     const siteConfig = window.H2RES_SITE_CONFIG || {};
@@ -54,19 +35,23 @@
     const HERO_TICKER_FEATURED_KEYS = [
       'BELJAN2026125674',
       'CALISE2026100234',
+      'Franjo2006',
       'VILLANI2026117662',
+      'BEKELE2026100260',
       'HERC2025101067',
       'PASTORE2025136384'
     ];
     const pubGrid = document.getElementById('pubGrid');
     const pubTabs = document.querySelectorAll('.pub-tab');
     const pubYearFilter = document.getElementById('pubYearFilter');
+    const pubSearch = document.getElementById('pubSearch');
     const pubShowMoreButton = document.getElementById('pubShowMore');
     const heroTickerPrimary = document.getElementById('heroTickerPrimary');
     const heroTickerSecondary = document.getElementById('heroTickerSecondary');
     const PUB_PAGE_SIZE = 4;
     let activePubFilter = 'articles';
     let activePubYear = 'all';
+    let activePubSearch = '';
     let visiblePubCount = PUB_PAGE_SIZE;
     let publicationEntries = [];
     const { normalizeBibValue, parseBibTeX } = window.H2resBibUtils;
@@ -276,9 +261,28 @@
       if (pdfUrl) {
         links.push(`<a class="pub-link" href="${escapeHtml(pdfUrl)}" target="_blank" rel="noopener noreferrer">PDF ↗</a>`);
       }
-      links.push(`<a class="pub-link bibtex-copy" href="#" data-key="${escapeHtml(entry.citationKey)}">BibTeX</a>`);
+      if (window.H2resCite && Array.isArray(window.H2resCite.formats)) {
+        window.H2resCite.formats.forEach(fmt => {
+          links.push(`<a class="pub-link cite-copy" href="#" data-fmt="${escapeHtml(fmt)}" data-key="${escapeHtml(entry.citationKey)}">${escapeHtml(window.H2resCite.labels[fmt] || fmt)}</a>`);
+        });
+      } else {
+        links.push(`<a class="pub-link cite-copy" href="#" data-fmt="bibtex" data-key="${escapeHtml(entry.citationKey)}">BibTeX</a>`);
+      }
 
       return links.join('');
+    }
+
+    function entrySearchText(entry) {
+      if (entry._searchText) {
+        return entry._searchText;
+      }
+      const f = entry.fields || {};
+      const text = [f.title, f.author, f.year, f.journal, f.booktitle, f.keywords, f.publisher, f.school, f.institution]
+        .map(value => normalizeBibValue(value || ''))
+        .join(' ')
+        .toLowerCase();
+      entry._searchText = text;
+      return text;
     }
 
     function detailsIdFromKey(citationKey) {
@@ -327,7 +331,7 @@
             <div class="pub-icon">${publicationIcon(entry.category)}</div>
             <div class="pub-content">
               <span class="pub-type">Research Project</span>
-              <h4 class="pub-title">${escapeHtml(title)}</h4>
+              <h3 class="pub-title">${escapeHtml(title)}</h3>
               <p class="pub-meta">${escapeHtml(meta)}</p>
               <div class="pub-links">${buildPublicationLinks(entry)}</div>
               <p class="pub-project-hint">Open project page for full details</p>
@@ -341,7 +345,7 @@
           <div class="pub-icon">${publicationIcon(entry.category)}</div>
           <div class="pub-content">
             <span class="pub-type">${escapeHtml(typeLabel(entry.entryType))}</span>
-            <h4 class="pub-title">${escapeHtml(title)}</h4>
+            <h3 class="pub-title">${escapeHtml(title)}</h3>
             <p class="pub-meta">${escapeHtml(meta)}</p>
             <div class="pub-links">${buildPublicationLinks(entry)}</div>
             ${buildPublicationDetails(entry)}
@@ -371,18 +375,20 @@
       }
     }
 
-    function bindBibtexCopyActions() {
-      document.querySelectorAll('.bibtex-copy').forEach(link => {
+    function bindCiteCopyActions() {
+      document.querySelectorAll('.cite-copy').forEach(link => {
         link.addEventListener('click', async event => {
           event.preventDefault();
           const key = link.getAttribute('data-key');
+          const fmt = link.getAttribute('data-fmt') || 'bibtex';
           const selected = publicationEntries.find(entry => entry.citationKey === key);
           if (!selected) {
             return;
           }
+          const text = window.H2resCite ? window.H2resCite.build(fmt, selected) : selected.bibtex;
           const originalText = link.textContent;
           try {
-            await copyBibtexText(selected.bibtex);
+            await copyBibtexText(text);
             link.textContent = 'Copied';
           } catch (error) {
             link.textContent = 'Copy failed';
@@ -528,6 +534,13 @@
       if (activePubYear !== 'all') {
         filtered = filtered.filter(entry => String(entry.sortYear) === activePubYear);
       }
+      if (activePubSearch) {
+        const terms = activePubSearch.split(/\s+/).filter(Boolean);
+        filtered = filtered.filter(entry => {
+          const text = entrySearchText(entry);
+          return terms.every(term => text.includes(term));
+        });
+      }
       return filtered;
     }
 
@@ -560,9 +573,15 @@
     }
 
     function renderPublicationGrid() {
+      if (!pubGrid) {
+        return;
+      }
       const filtered = filteredPublicationEntries();
       if (filtered.length === 0) {
-        pubGrid.innerHTML = '';
+        const message = activePubSearch
+          ? 'No publications match your search in this category.'
+          : 'No publications available in this category yet.';
+        pubGrid.innerHTML = `<div class="pub-status">${escapeHtml(message)}</div>`;
         if (pubShowMoreButton) {
           pubShowMoreButton.setAttribute('hidden', '');
         }
@@ -572,7 +591,7 @@
       const visible = filtered.slice(0, visiblePubCount);
       pubGrid.innerHTML = visible.map(buildPublicationCard).join('');
       bindPublicationCardToggleActions();
-      bindBibtexCopyActions();
+      bindCiteCopyActions();
       updateShowMoreButton(filtered.length);
     }
 
@@ -641,7 +660,9 @@
         const protocolHint = window.location.protocol === 'file:'
           ? ' Open this page through a local web server to allow loading external files.'
           : '';
-        pubGrid.innerHTML = `<div class="pub-status">Could not load <code>${escapeHtml(PUB_BIB_SOURCE)}</code>.${protocolHint}</div>`;
+        if (pubGrid) {
+          pubGrid.innerHTML = `<div class="pub-status">Could not load <code>${escapeHtml(PUB_BIB_SOURCE)}</code>.${protocolHint}</div>`;
+        }
         if (pubShowMoreButton) {
           pubShowMoreButton.setAttribute('hidden', '');
         }
@@ -651,11 +672,31 @@
       }
     }
 
+    function activatePublicationSearch() {
+      if (!pubSearch) {
+        return;
+      }
+      let debounceId = null;
+      pubSearch.addEventListener('input', () => {
+        window.clearTimeout(debounceId);
+        debounceId = window.setTimeout(() => {
+          activePubSearch = pubSearch.value.trim().toLowerCase();
+          visiblePubCount = PUB_PAGE_SIZE;
+          renderPublicationGrid();
+        }, 140);
+      });
+    }
+
     bindCommunityCopyActions();
     activatePublicationTabs();
     activatePublicationYearFilter();
+    activatePublicationSearch();
     activatePublicationShowMore();
-    loadPublicationsFromBib();
+    // Load the bib only where it is needed: the publications grid, or the
+    // home hero ticker (which surfaces featured publications).
+    if (pubGrid || heroTickerPrimary) {
+      loadPublicationsFromBib();
+    }
 
     function normalizeTeamPhotoPath(photo) {
       if (!photo) {
@@ -667,12 +708,42 @@
       return photo.replace(/^\.\.\//, '');
     }
 
-    function buildTeamAvatar(person, cardName) {
+    // Initials monogram used when a member has no photo (or the photo fails
+    // to load). Strips academic titles so the initials reflect the real name.
+    function teamInitials(name) {
+      let parts = String(name || '')
+        .replace(/\([^)]*\)/g, ' ')
+        .split(/\s+/)
+        .filter(function (w) {
+          if (!w) return false;
+          if (/\.$/.test(w)) return false; // drop "Dr.", "Prof.", "Z." etc.
+          return !/^(prof|dr|assoc|sc|mr|ms|mrs|phd|eng)$/i.test(w);
+        });
+      if (!parts.length) parts = String(name || '').split(/\s+/).filter(Boolean);
+      const a = parts[0] || '';
+      const b = parts.length > 1 ? parts[parts.length - 1] : '';
+      return ((a.charAt(0) || '') + (b.charAt(0) || '')).toUpperCase() || '?';
+    }
+
+    const TEAM_AVATAR_COLORS = ['#0f766e', '#2563eb', '#15803d', '#6d28d9', '#b45309', '#475569'];
+    function teamAvatarColor(seed) {
+      const s = String(seed || '');
+      let h = 0;
+      for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+      return TEAM_AVATAR_COLORS[h % TEAM_AVATAR_COLORS.length];
+    }
+
+    function buildTeamAvatar(person, cardName, seed) {
       const photo = normalizeTeamPhotoPath(person.photo || '');
+      const initials = escapeHtml(teamInitials(cardName));
+      const color = teamAvatarColor(seed || cardName);
+      const initialsLayer = `<span class="team-avatar-initials" style="background:${color}">${initials}</span>`;
       if (!photo) {
-        return '<div class="team-avatar"></div>';
+        return `<div class="team-avatar">${initialsLayer}</div>`;
       }
-      return `<div class="team-avatar"><img src="${escapeHtml(photo)}" alt="${escapeHtml(cardName)}"></div>`;
+      // Initials sit underneath; if the image 404s it removes itself and the
+      // initials show through — no broken-image icon, no console 404 fallout.
+      return `<div class="team-avatar">${initialsLayer}<img src="${escapeHtml(photo)}" alt="${escapeHtml(cardName)}" loading="lazy" onerror="this.remove()"></div>`;
     }
 
     function buildTeamCard(config) {
@@ -684,14 +755,14 @@
       const profileUrl = `team/member.html?id=${encodeURIComponent(config.id)}`;
       const cardName = config.cardName || person.name;
       const cardSubtitle = config.cardSubtitle || person.institution || '';
-      const avatar = buildTeamAvatar(person, cardName);
+      const avatar = buildTeamAvatar(person, cardName, config.id);
 
       if (config.scopusUrl) {
         return `
           <div class="team-member team-member-clickable" data-profile-url="${escapeHtml(profileUrl)}" role="link" tabindex="0">
             ${avatar}
             <div class="team-info">
-              <h4>${escapeHtml(cardName)}</h4>
+              <h3>${escapeHtml(cardName)}</h3>
               <p>${escapeHtml(cardSubtitle)}</p>
               <div class="team-member-meta">
                 <a class="scopus-link" href="${escapeHtml(config.scopusUrl)}" target="_blank" rel="noopener noreferrer">
@@ -707,7 +778,7 @@
         <a class="team-member" href="${escapeHtml(profileUrl)}">
           ${avatar}
           <div class="team-info">
-            <h4>${escapeHtml(cardName)}</h4>
+            <h3>${escapeHtml(cardName)}</h3>
             <p>${escapeHtml(cardSubtitle)}</p>
           </div>
         </a>
@@ -725,9 +796,34 @@
         .join('');
     }
 
+    // Contributors & Alumni currently have no photos, so they render as a
+    // clean bulleted list of names rather than avatar cards with empty circles.
+    function buildTeamListItem(config) {
+      const person = teamData[config.id];
+      const cardName = config.cardName || (person && person.name) || '';
+      if (!cardName) {
+        return '';
+      }
+      const cardSubtitle = config.cardSubtitle || (person && person.institution) || '';
+      const profileUrl = `team/member.html?id=${encodeURIComponent(config.id)}`;
+      const subtitle = cardSubtitle
+        ? `<span class="team-list-role">${escapeHtml(cardSubtitle)}</span>`
+        : '';
+      return `<li class="team-list-item"><span class="team-list-text"><a class="team-list-link" href="${escapeHtml(profileUrl)}">${escapeHtml(cardName)}</a>${subtitle}</span></li>`;
+    }
+
+    function renderTeamList(containerId, members) {
+      const container = document.getElementById(containerId);
+      if (!container) {
+        return;
+      }
+      const items = (members || []).map(buildTeamListItem).filter(Boolean).join('');
+      container.innerHTML = `<ul class="team-list">${items}</ul>`;
+    }
+
     function renderTeamSection() {
       renderTeamGroup('teamCoreMembers', teamHome.core);
-      renderTeamGroup('teamContributorMembers', teamHome.contributors);
+      renderTeamList('teamContributorMembers', teamHome.contributors);
       renderTeamGroup('teamAdvisoryMembers', teamHome.advisory);
     }
 
@@ -1030,6 +1126,35 @@
       setNewsletterStatus(payload.message || 'Submission failed. Please try again.', 'error');
     });
 
+    initVideoEmbeds();
+  }
+
+  // Click-to-load YouTube playlist facade (privacy-first): nothing is
+  // requested from YouTube until the user presses play, and it then loads
+  // via youtube-nocookie.com. The embed always reflects the playlist's
+  // current videos, so adding more on YouTube needs no change here.
+  function initVideoEmbeds() {
+    document.querySelectorAll('.video-embed').forEach(function (embed) {
+      var facade = embed.querySelector('.video-facade');
+      if (!facade) return;
+      facade.addEventListener('click', function () {
+        var list = embed.getAttribute('data-yt-playlist');
+        var first = embed.getAttribute('data-yt-first') || '';
+        var params = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1' });
+        if (list) params.set('list', list);
+        var base = first
+          ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(first)
+          : 'https://www.youtube-nocookie.com/embed/videoseries';
+        var iframe = document.createElement('iframe');
+        iframe.src = base + '?' + params.toString();
+        iframe.title = embed.getAttribute('data-yt-title') || 'H2RES video playlist';
+        iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        iframe.setAttribute('allowfullscreen', '');
+        embed.innerHTML = '';
+        embed.appendChild(iframe);
+        iframe.focus();
+      });
+    });
   }
 
   if (document.readyState === 'loading') {

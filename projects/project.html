@@ -3,6 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Details of a research project developed with the H2RES energy system model.">
+  <link rel="canonical" href="https://h2res.org/projects/project.html">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="H2RES">
+  <meta property="og:title" content="H2RES Research Project">
+  <meta property="og:description" content="Details of a research project developed with the H2RES energy system model.">
+  <meta property="og:url" content="https://h2res.org/projects/project.html">
+  <meta property="og:image" content="https://h2res.org/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="H2RES Research Project">
+  <meta name="twitter:description" content="Details of a research project developed with the H2RES energy system model.">
+  <meta name="twitter:image" content="https://h2res.org/assets/og-image.png">
   <title>H2RES Project</title>
   <link rel="stylesheet" href="../assets/css/site-shell.css">
   <link rel="stylesheet" href="../assets/css/project-detail.css">
@@ -163,7 +191,7 @@
         ${fundingInfo ? `
           <div class="section-block funding-block">
             <div class="funding-card">
-              <img src="${escapeHtml(fundingInfo.logo || '')}" alt="${escapeHtml(fundingInfo.logoAlt || 'Funding logo')}" class="funding-logo${fundingInfo.logoClass ? ` ${escapeHtml(fundingInfo.logoClass)}` : ''}">
+              <img src="${escapeHtml(fundingInfo.logo || '')}" alt="${escapeHtml(fundingInfo.logoAlt || 'Funding logo')}" class="funding-logo${fundingInfo.logoClass ? ` ${escapeHtml(fundingInfo.logoClass)}` : ''}" loading="lazy">
               <div>
                 <p class="funding-kicker">Funding Support</p>
                 <p class="funding-text">${escapeHtml(fundingInfo.text || '')}</p>
