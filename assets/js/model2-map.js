@@ -47,7 +47,7 @@ window.H2RES_MODEL2 = {
       group: "sector",
       short: "Electricity: thermal, VRE and hydro, storage and transmission.",
       blurb: [
-        "The power sector covers thermal, wind, solar and hydro generation, reservoirs and pumped hydro, batteries, and transmission between zones. Power is the one sector that is always required, because every other sector connects to it.",
+        "The power sector covers thermal generation — coal, gas, oil, nuclear and biomass units, which today still supply most electricity in many systems — alongside wind, solar and hydro, plus reservoirs and pumped hydro, batteries, and transmission between zones. Power is the one sector that is always required, because every other sector connects to it.",
         "The electricity balance holds at each bus and hour; its dual is the electricity price there. Lines use a transport (net-transfer-capacity) representation — bounded flow in both directions, no impedance and no losses. Reservoirs are stores the weather fills for free, with spill so a full reservoir can pass water it cannot use."
       ],
       tech: ["Thermal (with ramping)", "Wind / Solar / Run-of-river (hourly profile)", "Reservoir hydro (HDAM)", "Pumped hydro — open & closed loop", "Batteries", "Transmission (NTC)"],

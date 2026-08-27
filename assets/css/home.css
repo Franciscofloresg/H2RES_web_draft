@@ -774,6 +774,7 @@
     .orientation-card {
       display: flex;
       flex-direction: column;
+      position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
@@ -781,10 +782,17 @@
       transition: all 0.3s ease;
     }
 
-    .orientation-card:hover {
+    .orientation-card:hover,
+    .orientation-card:focus-within {
       border-color: var(--accent-teal);
       box-shadow: 0 8px 30px rgba(21, 147, 137, 0.1);
       transform: translateY(-2px);
+    }
+
+    /* Keyboard focus ring on the whole card */
+    .orientation-card:focus-within {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 2px;
     }
 
     .orientation-label {
@@ -807,6 +815,16 @@
 
     .orientation-card .docs-link {
       margin-top: auto;
+    }
+
+    /* Whole card is clickable: the card's single link is stretched over
+       the entire card via ::after. Keyboard focus and link semantics stay
+       on the real anchor, so this stays accessible. */
+    .orientation-card .docs-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
     }
 
     .orientation-list li {
