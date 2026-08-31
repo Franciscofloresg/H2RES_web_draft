@@ -189,12 +189,144 @@
             </a>
 
       <p class="sm-hint">Hover a block for its model code; click to open its sector page. &nbsp;·&nbsp; <a href="module.html?id=limitations">Assumptions &amp; limitations &rarr;</a></p>
+
+      <!-- Email-gated download for the H2RES 2.0 model -->
+      <section class="dl-cta" aria-labelledby="dlCtaTitle">
+        <h2 class="dl-cta-title" id="dlCtaTitle">Get the H2RES 2.0 model</h2>
+        <p class="dl-cta-text">Download the coupled four-sector model to run your own scenarios. Enter your email and we will send you the package and keep you posted on new releases.</p>
+        <button type="button" class="btn btn-primary dl-open-btn" id="dlOpen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download H2RES 2.0
+        </button>
+      </section>
     </div>
   </main>
+
+  <!-- Download modal -->
+  <div class="dl-modal" id="dlModal" hidden>
+    <div class="dl-modal-backdrop" data-dl-close></div>
+    <div class="dl-modal-card" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc">
+      <button type="button" class="dl-modal-close" id="dlClose" aria-label="Close" data-dl-close>&times;</button>
+      <h2 class="dl-modal-title" id="dlTitle">Download H2RES 2.0</h2>
+      <p class="dl-modal-desc" id="dlDesc">Enter your email to get access to the H2RES 2.0 model. We will add you to our mailing list so you hear about new releases — you can unsubscribe any time.</p>
+      <form class="dl-form" id="dlForm" method="post" target="dlTarget">
+        <label class="dl-label" for="dlEmail">Email address</label>
+        <input type="email" id="dlEmail" name="email" class="dl-input" placeholder="you@institution.edu" autocomplete="email" required>
+        <input type="hidden" name="source" value="H2RES 2.0 download">
+        <input type="hidden" id="dlPage" name="page" value="">
+        <input type="hidden" id="dlSubmittedAt" name="submittedAt" value="">
+        <button type="submit" class="btn btn-primary dl-submit" id="dlSubmit">Get the download</button>
+      </form>
+      <p class="dl-status" id="dlStatus" aria-live="polite"></p>
+      <iframe name="dlTarget" id="dlTarget" title="Download form submission target" class="dl-target" aria-hidden="true"></iframe>
+    </div>
+  </div>
 
   <div data-site-shell-footer></div>
 
   <script src="../assets/js/site-config.js"></script>
   <script src="../assets/js/site-shell.js"></script>
+  <script>
+    // Email-gated download for H2RES 2.0.
+    // When the model package is ready, set DOWNLOAD_URL to its URL (e.g.
+    // "/assets/downloads/H2RES_2.0.zip"); the button will then start the
+    // download right after the email is captured. While it is empty, the
+    // email is still collected and the visitor is told the file is coming.
+    (function () {
+      const DOWNLOAD_URL = "";
+
+      const cfg = (window.H2RES_SITE_CONFIG && window.H2RES_SITE_CONFIG.links) || {};
+      const modal = document.getElementById("dlModal");
+      const openBtn = document.getElementById("dlOpen");
+      const form = document.getElementById("dlForm");
+      const email = document.getElementById("dlEmail");
+      const submit = document.getElementById("dlSubmit");
+      const statusEl = document.getElementById("dlStatus");
+      const iframe = document.getElementById("dlTarget");
+      const pageField = document.getElementById("dlPage");
+      const atField = document.getElementById("dlSubmittedAt");
+      if (!modal || !openBtn || !form) return;
+
+      let lastFocus = null;
+      let pending = false;
+      let timeoutId = null;
+
+      function setStatus(msg, tone) {
+        if (!statusEl) return;
+        statusEl.textContent = msg || "";
+        statusEl.classList.remove("is-success", "is-error");
+        if (tone) statusEl.classList.add("is-" + tone);
+      }
+
+      function openModal() {
+        lastFocus = document.activeElement;
+        modal.hidden = false;
+        document.body.classList.add("dl-modal-open");
+        setStatus("");
+        window.setTimeout(() => email && email.focus(), 30);
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.classList.remove("dl-modal-open");
+        if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      }
+
+      openBtn.addEventListener("click", openModal);
+      modal.querySelectorAll("[data-dl-close]").forEach((el) => el.addEventListener("click", closeModal));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal.hidden) { e.preventDefault(); closeModal(); }
+        if (e.key === "Tab" && !modal.hidden) {
+          const f = modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
+          const list = Array.from(f).filter((n) => !n.hidden && n.offsetParent !== null);
+          if (!list.length) return;
+          const first = list[0], last = list[list.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      function onDelivered() {
+        if (!pending) return;
+        pending = false;
+        if (timeoutId) { window.clearTimeout(timeoutId); timeoutId = null; }
+        if (submit) submit.disabled = false;
+        if (DOWNLOAD_URL) {
+          setStatus("Thanks! Your download is starting…", "success");
+          const a = document.createElement("a");
+          a.href = DOWNLOAD_URL;
+          a.rel = "noopener";
+          document.body.appendChild(a); a.click(); a.remove();
+          window.setTimeout(closeModal, 1600);
+        } else {
+          setStatus("Thanks — you're on the list! The H2RES 2.0 package isn't up for download just yet; we'll email it to you as soon as it's ready.", "success");
+          form.reset();
+        }
+      }
+      iframe && iframe.addEventListener("load", onDelivered);
+
+      form.addEventListener("submit", function (e) {
+        const endpoint = (cfg.newsletterEndpoint || "").trim();
+        if (!endpoint) {
+          e.preventDefault();
+          setStatus("Download sign-up isn't configured yet. Please try again later.", "error");
+          return;
+        }
+        // Native validation (type=email + required) has already passed here.
+        form.action = endpoint;
+        if (pageField) pageField.value = window.location.href;
+        if (atField) atField.value = new Date().toISOString();
+        pending = true;
+        if (submit) submit.disabled = true;
+        setStatus("Submitting…");
+        timeoutId = window.setTimeout(function () {
+          if (!pending) return;
+          pending = false;
+          if (submit) submit.disabled = false;
+          setStatus("That didn't go through. Please check your connection and try again.", "error");
+        }, 15000);
+        // Let the form POST natively into the hidden iframe.
+      });
+    })();
+  </script>
 </body>
 </html>
